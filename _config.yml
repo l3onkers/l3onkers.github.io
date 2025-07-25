@@ -4,10 +4,10 @@ email: tu.email@ejemplo.com
 description: >-
   Desarrollador Full Stack y escritor técnico. 
   Apasionado por crear soluciones elegantes y compartir conocimiento.
-baseurl: ""
-url: "https://bonkers.github.io"
+baseurl: "/bonkers.github.io"
+url: "https://l3onkers.github.io"
 twitter_username: tu_twitter
-github_username: bonkers
+github_username: l3onkers
 linkedin_username: tu-linkedin
 
 # Build settings
@@ -59,7 +59,7 @@ author:
       url: "mailto:tu.email@ejemplo.com"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/bonkers"
+      url: "https://github.com/l3onkers"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/tu-linkedin"

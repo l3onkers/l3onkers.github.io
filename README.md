@@ -54,7 +54,7 @@
 
 1. **Clona el repositorio**:
    ```bash
-   git clone https://github.com/bonkers/bonkers.github.io.git
+   git clone https://github.com/l3onkers/bonkers.github.io.git
    cd bonkers.github.io
    ```
 
@@ -196,7 +196,7 @@ El sitio se despliega automáticamente en GitHub Pages cuando haces push a la ra
 1. Ve a Settings → Pages en tu repositorio
 2. Selecciona "Deploy from a branch"
 3. Elige la rama `main` y carpeta `/ (root)`
-4. Tu sitio estará disponible en `https://tu-usuario.github.io`
+4. Tu sitio estará disponible en `https://l3onkers.github.io/bonkers.github.io/`
 
 ### Dominio personalizado (opcional)
 
@@ -253,6 +253,6 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 ¿Tienes preguntas o sugerencias? ¡No dudes en abrir un issue o contactarme!
 
-**Sitio web**: [https://bonkers.github.io](https://bonkers.github.io)  
+**Sitio web**: [https://l3onkers.github.io/bonkers.github.io/](https://l3onkers.github.io/bonkers.github.io/)  
 **Email**: [tu.email@ejemplo.com](mailto:tu.email@ejemplo.com)  
 **LinkedIn**: [Tu perfil](https://linkedin.com/in/tu-linkedin)
