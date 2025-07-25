@@ -1,0 +1,65 @@
+# Site settings
+title: Tu Nombre
+email: tu.email@ejemplo.com
+description: >-
+  Desarrollador Full Stack y escritor técnico. 
+  Apasionado por crear soluciones elegantes y compartir conocimiento.
+baseurl: ""
+url: "https://bonkers.github.io"
+twitter_username: tu_twitter
+github_username: bonkers
+linkedin_username: tu-linkedin
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Tu Nombre"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Custom variables
+author:
+  name: Tu Nombre
+  bio: Desarrollador Full Stack especializado en tecnologías web modernas
+  location: Tu Ciudad, País
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:tu.email@ejemplo.com"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/bonkers"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/tu-linkedin"
