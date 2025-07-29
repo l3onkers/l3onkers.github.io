@@ -4,7 +4,7 @@ title: "Bienvenido a mi blog personal"
 date: 2024-01-15 10:00:00 +0100
 categories: [personal, desarrollo]
 tags: [bienvenida, jekyll, github-pages, desarrollo-web]
-author: Tu Nombre
+author: Álvaro Escobar
 ---
 
 ¡Hola y bienvenido a mi blog personal! Me emociona mucho compartir este espacio contigo donde estaré escribiendo sobre desarrollo web, tecnología y mis experiencias como desarrollador.

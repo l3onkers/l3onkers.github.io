@@ -1,14 +1,14 @@
 # Site settings
-title: Tu Nombre
-email: tu.email@ejemplo.com
+title: Álvaro Escobar
+email: contacto@alvaro-escobar.dev
 description: >-
   Desarrollador Full Stack y escritor técnico. 
   Apasionado por crear soluciones elegantes y compartir conocimiento.
-baseurl: "/bonkers.github.io"
+baseurl: ""
 url: "https://l3onkers.github.io"
-twitter_username: tu_twitter
+twitter_username: 
 github_username: l3onkers
-linkedin_username: tu-linkedin
+linkedin_username: alvaro-escobar
 
 # Build settings
 markdown: kramdown
@@ -42,7 +42,7 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      author: "Tu Nombre"
+      author: "Álvaro Escobar"
   - scope:
       path: ""
     values:
@@ -50,13 +50,20 @@ defaults:
 
 # Custom variables
 author:
-  name: Tu Nombre
-  bio: Desarrollador Full Stack especializado en tecnologías web modernas
-  location: Tu Ciudad, País
+  name: Álvaro Escobar
+  bio: Desarrollador Full Stack especializado en tecnologías web modernas. Apasionado por crear soluciones innovadoras y compartir conocimiento con la comunidad.
+  location: España
+  avatar: "https://media.licdn.com/dms/image/v2/D4D03AQFvyLxzMoW_3Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1677084008745?e=2147483647&v=beta&t=VIcXEJWn8VeMT0Vv7cpqwpWMoNrwfoSpagm6-Ga72IQ"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:tu.email@ejemplo.com"
+      url: "mailto:contacto@alvaro-escobar.dev"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/alvaro-escobar/"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/l3onkers"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/l3onkers"

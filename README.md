@@ -1,13 +1,14 @@
-# Mi Sitio Web Personal
+# Sitio Web Personal de Álvaro Escobar
 
-¡Bienvenido a mi sitio web personal! Este es un sitio web estático construido con Jekyll y alojado en GitHub Pages.
+¡Bienvenido a mi sitio web personal! Este es un sitio web estático construido con Jekyll y alojado en GitHub Pages, que incluye mi portfolio profesional, blog técnico y currículum vitae.
 
 ## 🌟 Características
 
 - **Diseño minimalista y moderno**: Interfaz limpia y profesional
 - **Modo oscuro/claro**: Selector dinámico de tema con persistencia local
 - **Sección CV**: Currículum completo con experiencia, educación y habilidades
-- **Blog integrado**: Sistema de blog con posts en Markdown
+- **Blog integrado**: Sistema de blog con posts en Markdown sobre desarrollo web
+- **Portfolio personal**: Información real y proyectos destacados
 - **Responsive**: Optimizado para todos los dispositivos
 - **SEO optimizado**: Meta tags y estructura semántica
 - **Rápido**: Sitio estático con excelente rendimiento
