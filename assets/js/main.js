@@ -10,6 +10,15 @@ document.addEventListener('DOMContentLoaded', function() {
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
     
+    // Load banner state
+    const bannerHidden = localStorage.getItem('construction-banner-hidden');
+    if (bannerHidden === 'true') {
+        const banner = document.getElementById('construction-banner');
+        if (banner) {
+            banner.classList.add('hidden');
+        }
+    }
+    
     // Enhanced theme toggle with animation
     themeToggle.addEventListener('click', function() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -212,7 +221,34 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', function() {
         document.body.classList.add('loaded');
     });
+    
+    // Add fade-in animation to cards
+    const cards = document.querySelectorAll('.card, .project-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.classList.add('fade-in-up');
+    });
 });
+
+// Construction Banner Functions
+function closeBanner() {
+    const banner = document.getElementById('construction-banner');
+    if (banner) {
+        banner.style.transition = 'all 0.5s ease';
+        banner.classList.add('hidden');
+        localStorage.setItem('construction-banner-hidden', 'true');
+    }
+}
+
+// Optional: Auto-hide banner after 30 seconds
+setTimeout(() => {
+    const banner = document.getElementById('construction-banner');
+    const bannerHidden = localStorage.getItem('construction-banner-hidden');
+    if (banner && bannerHidden !== 'true') {
+        // Add a subtle pulse to remind user they can close it
+        banner.style.animation = 'pulse 1s ease-in-out 3';
+    }
+}, 30000);
 
 // Add CSS for copy button
 const style = document.createElement('style');
