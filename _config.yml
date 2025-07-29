@@ -18,6 +18,10 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
+# SEO Tag configuration - Security hardening
+seo_tag:
+  generator: false
+
 # Sass configuration for better CSS compilation
 sass:
   style: compressed
