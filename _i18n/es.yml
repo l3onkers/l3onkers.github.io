@@ -1,0 +1,120 @@
+# Traducciones en Español (Idioma por defecto)
+
+# Navegación
+nav:
+  home: "Inicio"
+  cv: "CV"
+  projects: "Proyectos"
+  blog: "Blog"
+  contact: "Contacto"
+
+# Botones y acciones
+buttons:
+  read_more: "Leer más"
+  see_projects: "Ver proyectos"
+  see_cv: "Ver mi CV"
+  read_blog: "Leer mi Blog"
+  contact_email: "Contacto"
+  download_pdf: "Descargar PDF"
+  demo: "Demo"
+  code: "Código"
+  connect_linkedin: "Conectar en LinkedIn"
+  see_github: "Ver en GitHub"
+
+# Página de inicio
+home:
+  hero:
+    greeting: "¡Hola! Soy"
+    tagline: "Desarrollador Full Stack especializado en tecnologías web modernas. Apasionado por crear soluciones innovadoras y compartir conocimiento con la comunidad."
+  
+  sections:
+    development:
+      title: "Desarrollo"
+      description: "Especializado en tecnologías web modernas, creando aplicaciones escalables y experiencias de usuario excepcionales."
+    
+    blog:
+      title: "Blog"
+      description: "Comparto conocimientos sobre desarrollo, tecnología y mejores prácticas a través de artículos técnicos."
+    
+    latest_posts: "Últimas Publicaciones"
+    all_articles: "Ver todos los artículos"
+
+# Página CV
+cv:
+  title: "Currículum Vitae"
+  personal_info: "Información Personal"
+  download_cv: "Descargar CV"
+  download_description: "Descarga una versión en PDF de mi currículum para tener una copia offline."
+  
+  sections:
+    experience: "Experiencia Profesional"
+    education: "Formación Académica"
+    skills: "Habilidades Técnicas"
+    certifications: "Certificaciones"
+    projects: "Proyectos Destacados"
+    languages: "Idiomas"
+  
+  fields:
+    name: "Nombre"
+    location: "Ubicación"
+    email: "Email"
+    bio: "Bio"
+    company: "Empresa"
+    period: "Período"
+    present: "Presente"
+    technologies: "Tecnologías"
+    date: "Fecha"
+    id: "ID"
+    native: "Nativo"
+    advanced: "Avanzado"
+    intermediate: "Intermedio"
+
+# Página de proyectos
+projects:
+  title: "Mis Proyectos"
+  description: "Una selección de proyectos personales y profesionales que demuestran mis habilidades técnicas y creatividad."
+  featured: "Destacado"
+  collaboration:
+    title: "¿Interesado en colaborar?"
+    description: "Siempre estoy abierto a nuevos proyectos y colaboraciones interesantes."
+
+# Blog
+blog:
+  title: "Blog"
+  description: "Comparto mis experiencias, aprendizajes y reflexiones sobre desarrollo web, tecnología y mejores prácticas."
+  read_full: "Leer artículo completo"
+  no_posts: "No hay artículos disponibles aún."
+  
+  meta:
+    by: "por"
+    on: "el"
+    in: "en"
+    tags: "etiquetas"
+
+# Footer
+footer:
+  links: "Enlaces"
+  follow: "Sígueme"
+  rights: "Todos los derechos reservados"
+
+# Mensajes del sistema
+system:
+  under_construction: "¡Sitio en construcción! 🚧"
+  construction_message: "Estoy trabajando para ofrecerte la mejor experiencia. Algunas funciones pueden estar limitadas."
+  close: "Cerrar"
+  language_changed: "Idioma cambiado a Español"
+  
+# Meses (para fechas)
+months:
+  january: "enero"
+  february: "febrero"
+  march: "marzo"
+  april: "abril"
+  may: "mayo"
+  june: "junio"
+  july: "julio"
+  august: "agosto"
+  september: "septiembre"
+  october: "octubre"
+  november: "noviembre"
+  december: "diciembre"

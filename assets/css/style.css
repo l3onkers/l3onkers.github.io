@@ -1618,3 +1618,167 @@ html {
     width: 150px;
   }
 }
+
+/* Language Selector Styles */
+.language-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.language-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.language-toggle:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--primary-color);
+}
+
+.language-toggle i:last-child {
+  font-size: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.language-toggle.active i:last-child {
+  transform: rotate(180deg);
+}
+
+.language-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  min-width: 140px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: var(--transition);
+  z-index: 1000;
+  margin-top: 0.5rem;
+}
+
+.language-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-secondary) !important;
+  text-decoration: none !important;
+  transition: var(--transition);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.language-option:last-child {
+  border-bottom: none;
+}
+
+.language-option:hover {
+  background-color: var(--bg-secondary);
+  color: var(--primary-color) !important;
+}
+
+.language-option.active {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: var(--primary-color) !important;
+}
+
+.language-option.active::after {
+  content: '✓';
+  margin-left: auto;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Flag icons (using CSS sprites or simple colored circles) */
+.flag-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.flag-icon-es {
+  background: linear-gradient(to bottom, #AA151B 33%, #F1BF00 33%, #F1BF00 66%, #AA151B 66%);
+}
+
+.flag-icon-gb {
+  background: linear-gradient(45deg, #012169 25%, transparent 25%), 
+              linear-gradient(-45deg, #012169 25%, transparent 25%), 
+              linear-gradient(45deg, transparent 75%, #012169 75%), 
+              linear-gradient(-45deg, transparent 75%, #012169 75%),
+              linear-gradient(to right, #CE1124, #CE1124);
+  background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+}
+
+@media (max-width: 768px) {
+  .language-selector {
+    order: -1;
+  }
+  
+  .language-dropdown {
+    right: auto;
+    left: 0;
+  }
+}
+
+/* Language Change Notification */
+.language-notification {
+  position: fixed;
+  top: 5rem;
+  right: 2rem;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  z-index: 10000;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.language-notification.show {
+  transform: translateX(0);
+}
+
+.language-notification::before {
+  content: '🌐';
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .language-notification {
+    top: 4rem;
+    right: 1rem;
+    left: 1rem;
+    transform: translateY(-100%);
+    text-align: center;
+  }
+  
+  .language-notification.show {
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,120 @@
+# English Translations
+
+# Navigation
+nav:
+  home: "Home"
+  cv: "Resume"
+  projects: "Projects"
+  blog: "Blog"
+  contact: "Contact"
+
+# Buttons and actions
+buttons:
+  read_more: "Read more"
+  see_projects: "View projects"
+  see_cv: "View my Resume"
+  read_blog: "Read my Blog"
+  contact_email: "Contact"
+  download_pdf: "Download PDF"
+  demo: "Demo"
+  code: "Code"
+  connect_linkedin: "Connect on LinkedIn"
+  see_github: "View on GitHub"
+
+# Home page
+home:
+  hero:
+    greeting: "Hello! I'm"
+    tagline: "Full Stack Developer specialized in modern web technologies. Passionate about creating innovative solutions and sharing knowledge with the community."
+  
+  sections:
+    development:
+      title: "Development"
+      description: "Specialized in modern web technologies, creating scalable applications and exceptional user experiences."
+    
+    blog:
+      title: "Blog"
+      description: "I share knowledge about development, technology and best practices through technical articles."
+    
+    latest_posts: "Latest Posts"
+    all_articles: "View all articles"
+
+# CV page
+cv:
+  title: "Curriculum Vitae"
+  personal_info: "Personal Information"
+  download_cv: "Download Resume"
+  download_description: "Download a PDF version of my resume to have an offline copy."
+  
+  sections:
+    experience: "Professional Experience"
+    education: "Education"
+    skills: "Technical Skills"
+    certifications: "Certifications"
+    projects: "Featured Projects"
+    languages: "Languages"
+  
+  fields:
+    name: "Name"
+    location: "Location"
+    email: "Email"
+    bio: "Bio"
+    company: "Company"
+    period: "Period"
+    present: "Present"
+    technologies: "Technologies"
+    date: "Date"
+    id: "ID"
+    native: "Native"
+    advanced: "Advanced"
+    intermediate: "Intermediate"
+
+# Projects page
+projects:
+  title: "My Projects"
+  description: "A selection of personal and professional projects that demonstrate my technical skills and creativity."
+  featured: "Featured"
+  collaboration:
+    title: "Interested in collaborating?"
+    description: "I'm always open to new projects and interesting collaborations."
+
+# Blog
+blog:
+  title: "Blog"
+  description: "I share my experiences, learnings and reflections on web development, technology and best practices."
+  read_full: "Read full article"
+  no_posts: "No articles available yet."
+  
+  meta:
+    by: "by"
+    on: "on"
+    in: "in"
+    tags: "tags"
+
+# Footer
+footer:
+  links: "Links"
+  follow: "Follow me"
+  rights: "All rights reserved"
+
+# System messages
+system:
+  under_construction: "Site under construction! 🚧"
+  construction_message: "I'm working to provide you with the best experience. Some features may be limited."
+  close: "Close"
+  language_changed: "Language changed to English"
+
+# Months (for dates)
+months:
+  january: "January"
+  february: "February"
+  march: "March"
+  april: "April"
+  may: "May"
+  june: "June"
+  july: "July"
+  august: "August"
+  september: "September"
+  october: "October"
+  november: "November"
+  december: "December"

@@ -142,10 +142,28 @@
                 </div>
                 
                 <div class="nav-links">
-                    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Inicio</a>
-                    <a href="{{ '/cv' | relative_url }}" {% if page.url == '/cv/' %}class="active"{% endif %}>CV</a>
-                    <a href="{{ '/proyectos' | relative_url }}" {% if page.url == '/proyectos/' %}class="active"{% endif %}>Proyectos</a>
-                    <a href="{{ '/blog' | relative_url }}" {% if page.url == '/blog/' %}class="active"{% endif %}>Blog</a>
+                    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %} data-translate="nav-home">Inicio</a>
+                    <a href="{{ '/cv' | relative_url }}" {% if page.url == '/cv/' %}class="active"{% endif %} data-translate="nav-cv">CV</a>
+                    <a href="{{ '/proyectos' | relative_url }}" {% if page.url == '/proyectos/' %}class="active"{% endif %} data-translate="nav-projects">Proyectos</a>
+                    <a href="{{ '/blog' | relative_url }}" {% if page.url == '/blog/' %}class="active"{% endif %} data-translate="nav-blog">Blog</a>
+                    
+                    <div class="language-selector">
+                        <button class="language-toggle" id="language-toggle" aria-label="Cambiar idioma">
+                            <i class="fas fa-globe"></i>
+                            <span id="current-lang">ES</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="language-dropdown" id="language-dropdown">
+                            <a href="#" data-lang="es" class="language-option active">
+                                <i class="flag-icon flag-icon-es"></i>
+                                Español
+                            </a>
+                            <a href="#" data-lang="en" class="language-option">
+                                <i class="flag-icon flag-icon-gb"></i>
+                                English
+                            </a>
+                        </div>
+                    </div>
                     
                     <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
                         <i class="fas fa-sun" id="theme-icon"></i>

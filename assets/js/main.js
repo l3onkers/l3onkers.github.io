@@ -228,6 +228,183 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.animationDelay = `${index * 0.1}s`;
         card.classList.add('fade-in-up');
     });
+    
+    // Language selector functionality
+    const languageToggle = document.getElementById('language-toggle');
+    const languageDropdown = document.getElementById('language-dropdown');
+    const currentLangSpan = document.getElementById('current-lang');
+    const languageOptions = document.querySelectorAll('.language-option');
+    
+    // Load saved language or default to Spanish
+    const savedLanguage = localStorage.getItem('language') || 'es';
+    setLanguage(savedLanguage);
+    
+    // Language toggle event listener
+    if (languageToggle) {
+        languageToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('show');
+            languageToggle.classList.toggle('active');
+        });
+    }
+    
+    // Language option event listeners
+    languageOptions.forEach(option => {
+        option.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const selectedLang = this.getAttribute('data-lang');
+            setLanguage(selectedLang);
+            
+            // Close dropdown
+            languageDropdown.classList.remove('show');
+            languageToggle.classList.remove('active');
+            
+            // Show language change notification
+            showLanguageNotification(selectedLang);
+        });
+    });
+    
+    // Close language dropdown when clicking outside
+    document.addEventListener('click', function() {
+        languageDropdown.classList.remove('show');
+        languageToggle.classList.remove('active');
+    });
+    
+    // Set language function
+    function setLanguage(lang) {
+        localStorage.setItem('language', lang);
+        currentLangSpan.textContent = lang.toUpperCase();
+        
+        // Update active state
+        languageOptions.forEach(option => {
+            option.classList.remove('active');
+            if (option.getAttribute('data-lang') === lang) {
+                option.classList.add('active');
+            }
+        });
+        
+        // Apply translations
+        applyTranslations(lang);
+        
+        // Redirect to appropriate language version if available
+        redirectToLanguageVersion(lang);
+    }
+    
+    // Redirect to language version
+    function redirectToLanguageVersion(lang) {
+        const currentPath = window.location.pathname;
+        const baseUrl = window.location.origin;
+        
+        // Only redirect if we're changing to a different language
+        const currentLang = getCurrentLanguageFromPath();
+        if (currentLang === lang) return;
+        
+        // Language URL mapping
+        if (lang === 'en') {
+            // Redirect to English version
+            if (!currentPath.startsWith('/en/')) {
+                let newPath = '/en' + currentPath;
+                if (currentPath === '/' || currentPath === '/index.html') {
+                    newPath = '/en/';
+                }
+                window.location.href = baseUrl + newPath;
+            }
+        } else {
+            // Redirect to Spanish version (default)
+            if (currentPath.startsWith('/en/')) {
+                let newPath = currentPath.replace('/en', '');
+                if (!newPath || newPath === '/') {
+                    newPath = '/';
+                }
+                window.location.href = baseUrl + newPath;
+            }
+        }
+    }
+    
+    // Get current language from URL path
+    function getCurrentLanguageFromPath() {
+        const path = window.location.pathname;
+        if (path.startsWith('/en/')) {
+            return 'en';
+        }
+        return 'es';
+    }
+    
+    // Apply translations function
+    function applyTranslations(lang) {
+        // This would normally fetch translations from the _i18n files
+        // For now, we'll implement basic translations
+        const translations = {
+            es: {
+                'nav-home': 'Inicio',
+                'nav-cv': 'CV',
+                'nav-projects': 'Proyectos',
+                'nav-blog': 'Blog',
+                'hero-greeting': '¡Hola! Soy',
+                'read-more': 'Leer más →',
+                'see-projects': 'Ver proyectos →',
+                'see-cv': 'Ver mi CV',
+                'read-blog': 'Leer mi Blog',
+                'contact': 'Contacto',
+                'latest-posts': 'Últimas Publicaciones',
+                'all-articles': 'Ver todos los artículos'
+            },
+            en: {
+                'nav-home': 'Home',
+                'nav-cv': 'Resume',
+                'nav-projects': 'Projects',
+                'nav-blog': 'Blog',
+                'hero-greeting': 'Hello! I\'m',
+                'read-more': 'Read more →',
+                'see-projects': 'View projects →',
+                'see-cv': 'View my Resume',
+                'read-blog': 'Read my Blog',
+                'contact': 'Contact',
+                'latest-posts': 'Latest Posts',
+                'all-articles': 'View all articles'
+            }
+        };
+        
+        const currentTranslations = translations[lang] || translations['es'];
+        
+        // Apply translations to elements with data-translate attributes
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (currentTranslations[key]) {
+                element.textContent = currentTranslations[key];
+            }
+        });
+        
+        // Update page language attribute
+        document.documentElement.setAttribute('lang', lang);
+    }
+    
+    // Show language change notification
+    function showLanguageNotification(lang) {
+        const notifications = {
+            es: 'Idioma cambiado a Español',
+            en: 'Language changed to English'
+        };
+        
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'language-notification';
+        notification.textContent = notifications[lang] || notifications['es'];
+        
+        // Add notification to page
+        document.body.appendChild(notification);
+        
+        // Show notification
+        setTimeout(() => notification.classList.add('show'), 100);
+        
+        // Hide and remove notification
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => document.body.removeChild(notification), 300);
+        }, 3000);
+    }
 });
 
 // Construction Banner Functions

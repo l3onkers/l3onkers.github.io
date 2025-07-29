@@ -3,24 +3,24 @@ layout: default
 ---
 
 <section class="hero">
-    <h1>¡Hola! Soy {{ site.author.name }}</h1>
+    <h1><span data-translate="hero-greeting">¡Hola! Soy</span> {{ site.author.name }}</h1>
     <p>{{ site.author.bio }}</p>
     <div class="hero-buttons">
         <a href="{{ '/cv' | relative_url }}" class="btn btn-primary">
             <i class="fas fa-user"></i>
-            Ver mi CV
+            <span data-translate="see-cv">Ver mi CV</span>
         </a>
         <a href="{{ '/proyectos' | relative_url }}" class="btn btn-primary">
             <i class="fas fa-code"></i>
-            Ver Proyectos
+            <span data-translate="see-projects">Ver Proyectos</span>
         </a>
         <a href="{{ '/blog' | relative_url }}" class="btn btn-secondary">
             <i class="fas fa-blog"></i>
-            Leer mi Blog
+            <span data-translate="read-blog">Leer mi Blog</span>
         </a>
         <a href="mailto:{{ site.email }}" class="btn btn-secondary">
             <i class="fas fa-envelope"></i>
-            Contacto
+            <span data-translate="contact">Contacto</span>
         </a>
     </div>
 </section>
@@ -29,19 +29,19 @@ layout: default
     <div class="card">
         <h3><i class="fas fa-code"></i> Desarrollo</h3>
         <p>Especializado en tecnologías web modernas, creando aplicaciones escalables y experiencias de usuario excepcionales.</p>
-        <a href="{{ '/proyectos' | relative_url }}" class="read-more">Ver proyectos →</a>
+        <a href="{{ '/proyectos' | relative_url }}" class="read-more" data-translate="see-projects">Ver proyectos →</a>
     </div>
     
     <div class="card">
         <h3><i class="fas fa-pen"></i> Blog</h3>
         <p>Comparto conocimientos sobre desarrollo, tecnología y mejores prácticas a través de artículos técnicos.</p>
-        <a href="{{ '/blog' | relative_url }}" class="read-more">Leer artículos →</a>
+        <a href="{{ '/blog' | relative_url }}" class="read-more" data-translate="read-more">Leer artículos →</a>
     </div>
 </section>
 
 {% if site.posts.size > 0 %}
 <section style="margin-top: 4rem;">
-    <h2 style="text-align: center; margin-bottom: 2rem;">Últimas Publicaciones</h2>
+    <h2 style="text-align: center; margin-bottom: 2rem;" data-translate="latest-posts">Últimas Publicaciones</h2>
     <div class="grid grid-2">
         {% for post in site.posts limit:4 %}
         <article class="post-preview">
@@ -53,14 +53,14 @@ layout: default
                 </time>
             </div>
             <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
-            <a href="{{ post.url | relative_url }}" class="read-more">Leer más →</a>
+            <a href="{{ post.url | relative_url }}" class="read-more" data-translate="read-more">Leer más →</a>
         </article>
         {% endfor %}
     </div>
     
     {% if site.posts.size > 4 %}
     <div style="text-align: center; margin-top: 2rem;">
-        <a href="{{ '/blog' | relative_url }}" class="btn btn-primary">Ver todos los artículos</a>
+        <a href="{{ '/blog' | relative_url }}" class="btn btn-primary" data-translate="all-articles">Ver todos los artículos</a>
     </div>
     {% endif %}
 </section>
