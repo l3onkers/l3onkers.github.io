@@ -8,7 +8,7 @@
     <title>{% if page.title %}{{ page.title | escape }} - {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
     <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
     
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ '/feed.xml' | relative_url }}">
     
@@ -19,6 +19,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Force Lila Color Scheme - Emergency CSS -->
+    <style>
+        :root {
+            --primary-color: #8b5cf6 !important;
+            --primary-hover: #7c3aed !important;
+            --primary-gradient: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%) !important;
+        }
+        [data-theme="dark"] {
+            --primary-color: #a78bfa !important;
+            --primary-hover: #8b5cf6 !important;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%) !important;
+        }
+        .nav-brand a:hover, .nav-links a:hover, .nav-links a.active {
+            color: #8b5cf6 !important;
+        }
+        .nav-links a.active::after {
+            background-color: #8b5cf6 !important;
+        }
+    </style>
     
     {% seo %}
 </head>

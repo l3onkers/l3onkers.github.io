@@ -1,0 +1,62 @@
+---
+layout: default
+title: Test Colores Lila
+---
+
+<div style="padding: 2rem;">
+    <h1>🔍 Test de Colores Lila</h1>
+    
+    <div style="margin: 2rem 0;">
+        <h2>Botones de Prueba</h2>
+        <a href="#" class="btn btn-primary" style="margin-right: 1rem;">Botón Primario Lila</a>
+        <a href="#" class="btn btn-secondary">Botón Secundario</a>
+    </div>
+    
+    <div style="margin: 2rem 0;">
+        <h2>Cards de Prueba</h2>
+        <div class="grid grid-2" style="margin-top: 1rem;">
+            <div class="card">
+                <h3>Card Test 1</h3>
+                <p>Esta card debería tener efectos hover en lila.</p>
+            </div>
+            <div class="card">
+                <h3>Card Test 2</h3>
+                <p>Otra card para probar los efectos visuales.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin: 2rem 0;">
+        <h2>Tags de Tecnología</h2>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">HTML</span>
+        </div>
+    </div>
+    
+    <div style="margin: 2rem 0;">
+        <h2>Información de Debug</h2>
+        <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+            <p><strong>Color primario actual:</strong> <span style="color: var(--primary-color); font-weight: bold;">var(--primary-color)</span></p>
+            <p><strong>Timestamp:</strong> {{ site.time }}</p>
+            <p><strong>Fecha de build:</strong> {{ "now" | date: "%Y-%m-%d %H:%M:%S" }}</p>
+        </div>
+    </div>
+    
+    <div style="margin: 2rem 0;">
+        <h2>Colores Directos (CSS Inline)</h2>
+        <div style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%); color: white; padding: 1rem; border-radius: 8px; text-align: center;">
+            <strong>Este bloque debería ser LILA si los colores funcionan</strong>
+        </div>
+    </div>
+</div>
+
+<script>
+// Debug JavaScript
+console.log('🎨 Test de Colores - Debug Info:');
+console.log('Primary color:', getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
+console.log('Theme:', document.documentElement.getAttribute('data-theme'));
+console.log('Timestamp:', new Date().toISOString());
+</script>
