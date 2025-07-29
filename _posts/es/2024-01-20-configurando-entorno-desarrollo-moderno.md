@@ -5,6 +5,7 @@ date: 2024-01-20 14:30:00 +0100
 categories: [desarrollo, herramientas]
 tags: [vscode, git, node, desarrollo-web, productividad]
 author: Álvaro Escobar
+lang: es
 ---
 
 Un entorno de desarrollo bien configurado es la base de la productividad de cualquier desarrollador. En este artículo te guiaré a través de la configuración de un entorno moderno y eficiente para desarrollo web.

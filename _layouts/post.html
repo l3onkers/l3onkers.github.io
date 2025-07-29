@@ -2,13 +2,17 @@
 layout: default
 ---
 
-<article class="post">
+<article class="post" lang="{{ page.lang | default: 'es' }}">
     <header class="post-header">
         <h1 class="post-title">{{ page.title | escape }}</h1>
         <div class="post-meta">
             <time datetime="{{ page.date | date_to_xmlschema }}">
                 <i class="fas fa-calendar-alt"></i>
-                {{ page.date | date: "%d de %B, %Y" }}
+                {% if page.lang == 'en' %}
+                    {{ page.date | date: "%B %d, %Y" }}
+                {% else %}
+                    {{ page.date | date: "%d de %B, %Y" }}
+                {% endif %}
             </time>
             {% if page.author %}
             <span class="post-author">
@@ -33,7 +37,11 @@ layout: default
 
     {% if page.tags %}
     <div class="post-tags">
-        <h4>Etiquetas:</h4>
+        {% if page.lang == 'en' %}
+            <h4>Tags:</h4>
+        {% else %}
+            <h4>Etiquetas:</h4>
+        {% endif %}
         {% for tag in page.tags %}
         <span class="tag">#{{ tag }}</span>
         {% endfor %}
@@ -41,18 +49,46 @@ layout: default
     {% endif %}
 
     <div class="post-navigation">
-        {% if page.previous.url %}
-        <a class="prev-post" href="{{ page.previous.url | relative_url }}">
-            <i class="fas fa-chevron-left"></i>
-            <span>{{ page.previous.title | truncate: 30 }}</span>
-        </a>
+        {% assign posts_same_lang = site.posts | where: "lang", page.lang %}
+        {% assign current_index = 0 %}
+        {% for post in posts_same_lang %}
+            {% if post.url == page.url %}
+                {% assign current_index = forloop.index %}
+                {% break %}
+            {% endif %}
+        {% endfor %}
+        
+        {% assign prev_index = current_index | plus: 1 %}
+        {% assign next_index = current_index | minus: 1 %}
+        
+        {% if prev_index <= posts_same_lang.size %}
+            {% assign prev_post = posts_same_lang[prev_index] %}
+            <a class="prev-post" href="{{ prev_post.url | relative_url }}">
+                <i class="fas fa-chevron-left"></i>
+                <span>{{ prev_post.title | truncate: 30 }}</span>
+            </a>
         {% endif %}
         
-        {% if page.next.url %}
-        <a class="next-post" href="{{ page.next.url | relative_url }}">
-            <span>{{ page.next.title | truncate: 30 }}</span>
-            <i class="fas fa-chevron-right"></i>
-        </a>
+        {% if next_index > 0 %}
+            {% assign next_post = posts_same_lang[next_index] %}
+            <a class="next-post" href="{{ next_post.url | relative_url }}">
+                <span>{{ next_post.title | truncate: 30 }}</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        {% endif %}
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+        {% if page.lang == 'en' %}
+            <a href="{{ '/en/blog' | relative_url }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i>
+                Back to Blog
+            </a>
+        {% else %}
+            <a href="{{ '/blog' | relative_url }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i>
+                Volver al Blog
+            </a>
         {% endif %}
     </div>
 </article>

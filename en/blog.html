@@ -5,15 +5,16 @@ lang: en
 ---
 
 <div style="text-align: center; margin-bottom: 3rem;">
-    <h1>Blog</h1>
-    <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+    <h1 data-translate="blog.title">Blog</h1>
+    <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;" data-translate="blog.description">
         I share my experiences, learnings and reflections on web development, technology and best practices.
     </p>
 </div>
 
-{% if site.posts.size > 0 %}
+{% assign english_posts = site.posts | where: "lang", "en" %}
+{% if english_posts.size > 0 %}
 <div class="post-list">
-    {% for post in site.posts %}
+    {% for post in english_posts %}
     <article class="post-preview">
         <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
         <div class="post-meta">
@@ -49,7 +50,7 @@ lang: en
             {% endif %}
         </div>
         {% endif %}
-        <a href="{{ post.url | relative_url }}" class="read-more">Read full article →</a>
+        <a href="{{ post.url | relative_url }}" class="read-more" data-translate="blog.read_full">Read full article →</a>
     </article>
     {% endfor %}
 </div>

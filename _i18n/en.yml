@@ -101,7 +101,6 @@ footer:
 system:
   under_construction: "Site under construction! 🚧"
   construction_message: "I'm working to provide you with the best experience. Some features may be limited."
-  close: "Close"
   language_changed: "Language changed to English"
 
 # Months (for dates)

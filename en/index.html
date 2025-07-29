@@ -40,11 +40,12 @@ lang: en
     </div>
 </section>
 
-{% if site.posts.size > 0 %}
+{% assign english_posts = site.posts | where: "lang", "en" %}
+{% if english_posts.size > 0 %}
 <section style="margin-top: 4rem;">
     <h2 style="text-align: center; margin-bottom: 2rem;" data-translate="home.sections.latest_posts">Latest Posts</h2>
     <div class="grid grid-2">
-        {% for post in site.posts limit:4 %}
+        {% for post in english_posts limit:4 %}
         <article class="post-preview">
             <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
             <div class="post-meta">
@@ -59,7 +60,7 @@ lang: en
         {% endfor %}
     </div>
     
-    {% if site.posts.size > 4 %}
+    {% if english_posts.size > 4 %}
     <div style="text-align: center; margin-top: 2rem;">
         <a href="{{ '/en/blog' | relative_url }}" class="btn btn-primary" data-translate="home.sections.all_articles">View all articles</a>
     </div>

@@ -397,7 +397,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 'footer.rights': 'Todos los derechos reservados',
                 'system.under_construction': '¡Sitio en construcción! 🚧',
                 'system.construction_message': 'Estoy trabajando para ofrecerte la mejor experiencia. Algunas funciones pueden estar limitadas.',
-                'system.close': 'Cerrar',
                 'system.language_changed': 'Idioma cambiado a Español'
             },
             en: {
@@ -461,7 +460,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 'footer.rights': 'All rights reserved',
                 'system.under_construction': 'Site under construction! 🚧',
                 'system.construction_message': 'I\'m working to provide you with the best experience. Some features may be limited.',
-                'system.close': 'Close',
                 'system.language_changed': 'Language changed to English'
             }
         };

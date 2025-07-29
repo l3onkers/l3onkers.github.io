@@ -5,6 +5,7 @@ date: 2025-07-29 15:00:00 +0100
 categories: [personal, desarrollo, jekyll]
 tags: [jekyll, github-pages, portfolio, diseño-web, optimización]
 author: Álvaro Escobar
+lang: es
 ---
 
 ¡Hola! Hoy quiero compartir contigo el proceso de modernización de mi sitio web personal que acabo de completar. He actualizado completamente la configuración, personalizado el contenido y mejorado la experiencia de usuario.

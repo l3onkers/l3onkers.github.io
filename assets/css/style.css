@@ -1588,9 +1588,7 @@ html {
 
 /* Banner hidden state */
 .construction-banner.hidden {
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
 /* Mobile responsive */

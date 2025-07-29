@@ -10,9 +10,10 @@ title: Blog
     </p>
 </div>
 
-{% if site.posts.size > 0 %}
+{% assign spanish_posts = site.posts | where: "lang", "es" %}
+{% if spanish_posts.size > 0 %}
 <div class="post-list">
-    {% for post in site.posts %}
+    {% for post in spanish_posts %}
     <article class="post-preview">
         <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
         <div class="post-meta">
