@@ -3,45 +3,45 @@ layout: default
 ---
 
 <section class="hero">
-    <h1><span data-translate="hero-greeting">¡Hola! Soy</span> {{ site.author.name }}</h1>
-    <p>{{ site.author.bio }}</p>
+    <h1><span data-translate="home.hero.greeting">¡Hola! Soy</span> {{ site.author.name }}</h1>
+    <p data-translate="home.hero.tagline">{{ site.author.bio }}</p>
     <div class="hero-buttons">
         <a href="{{ '/cv' | relative_url }}" class="btn btn-primary">
             <i class="fas fa-user"></i>
-            <span data-translate="see-cv">Ver mi CV</span>
+            <span data-translate="buttons.see_cv">Ver mi CV</span>
         </a>
         <a href="{{ '/proyectos' | relative_url }}" class="btn btn-primary">
             <i class="fas fa-code"></i>
-            <span data-translate="see-projects">Ver Proyectos</span>
+            <span data-translate="buttons.see_projects">Ver Proyectos</span>
         </a>
         <a href="{{ '/blog' | relative_url }}" class="btn btn-secondary">
             <i class="fas fa-blog"></i>
-            <span data-translate="read-blog">Leer mi Blog</span>
+            <span data-translate="buttons.read_blog">Leer mi Blog</span>
         </a>
         <a href="mailto:{{ site.email }}" class="btn btn-secondary">
             <i class="fas fa-envelope"></i>
-            <span data-translate="contact">Contacto</span>
+            <span data-translate="buttons.contact_email">Contacto</span>
         </a>
     </div>
 </section>
 
 <section class="grid grid-2" style="margin-top: 3rem;">
     <div class="card">
-        <h3><i class="fas fa-code"></i> Desarrollo</h3>
-        <p>Especializado en tecnologías web modernas, creando aplicaciones escalables y experiencias de usuario excepcionales.</p>
-        <a href="{{ '/proyectos' | relative_url }}" class="read-more" data-translate="see-projects">Ver proyectos →</a>
+        <h3><i class="fas fa-code"></i> <span data-translate="home.sections.development.title">Desarrollo</span></h3>
+        <p data-translate="home.sections.development.description">Especializado en tecnologías web modernas, creando aplicaciones escalables y experiencias de usuario excepcionales.</p>
+        <a href="{{ '/proyectos' | relative_url }}" class="read-more" data-translate="buttons.see_projects">Ver proyectos →</a>
     </div>
     
     <div class="card">
-        <h3><i class="fas fa-pen"></i> Blog</h3>
-        <p>Comparto conocimientos sobre desarrollo, tecnología y mejores prácticas a través de artículos técnicos.</p>
-        <a href="{{ '/blog' | relative_url }}" class="read-more" data-translate="read-more">Leer artículos →</a>
+        <h3><i class="fas fa-pen"></i> <span data-translate="home.sections.blog.title">Blog</span></h3>
+        <p data-translate="home.sections.blog.description">Comparto conocimientos sobre desarrollo, tecnología y mejores prácticas a través de artículos técnicos.</p>
+        <a href="{{ '/blog' | relative_url }}" class="read-more" data-translate="buttons.read_more">Leer artículos →</a>
     </div>
 </section>
 
 {% if site.posts.size > 0 %}
 <section style="margin-top: 4rem;">
-    <h2 style="text-align: center; margin-bottom: 2rem;" data-translate="latest-posts">Últimas Publicaciones</h2>
+    <h2 style="text-align: center; margin-bottom: 2rem;" data-translate="home.sections.latest_posts">Últimas Publicaciones</h2>
     <div class="grid grid-2">
         {% for post in site.posts limit:4 %}
         <article class="post-preview">
@@ -53,14 +53,14 @@ layout: default
                 </time>
             </div>
             <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
-            <a href="{{ post.url | relative_url }}" class="read-more" data-translate="read-more">Leer más →</a>
+            <a href="{{ post.url | relative_url }}" class="read-more" data-translate="buttons.read_more">Leer más →</a>
         </article>
         {% endfor %}
     </div>
     
     {% if site.posts.size > 4 %}
     <div style="text-align: center; margin-top: 2rem;">
-        <a href="{{ '/blog' | relative_url }}" class="btn btn-primary" data-translate="all-articles">Ver todos los artículos</a>
+        <a href="{{ '/blog' | relative_url }}" class="btn btn-primary" data-translate="home.sections.all_articles">Ver todos los artículos</a>
     </div>
     {% endif %}
 </section>

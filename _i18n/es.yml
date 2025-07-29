@@ -14,7 +14,7 @@ buttons:
   see_projects: "Ver proyectos"
   see_cv: "Ver mi CV"
   read_blog: "Leer mi Blog"
-  contact_email: "Contacto"
+  contact_email: "Contactar por Email"
   download_pdf: "Descargar PDF"
   demo: "Demo"
   code: "Código"
@@ -83,7 +83,7 @@ blog:
   title: "Blog"
   description: "Comparto mis experiencias, aprendizajes y reflexiones sobre desarrollo web, tecnología y mejores prácticas."
   read_full: "Leer artículo completo"
-  no_posts: "No hay artículos disponibles aún."
+  no_posts: "Próximamente..."
   
   meta:
     by: "por"

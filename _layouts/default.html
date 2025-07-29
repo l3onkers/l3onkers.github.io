@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -116,10 +116,10 @@
                 <i class="fas fa-tools"></i>
             </div>
             <div class="construction-text">
-                <h4>🚧 Sitio en Construcción</h4>
-                <p>Estoy afinando los detalles para ofrecerte la mejor experiencia. ¡Pronto estará listo!</p>
+                <h4 data-translate="system.under_construction">🚧 Sitio en Construcción</h4>
+                <p data-translate="system.construction_message">Estoy afinando los detalles para ofrecerte la mejor experiencia. ¡Pronto estará listo!</p>
             </div>
-            <button class="construction-close" onclick="closeBanner()" aria-label="Cerrar banner">
+            <button class="construction-close" onclick="closeBanner()" aria-label="Cerrar banner" data-translate="system.close">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -142,10 +142,10 @@
                 </div>
                 
                 <div class="nav-links">
-                    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %} data-translate="nav-home">Inicio</a>
-                    <a href="{{ '/cv' | relative_url }}" {% if page.url == '/cv/' %}class="active"{% endif %} data-translate="nav-cv">CV</a>
-                    <a href="{{ '/proyectos' | relative_url }}" {% if page.url == '/proyectos/' %}class="active"{% endif %} data-translate="nav-projects">Proyectos</a>
-                    <a href="{{ '/blog' | relative_url }}" {% if page.url == '/blog/' %}class="active"{% endif %} data-translate="nav-blog">Blog</a>
+                    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %} data-translate="nav.home">Inicio</a>
+                    <a href="{{ '/cv' | relative_url }}" {% if page.url == '/cv/' %}class="active"{% endif %} data-translate="nav.cv">CV</a>
+                    <a href="{{ '/proyectos' | relative_url }}" {% if page.url == '/proyectos/' %}class="active"{% endif %} data-translate="nav.projects">Proyectos</a>
+                    <a href="{{ '/blog' | relative_url }}" {% if page.url == '/blog/' %}class="active"{% endif %} data-translate="nav.blog">Blog</a>
                     
                     <div class="language-selector">
                         <button class="language-toggle" id="language-toggle" aria-label="Cambiar idioma">
@@ -194,17 +194,17 @@
                 </div>
                 
                 <div class="footer-links">
-                    <h4>Enlaces</h4>
+                    <h4 data-translate="footer.links">Enlaces</h4>
                     <ul>
-                        <li><a href="{{ '/' | relative_url }}">Inicio</a></li>
-                        <li><a href="{{ '/cv' | relative_url }}">CV</a></li>
-                        <li><a href="{{ '/proyectos' | relative_url }}">Proyectos</a></li>
-                        <li><a href="{{ '/blog' | relative_url }}">Blog</a></li>
+                        <li><a href="{{ '/' | relative_url }}" data-translate="nav.home">Inicio</a></li>
+                        <li><a href="{{ '/cv' | relative_url }}" data-translate="nav.cv">CV</a></li>
+                        <li><a href="{{ '/proyectos' | relative_url }}" data-translate="nav.projects">Proyectos</a></li>
+                        <li><a href="{{ '/blog' | relative_url }}" data-translate="nav.blog">Blog</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-social">
-                    <h4>Sígueme</h4>
+                    <h4 data-translate="footer.follow">Sígueme</h4>
                     <div class="social-links">
                         {% if site.github_username %}
                         <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">
@@ -231,7 +231,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title }}. Todos los derechos reservados.</p>
+                <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title }}. <span data-translate="footer.rights">Todos los derechos reservados</span>.</p>
             </div>
         </div>
     </footer>

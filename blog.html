@@ -4,8 +4,8 @@ title: Blog
 ---
 
 <div style="text-align: center; margin-bottom: 3rem;">
-    <h1>Blog</h1>
-    <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+    <h1 data-translate="blog.title">Blog</h1>
+    <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;" data-translate="blog.description">
         Comparto mis experiencias, aprendizajes y reflexiones sobre desarrollo web, tecnología y mejores prácticas.
     </p>
 </div>
@@ -48,17 +48,17 @@ title: Blog
             {% endif %}
         </div>
         {% endif %}
-        <a href="{{ post.url | relative_url }}" class="read-more">Leer artículo completo →</a>
+        <a href="{{ post.url | relative_url }}" class="read-more" data-translate="blog.read_full">Leer artículo completo →</a>
     </article>
     {% endfor %}
 </div>
 {% else %}
 <div class="card" style="text-align: center; padding: 3rem;">
     <i class="fas fa-pen-alt" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
-    <h3>Próximamente...</h3>
+    <h3 data-translate="blog.no_posts">Próximamente...</h3>
     <p>Estoy preparando contenido interesante para compartir contigo. ¡Vuelve pronto para leer mis primeros artículos!</p>
     <p style="margin-top: 2rem;">
-        <a href="{{ '/' | relative_url }}" class="btn btn-primary">Volver al inicio</a>
+        <a href="{{ '/' | relative_url }}" class="btn btn-primary" data-translate="nav.home">Volver al inicio</a>
     </p>
 </div>
 {% endif %}
