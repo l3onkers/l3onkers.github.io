@@ -268,10 +268,11 @@ a:active {
 
 .btn-primary {
   background: var(--primary-gradient);
-  color: white;
+  color: #ffffff !important;
   border: none;
   position: relative;
   overflow: hidden;
+  text-decoration: none !important;
 }
 
 .btn-primary::before {
@@ -293,17 +294,21 @@ a:active {
   background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a855f7 100%);
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+  color: #ffffff !important;
 }
 
 .btn-secondary {
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--text-color) !important;
   border: 1px solid var(--border-color);
+  text-decoration: none !important;
 }
 
 .btn-secondary:hover {
   background-color: var(--bg-secondary);
   transform: translateY(-2px);
+  border-color: var(--primary-color);
+  color: var(--primary-color) !important;
 }
 
 /* Cards */

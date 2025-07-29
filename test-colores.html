@@ -8,8 +8,14 @@ title: Test Colores Lila
     
     <div style="margin: 2rem 0;">
         <h2>Botones de Prueba</h2>
-        <a href="#" class="btn btn-primary" style="margin-right: 1rem;">Botón Primario Lila</a>
-        <a href="#" class="btn btn-secondary">Botón Secundario</a>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+            <a href="#" class="btn btn-primary">Botón Primario Lila</a>
+            <a href="#" class="btn btn-secondary">Botón Secundario</a>
+            <button class="btn btn-primary">Button Element</button>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+            ℹ️ Los botones primarios deben tener texto <strong>BLANCO</strong> siempre, independientemente del tema.
+        </p>
     </div>
     
     <div style="margin: 2rem 0;">
@@ -35,7 +41,17 @@ title: Test Colores Lila
     </div>
     
     <div style="margin: 2rem 0;">
-        <h2>Tags de Tecnología</h2>
+        <h2>Enlaces de Texto</h2>
+        <p>Este párrafo contiene <a href="#">un enlace normal</a> que debería ser lila. También tiene <a href="#" class="read-more">un enlace "read-more"</a> con estilo especial.</p>
+        <ul style="margin-top: 1rem;">
+            <li><a href="#">Enlace en lista 1</a></li>
+            <li><a href="#">Enlace en lista 2</a></li>
+            <li><a href="#">Enlace visitado</a> (simular visitado)</li>
+        </ul>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+            ℹ️ Todos los enlaces deben ser lila en modo claro y lila claro en modo oscuro.
+        </p>
+    </div>
         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
             <span class="tech-tag">React</span>
             <span class="tech-tag">JavaScript</span>

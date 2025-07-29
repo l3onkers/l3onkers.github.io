@@ -33,6 +33,22 @@
         }
         .btn-primary {
             background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%) !important;
+            color: #ffffff !important;
+            text-decoration: none !important;
+        }
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+            color: #ffffff !important;
+            text-decoration: none !important;
+        }
+        .btn-secondary {
+            color: var(--text-color) !important;
+            text-decoration: none !important;
+        }
+        .btn-secondary:hover {
+            color: #8b5cf6 !important;
+        }
+        [data-theme="dark"] .btn-secondary:hover {
+            color: #a78bfa !important;
         }
         .nav-brand a:hover, .nav-links a:hover, .nav-links a.active {
             color: #8b5cf6 !important;
@@ -50,11 +66,26 @@
         a:visited {
             color: #9333ea !important;
         }
+        [data-theme="dark"] a {
+            color: #a78bfa !important;
+        }
+        [data-theme="dark"] a:hover {
+            color: #c4b5fd !important;
+        }
+        [data-theme="dark"] a:visited {
+            color: #ddd6fe !important;
+        }
         .read-more {
             color: #8b5cf6 !important;
         }
         .read-more:hover {
             color: #7c3aed !important;
+        }
+        [data-theme="dark"] .read-more {
+            color: #a78bfa !important;
+        }
+        [data-theme="dark"] .read-more:hover {
+            color: #c4b5fd !important;
         }
     </style>
     
