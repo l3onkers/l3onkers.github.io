@@ -22,7 +22,7 @@ buttons:
   see_github: "Ver en GitHub"
 
 # Página de inicio
-home:
+homepage:
   hero:
     greeting: "¡Hola! Soy"
     tagline: "Desarrollador Full Stack especializado en tecnologías web modernas. Apasionado por crear soluciones innovadoras y compartir conocimiento con la comunidad."
@@ -32,7 +32,7 @@ home:
       title: "Desarrollo"
       description: "Especializado en tecnologías web modernas, creando aplicaciones escalables y experiencias de usuario excepcionales."
     
-    blog:
+    blog_section:
       title: "Blog"
       description: "Comparto conocimientos sobre desarrollo, tecnología y mejores prácticas a través de artículos técnicos."
     
