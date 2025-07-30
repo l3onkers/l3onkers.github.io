@@ -13,7 +13,7 @@
     <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ '/feed.xml' | relative_url }}">
     
     <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" crossorigin="anonymous">
     
     <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,7 +120,7 @@
                 <p data-translate="system.construction_message">Estoy afinando los detalles para ofrecerte la mejor experiencia. ¡Pronto estará listo!</p>
             </div>
             <button class="construction-close" onclick="closeBanner()" aria-label="Cerrar banner">
-                <i class="fas fa-times"></i>
+                <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
         <div class="construction-progress">
@@ -177,7 +177,7 @@
                     </div>
                     
                     <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
-                        <i class="fas fa-sun" id="theme-icon"></i>
+                        <i class="fa-solid fa-sun" id="theme-icon"></i>
                     </button>
                 </div>
                 
@@ -219,12 +219,12 @@
                     <div class="social-links">
                         {% if site.github_username %}
                         <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">
-                            <i class="fab fa-github"></i>
+                            <i class="fa-brands fa-github"></i>
                         </a>
                         {% endif %}
                         {% if site.linkedin_username %}
                         <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener">
-                            <i class="fab fa-linkedin"></i>
+                            <i class="fa-brands fa-linkedin"></i>
                         </a>
                         {% endif %}
                         {% if site.twitter_username %}
@@ -234,7 +234,7 @@
                         {% endif %}
                         {% if site.email %}
                         <a href="mailto:{{ site.email }}">
-                            <i class="fas fa-envelope"></i>
+                            <i class="fa-solid fa-envelope"></i>
                         </a>
                         {% endif %}
                     </div>

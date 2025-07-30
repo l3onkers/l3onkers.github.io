@@ -42,9 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
         themeIcon.style.transform = 'rotate(180deg)';
         setTimeout(() => {
             if (theme === 'dark') {
-                themeIcon.className = 'fas fa-moon';
+                themeIcon.className = 'fa-solid fa-moon';
             } else {
-                themeIcon.className = 'fas fa-sun';
+                themeIcon.className = 'fa-solid fa-sun';
             }
             themeIcon.style.transform = 'rotate(0deg)';
         }, 150);
