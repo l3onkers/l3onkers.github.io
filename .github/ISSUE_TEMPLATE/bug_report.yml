@@ -1,0 +1,55 @@
+name: 🐛 Bug Report
+description: Reportar un problema o error en el sitio web
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportar este problema. Por favor, completa la información solicitada.
+
+  - type: input
+    id: browser
+    attributes:
+      label: Navegador
+      description: ¿Qué navegador estás usando?
+      placeholder: ej. Chrome 91, Firefox 89, Safari 14
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Dispositivo
+      description: ¿Qué tipo de dispositivo estás usando?
+      placeholder: ej. Desktop Windows 11, iPhone 12, Samsung Galaxy S21
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción del problema
+      description: Describe detalladamente el problema encontrado
+      placeholder: Describe qué esperabas que pasara y qué realmente pasó
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para reproducir
+      description: Lista los pasos para reproducir el problema
+      placeholder: |
+        1. Ve a '...'
+        2. Haz clic en '...'
+        3. Desplázate hacia '...'
+        4. Ve el error
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Información adicional
+      description: Cualquier otra información que pueda ser útil

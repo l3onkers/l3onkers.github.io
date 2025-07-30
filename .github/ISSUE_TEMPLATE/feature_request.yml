@@ -1,0 +1,50 @@
+name: ✨ Feature Request
+description: Sugerir una nueva funcionalidad para el sitio web
+title: "[FEATURE] "
+labels: ["enhancement", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¿Tienes una idea para mejorar el sitio? ¡Compártela!
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema a resolver
+      description: ¿Hay algún problema actual que esta funcionalidad resolvería?
+      placeholder: Describe el problema o limitación actual
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solución propuesta
+      description: Describe la funcionalidad que te gustaría ver implementada
+      placeholder: Describe detalladamente la funcionalidad propuesta
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: ¿Has considerado otras formas de resolver esto?
+      placeholder: Describe cualquier solución alternativa que hayas considerado
+
+  - type: checkboxes
+    id: area
+    attributes:
+      label: Área del sitio
+      description: ¿Qué área del sitio se vería afectada?
+      options:
+        - label: Página de inicio
+        - label: Blog
+        - label: Portfolio/Proyectos
+        - label: CV/Resume
+        - label: Navegación
+        - label: Diseño general
+        - label: Performance
+        - label: SEO
+        - label: Accesibilidad

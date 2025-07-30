@@ -1,19 +1,48 @@
-# Sitio Web Personal de Álvaro Escobar
+# 🌐 Sitio Web Personal - Álvaro Escobar
 
-¡Bienvenido a mi sitio web personal! Este es un sitio web estático construido con Jekyll y alojado en GitHub Pages, que incluye mi portfolio profesional, blog técnico y currículum vitae.
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Active-green)](https://l3onkers.github.io)
+[![Jekyll](https://img.shields.io/badge/Jekyll-4.3%2B-red)](https://jekyllrb.com/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/l3onkers/l3onkers.github.io/graphs/commit-activity)
 
-## 🌟 Características
+> 🚧 **Estado**: En desarrollo activo - No indexado por motores de búsqueda
 
-- **Diseño minimalista y moderno**: Interfaz limpia y profesional
-- **Modo oscuro/claro**: Selector dinámico de tema con persistencia local
-- **Sección CV**: Currículum completo con experiencia, educación y habilidades
-- **Blog integrado**: Sistema de blog con posts en Markdown sobre desarrollo web
-- **Portfolio personal**: Información real y proyectos destacados
-- **Responsive**: Optimizado para todos los dispositivos
-- **SEO optimizado**: Meta tags y estructura semántica
-- **Rápido**: Sitio estático con excelente rendimiento
+Sitio web personal de **Álvaro Escobar**, Desarrollador Full Stack especializado en tecnologías web modernas. Incluye portfolio profesional, blog técnico y currículum completo.
 
-## 🚀 Tecnologías utilizadas
+## ✨ Características Principales
+
+### 🎨 **Diseño y UX**
+- ✅ **Diseño moderno** con paleta de colores violeta/púrpura
+- ✅ **Modo oscuro por defecto** con toggle para tema claro
+- ✅ **Animaciones fluidas** y efectos de hover profesionales
+- ✅ **Responsive design** optimizado para todos los dispositivos
+- ✅ **Tipografía premium** (Inter font) para máxima legibilidad
+
+### 🌍 **Multiidioma**
+- ✅ **Español** (idioma por defecto)
+- ✅ **Inglés** con URL estructuradas (`/en/`)
+- ✅ **Selector de idioma** dinámico en navegación
+- ✅ **Contenido traducido** completo (páginas, posts, UI)
+
+### 🔒 **Seguridad y Privacidad**
+- ✅ **Anti-fingerprinting** (versiones de librerías ocultas)
+- ✅ **Headers de seguridad** configurados
+- ✅ **No indexación** durante desarrollo
+- ✅ **Políticas de privacidad** implementadas
+
+### 📝 **Contenido**
+- ✅ **Blog técnico** con posts en ambos idiomas
+- ✅ **Portfolio profesional** con proyectos destacados
+- ✅ **CV completo** descargable en PDF
+- ✅ **Navegación inteligente** por idioma
+
+### ⚡ **Performance**
+- ✅ **Sitio estático** (Jekyll + GitHub Pages)
+- ✅ **CSS optimizado** y comprimido
+- ✅ **Lazy loading** de imágenes
+- ✅ **Cache headers** configurados
+
+## �️ **Stack Tecnológico**
 
 - **Jekyll**: Generador de sitios estáticos
 - **GitHub Pages**: Hosting gratuito
