@@ -8,6 +8,11 @@
     <title>{% if page.title %}{{ page.title | escape }} - {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
     <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
     
+    <!-- SEO and Indexing Control -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ '/feed.xml' | relative_url }}">
@@ -116,8 +121,8 @@
                 <i class="fas fa-tools"></i>
             </div>
             <div class="construction-text">
-                <h4 data-translate="system.under_construction">🚧 Sitio en Construcción</h4>
-                <p data-translate="system.construction_message">Estoy afinando los detalles para ofrecerte la mejor experiencia. ¡Pronto estará listo!</p>
+                <h4 data-translate="system.under_construction">🚧 Sitio en Construcción - No Indexado</h4>
+                <p data-translate="system.construction_message">Estoy afinando los detalles para ofrecerte la mejor experiencia. Este sitio no está siendo indexado por motores de búsqueda.</p>
             </div>
             <button class="construction-close" onclick="closeBanner()" aria-label="Cerrar banner">
                 <i class="fa-solid fa-xmark"></i>

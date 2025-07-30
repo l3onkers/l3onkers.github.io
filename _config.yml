@@ -18,9 +18,12 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
-# SEO Tag configuration - Security hardening
+# SEO Tag configuration - Security hardening & Development mode
 seo_tag:
   generator: false
+
+# Development mode - No indexing
+robots: noindex, nofollow, noarchive, nosnippet, noimageindex
 
 # Sass configuration for better CSS compilation
 sass:

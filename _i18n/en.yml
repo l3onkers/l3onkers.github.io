@@ -99,8 +99,8 @@ footer:
 
 # System messages
 system:
-  under_construction: "Site under construction! 🚧"
-  construction_message: "I'm working to provide you with the best experience. Some features may be limited."
+  under_construction: "🚧 Site Under Construction - Not Indexed"
+  construction_message: "I'm fine-tuning the details to provide you with the best experience. This site is not being indexed by search engines until completed."
   language_changed: "Language changed to English"
 
 # Months (for dates)
