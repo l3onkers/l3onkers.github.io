@@ -26,7 +26,8 @@ lang: en
     </div>
 </section>
 
-<section class="home-sections">    <div class="grid grid-2 mt-3">
+<section class="home-sections">
+    <div class="grid grid-2 mt-3">
         <div class="card card-clickable fade-in-up animate-in anim-delay-0" 
              role="button" 
              tabindex="0"
@@ -47,9 +48,6 @@ lang: en
             <span class="read-more" data-translate="buttons.read_more">Read articles →</span>
         </div>
     </div>
-    </div>
-</section>
-
 {% assign english_posts = site.posts | where: "lang", "en" %}
 {% if english_posts.size > 0 %}
 <section class="section-spaced">
