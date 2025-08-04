@@ -943,6 +943,10 @@ function initReadingProgress() {
     function calculateReadingTime() {
         if (!readingTimeElement || !postContent) return;
         
+        // Temporarily disable to test for duplication
+        console.log('calculateReadingTime called');
+        return;
+        
         const text = postContent.textContent || postContent.innerText;
         const wordCount = text.trim().split(/\s+/).length;
         const wordsPerMinute = 200; // Average reading speed
