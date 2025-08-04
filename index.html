@@ -27,17 +27,25 @@ layout: default
 
 <section class="home-sections">
     <div class="grid grid-2 mt-3">
-        <a href="{{ '/proyectos' | relative_url }}" class="card card-link fade-in-up animate-in anim-delay-0">
+        <div class="card card-clickable fade-in-up animate-in anim-delay-0" 
+             role="button" 
+             tabindex="0"
+             data-href="{{ '/proyectos' | relative_url }}"
+             aria-label="Ir a la página de proyectos de desarrollo">
             <h3><i class="fas fa-code"></i> <span data-translate="homepage.sections.development.title">Desarrollo</span></h3>
             <p data-translate="homepage.sections.development.description">Especializado en tecnologías web modernas, creando aplicaciones escalables y experiencias de usuario excepcionales.</p>
             <span class="read-more" data-translate="buttons.see_projects">Ver proyectos →</span>
-        </a>
+        </div>
         
-        <a href="{{ '/blog' | relative_url }}" class="card card-link fade-in-up animate-in anim-delay-1">
+        <div class="card card-clickable fade-in-up animate-in anim-delay-1"
+             role="button"
+             tabindex="0"
+             data-href="{{ '/blog' | relative_url }}"
+             aria-label="Ir a la página del blog">
             <h3><i class="fas fa-pen"></i> <span data-translate="homepage.sections.blog_section.title">Blog</span></h3>
             <p data-translate="homepage.sections.blog_section.description">Comparto conocimientos sobre desarrollo, tecnología y mejores prácticas a través de artículos técnicos.</p>
             <span class="read-more" data-translate="buttons.read_more">Leer artículos →</span>
-        </a>
+        </div>
     </div>
 </section>
 

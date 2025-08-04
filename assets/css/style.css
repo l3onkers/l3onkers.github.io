@@ -1861,12 +1861,38 @@ html {
   color: var(--primary-hover);
 }
 
-/* Ensure proper styling for card elements when used as links */
-.card-link h3 {
+/* Card clickable divs - Same behavior as card-link but for div elements */
+.card-clickable {
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition);
+}
+
+.card-clickable:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-clickable:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.card-clickable .read-more {
+  color: var(--primary-color);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.card-clickable:hover .read-more {
+  color: var(--primary-hover);
+}
+
+.card-clickable h3 {
   color: inherit;
 }
 
-.card-link p {
+.card-clickable p {
   color: var(--text-secondary);
 }
 
