@@ -3,20 +3,7 @@ layout: default
 ---
 
 <section class="hero">
-    <h1><        <article class="post-preview card-clickable fade-in-up animate-in anim-delay-{{ forloop.index0 }}"
-                 role="button"
-                 tabindex="0"
-                 data-href="{{ post.url | absolute_url }}"
-                 aria-label="Leer artículo: {{ post.title }}">
-            <h3><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h3>
-            <div class="post-meta">
-                <time datetime="{{ post.date | date_to_xmlschema }}">
-                    <i class="fas fa-calendar-alt"></i>
-                    {{ post.date | date: "%d %b %Y" }}
-                </time>
-            </div>
-            <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
-            <a href="{{ post.url | absolute_url }}" class="read-more" data-translate="buttons.read_more">Leer más →</a>slate="home.hero.greeting">¡Hola! Soy</span> {{ site.author.name }}</h1>
+    <h1><span data-translate="home.hero.greeting">¡Hola! Soy</span> {{ site.author.name }}</h1>
     <p data-translate="home.hero.tagline">{{ site.author.bio }}</p>
     <div class="hero-buttons">
         <a href="{{ '/cv' | relative_url }}" class="btn btn-primary">
@@ -81,7 +68,7 @@ layout: default
                 </time>
             </div>
             <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
-            <a href="{{ post.url | relative_url }}" class="read-more" data-translate="buttons.read_more">Leer más →</a>
+            <a href="{{ post.url | absolute_url }}" class="read-more" data-translate="buttons.read_more">Leer más →</a>
         </article>
         {% endfor %}
     </div>
