@@ -1161,6 +1161,18 @@ body.loaded .wrapper {
   }
 }
 
+/* Blog page post list spacing */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.post-list .post-preview {
+  margin-bottom: 0; /* Remove any default margin since we're using gap */
+}
+
 /* Skill tags pulse animation on hover */
 .skill-tag:hover,
 .tech-tag:hover {

@@ -14,7 +14,11 @@ title: Blog
 {% if spanish_posts.size > 0 %}
 <div class="post-list">
     {% for post in spanish_posts %}
-    <article class="post-preview">
+    <article class="post-preview card-clickable"
+             role="button"
+             tabindex="0"
+             data-href="{{ post.url | relative_url }}"
+             aria-label="Leer artículo: {{ post.title }}">
         <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
         <div class="post-meta">
             <time datetime="{{ post.date | date_to_xmlschema }}">
