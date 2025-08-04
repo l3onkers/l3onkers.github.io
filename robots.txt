@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://l3onkers.github.io/sitemap.xml
+
+# Disallow crawling of drafts or test files
+Disallow: /_drafts/
+Disallow: /test/
+Disallow: /.github/
+
+# Allow all other content
+Allow: /en/
+Allow: /blog/
+Allow: /proyectos/
+Allow: /cv/
+Allow: /assets/
