@@ -412,11 +412,27 @@ a:active {
 
 .home-sections .card {
   position: relative;
+  background: var(--bg-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+  animation: float 6s ease-in-out infinite;
   padding: 2.5rem;
   min-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.home-sections .card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.home-sections .card:nth-child(2n) {
+  animation-delay: -2s;
 }
 
 .home-sections .card h3 {
