@@ -301,10 +301,35 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentLang = getCurrentLanguageFromPath();
         if (currentLang === lang) return;
         
+        // Page mapping between languages
+        const pageMapping = {
+            es: {
+                '/proyectos': '/proyectos',
+                '/cv': '/cv',
+                '/blog': '/blog',
+                '/': '/'
+            },
+            en: {
+                '/proyectos': '/en/projects',
+                '/cv': '/en/resume', 
+                '/blog': '/en/blog',
+                '/': '/en/',
+                '/projects': '/en/projects',
+                '/resume': '/en/resume'
+            }
+        };
+        
+        // Reverse mapping for English to Spanish
+        const reverseMapping = {
+            '/en/projects': '/proyectos',
+            '/en/resume': '/cv',
+            '/en/blog': '/blog',
+            '/en/': '/'
+        };
+        
         // Special handling for blog posts
         if (currentPath.includes('/blog/')) {
-            // For blog posts, we need to check if the corresponding post exists in the target language
-            // For now, just redirect to the blog index page
+            // For blog posts, redirect to the blog index page
             if (lang === 'en') {
                 window.location.href = baseUrl + '/en/blog/';
             } else {
@@ -313,10 +338,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Language URL mapping for other pages
+        // Handle page mapping
         if (lang === 'en') {
-            // Redirect to English version
-            if (!currentPath.startsWith('/en/')) {
+            // Going to English
+            const mappedPath = pageMapping.en[currentPath];
+            if (mappedPath) {
+                window.location.href = baseUrl + mappedPath;
+            } else if (!currentPath.startsWith('/en/')) {
+                // Fallback: add /en prefix for unmapped pages
                 let newPath = '/en' + currentPath;
                 if (currentPath === '/' || currentPath === '/index.html') {
                     newPath = '/en/';
@@ -324,8 +353,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = baseUrl + newPath;
             }
         } else {
-            // Redirect to Spanish version (default)
-            if (currentPath.startsWith('/en/')) {
+            // Going to Spanish
+            const mappedPath = reverseMapping[currentPath];
+            if (mappedPath) {
+                window.location.href = baseUrl + mappedPath;
+            } else if (currentPath.startsWith('/en/')) {
+                // Fallback: remove /en prefix for unmapped pages
                 let newPath = currentPath.replace('/en', '');
                 if (!newPath || newPath === '/') {
                     newPath = '/';
