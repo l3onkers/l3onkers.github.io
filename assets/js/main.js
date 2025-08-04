@@ -1,3 +1,113 @@
+// Performance Optimization & Lazy Loading
+document.addEventListener('DOMContentLoaded', function() {
+    // Lazy Loading Implementation
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    const lazyBackgrounds = document.querySelectorAll('[data-bg]');
+    
+    // Intersection Observer for lazy loading
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                
+                // Show loading placeholder
+                img.classList.add('loading');
+                
+                // Create new image to preload
+                const newImg = new Image();
+                newImg.onload = () => {
+                    // Replace data-src with src
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    img.classList.remove('loading');
+                    img.classList.add('loaded');
+                };
+                newImg.onerror = () => {
+                    img.classList.remove('loading');
+                    img.classList.add('error');
+                };
+                newImg.src = img.dataset.src;
+                
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        rootMargin: '50px 0px',
+        threshold: 0.1
+    });
+    
+    // Observe all lazy images
+    lazyImages.forEach(img => imageObserver.observe(img));
+    
+    // Background lazy loading
+    const backgroundObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                element.style.backgroundImage = `url(${element.dataset.bg})`;
+                element.removeAttribute('data-bg');
+                observer.unobserve(element);
+            }
+        });
+    }, {
+        rootMargin: '50px 0px'
+    });
+    
+    lazyBackgrounds.forEach(bg => backgroundObserver.observe(bg));
+    
+    // Critical resource preloading
+    function preloadCriticalResources() {
+        const criticalResources = [
+            '/assets/css/style.css',
+            '/assets/js/main.js'
+        ];
+        
+        criticalResources.forEach(resource => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = resource.endsWith('.css') ? 'style' : 'script';
+            link.href = resource;
+            document.head.appendChild(link);
+        });
+    }
+    
+    // Font loading optimization
+    function optimizeFontLoading() {
+        const fonts = [
+            'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
+        ];
+        
+        fonts.forEach(fontUrl => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'style';
+            link.href = fontUrl;
+            link.onload = function() {
+                this.onload = null;
+                this.rel = 'stylesheet';
+            };
+            document.head.appendChild(link);
+        });
+    }
+    
+    // Initialize performance optimizations
+    preloadCriticalResources();
+    optimizeFontLoading();
+    
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('SW registered: ', registration);
+                })
+                .catch(registrationError => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        });
+    }
+});
+
 // Theme Toggle Functionality & Enhanced Animations
 document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('theme-toggle');

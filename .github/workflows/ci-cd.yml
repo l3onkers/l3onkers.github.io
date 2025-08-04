@@ -530,33 +530,74 @@ jobs:
         with:
           node-version: '20'
 
-      - name: 📦 Install Lighthouse
-        run: npm install -g lighthouse
+      - name: 📦 Install Performance Tools
+        run: |
+          npm install -g lighthouse
+          npm install --save-dev clean-css terser
+
+      - name: 🔄 Run Asset Minification
+        run: |
+          echo "🔧 Running asset minification..."
+          if [ -f "package.json" ]; then
+            npm install
+            node scripts/minify.js || echo "Minification script not found, continuing..."
+          fi
 
       - name: 🚀 Run Performance Tests
         run: |
-          echo "🚀 Running performance tests..."
+          echo "🚀 Running enhanced performance tests..."
+          
           # Serve site locally
           python3 -m http.server 8000 --directory _site &
           SERVER_PID=$!
           sleep 5
           
-          # Run Lighthouse
+          # Run Lighthouse for multiple pages
+          echo "🔍 Testing homepage..."
           lighthouse http://localhost:8000/ \
+            --output json \
             --output html \
-            --output-path ./lighthouse-report.html \
+            --output-path ./lighthouse-homepage \
             --chrome-flags="--headless --no-sandbox" \
+            --preset="desktop" \
+            --throttling-method="devtools" \
             --quiet || true
+          
+          echo "🔍 Testing blog page..."
+          lighthouse http://localhost:8000/blog.html \
+            --output json \
+            --output html \
+            --output-path ./lighthouse-blog \
+            --chrome-flags="--headless --no-sandbox" \
+            --preset="desktop" \
+            --throttling-method="devtools" \
+            --quiet || true
+          
+          # Extract and display scores
+          echo "📊 Performance Scores:"
+          if [ -f "lighthouse-homepage.report.json" ]; then
+            node -e "
+              const report = JSON.parse(require('fs').readFileSync('lighthouse-homepage.report.json'));
+              const scores = report.lhr.categories;
+              console.log('Homepage Scores:');
+              console.log('  Performance: ' + Math.round(scores.performance.score * 100));
+              console.log('  Accessibility: ' + Math.round(scores.accessibility.score * 100));
+              console.log('  Best Practices: ' + Math.round(scores['best-practices'].score * 100));
+              console.log('  SEO: ' + Math.round(scores.seo.score * 100));
+            " || true
+          fi
           
           # Kill server
           kill $SERVER_PID
 
-      - name: 📊 Upload Lighthouse Report
+      - name: 📊 Upload Performance Reports
         uses: actions/upload-artifact@v4
         with:
-          name: lighthouse-report
-          path: lighthouse-report.html
-          retention-days: 7
+          name: performance-reports
+          path: |
+            lighthouse-*.html
+            lighthouse-*.json
+          retention-days: 30
 
   # Job 11: Test Summary (always runs to show results)
   test-summary:

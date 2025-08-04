@@ -152,3 +152,21 @@ gallery:
     zoom_in: "Zoom in"
     zoom_out: "Zoom out"
     counter: "of"
+
+# Performance and optimization
+performance:
+  loading: "Loading..."
+  error: "Loading error"
+  optimizing: "Optimizing content..."
+  cached: "Cached content"
+  offline: "Offline mode"
+  update_available: "Update available"
+  install_app: "Install app"
+  
+# Service Worker
+sw:
+  installing: "Installing updates..."
+  ready: "App ready to work offline"
+  cached: "Content cached for offline use"
+  updatefound: "New content available; will update automatically"
+  offline: "Offline. Showing cached content"

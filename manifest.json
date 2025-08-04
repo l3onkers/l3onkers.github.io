@@ -1,0 +1,96 @@
+{
+  "name": "L3onkers - Cybersecurity & Development",
+  "short_name": "L3onkers",
+  "description": "Personal website showcasing cybersecurity projects, development work, and technical blog posts",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#8b5cf6",
+  "orientation": "portrait-primary",
+  "lang": "es",
+  "categories": [
+    "productivity",
+    "education",
+    "technology",
+    "portfolio"
+  ],
+  "icons": [
+    {
+      "src": "/assets/images/profile/profile.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/profile/profile.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/images/screenshots/desktop.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Desktop view of L3onkers website"
+    },
+    {
+      "src": "/assets/images/screenshots/mobile.jpg",
+      "sizes": "320x568",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Mobile view of L3onkers website"
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "scope": "/",
+  "id": "l3onkers-site",
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "handle_links": "preferred",
+  "shortcuts": [
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Read latest blog posts",
+      "url": "/blog.html",
+      "icons": [
+        {
+          "src": "/assets/images/profile/profile.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "View portfolio projects",
+      "url": "/proyectos.html",
+      "icons": [
+        {
+          "src": "/assets/images/profile/profile.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "CV",
+      "short_name": "CV",
+      "description": "View curriculum vitae",
+      "url": "/cv.html",
+      "icons": [
+        {
+          "src": "/assets/images/profile/profile.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

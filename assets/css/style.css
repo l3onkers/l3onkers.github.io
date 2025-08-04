@@ -1,3 +1,148 @@
+/* Performance Optimizations & Lazy Loading */
+/* Font Loading Optimization */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+}
+
+/* Lazy Loading States */
+img[data-src] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: linear-gradient(90deg, 
+    var(--bg-secondary) 25%, 
+    rgba(139, 92, 246, 0.1) 50%, 
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+img.loading {
+  opacity: 0.6;
+  filter: blur(2px);
+}
+
+img.loaded {
+  opacity: 1;
+  filter: none;
+}
+
+img.error {
+  opacity: 0.5;
+  background: var(--bg-secondary);
+  position: relative;
+}
+
+img.error::after {
+  content: '🖼️';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+/* Shimmer animation for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Background lazy loading */
+[data-bg] {
+  background: linear-gradient(90deg, 
+    var(--bg-secondary) 25%, 
+    rgba(139, 92, 246, 0.1) 50%, 
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Critical CSS - Above the fold content */
+.critical-content {
+  contain: layout style paint;
+}
+
+/* Performance optimized animations */
+.performance-animation {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  img[data-src],
+  [data-bg],
+  .shimmer {
+    animation: none !important;
+  }
+}
+
+/* Resource hints for better loading */
+.preload-hint {
+  visibility: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+}
+
+/* Content loading states */
+.content-loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.content-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 25%, 
+    rgba(139, 92, 246, 0.1) 50%, 
+    transparent 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  z-index: 1;
+}
+
+/* Optimized grid layouts */
+.optimized-grid {
+  display: grid;
+  contain: layout style;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px;
+}
+
+/* Virtual scrolling support */
+.virtual-item {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 200px;
+}
+
 /* CSS Variables for Theme - Updated July 2025 with Lila Color Scheme */
 :root {
   /* Primary Lila/Purple Colors */
@@ -2617,7 +2762,7 @@ html {
 /* Lazy loading placeholder */
 img[data-src] {
     filter: blur(5px);
-    transition: filter 0.3s ease;
+    transition: filter  0.3s ease;
 }
 
 img[data-loaded="true"] {

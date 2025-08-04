@@ -152,3 +152,21 @@ gallery:
     zoom_in: "Ampliar"
     zoom_out: "Reducir"
     counter: "de"
+
+# Performance y optimización
+performance:
+  loading: "Cargando..."
+  error: "Error al cargar"
+  optimizing: "Optimizando contenido..."
+  cached: "Contenido cacheado"
+  offline: "Modo sin conexión"
+  update_available: "Actualización disponible"
+  install_app: "Instalar aplicación"
+  
+# Service Worker
+sw:
+  installing: "Instalando actualizaciones..."
+  ready: "Aplicación lista para funcionar sin conexión"
+  cached: "Contenido cacheado para uso sin conexión"
+  updatefound: "Nuevo contenido disponible; se actualizará automáticamente"
+  offline: "Sin conexión. Mostrando contenido cacheado"
