@@ -9,11 +9,15 @@
   /* Text Colors */
   --text-color: #1f2937;
   --text-secondary: #6b7280;
+  --secondary-text: #6b7280;
   
   /* Background Colors */
   --bg-color: #ffffff;
   --bg-secondary: #f9fafb;
+  --card-bg: #ffffff;
   --border-color: #e5e7eb;
+  --accent-color: #8b5cf6;
+  --accent-hover: #7c3aed;
   
   /* Shadows with Lila Tint */
   --shadow: 0 1px 3px 0 rgba(139, 92, 246, 0.1), 0 1px 2px 0 rgba(139, 92, 246, 0.06);
@@ -28,6 +32,14 @@
   --primary-light: #c4b5fd;
   --primary-gradient: linear-gradient(135deg, #a78bfa 0%, #c084fc 50%, #ddd6fe 100%);
   --text-color: #f9fafb;
+  --text-secondary: #d1d5db;
+  --secondary-text: #d1d5db;
+  --bg-color: #111827;
+  --bg-secondary: #1f2937;
+  --card-bg: #1f2937;
+  --border-color: #374151;
+  --accent-color: #a78bfa;
+  --accent-hover: #8b5cf6;
   --text-secondary: #d1d5db;
   --bg-color: #111827;
   --bg-secondary: #1f2937;
@@ -2044,10 +2056,34 @@ html {
     padding: 0.5rem;
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    background: var(--input-bg);
+    background: var(--card-bg);
     color: var(--text-color);
     font-size: 0.9rem;
     transition: border-color 0.3s ease;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+}
+
+.filter-select option {
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 0.5rem;
+}
+
+/* Dark theme arrow color */
+[data-theme="dark"] .filter-select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d1d5db' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
+.filter-select:hover {
+    border-color: var(--accent-color);
 }
 
 .filter-select:focus {
@@ -2056,13 +2092,18 @@ html {
     box-shadow: 0 0 0 2px rgba(138, 102, 204, 0.2);
 }
 
+.filter-select:hover {
+    border-color: var(--accent-color);
+}
+
 .results-counter {
     text-align: center;
     padding: 0.5rem;
-    background: var(--subtle-bg);
+    background: rgba(138, 102, 204, 0.1);
     border-radius: 4px;
     font-size: 0.9rem;
-    color: var(--secondary-text);
+    color: var(--text-color);
+    border: 1px solid rgba(138, 102, 204, 0.2);
 }
 
 .btn-link {
