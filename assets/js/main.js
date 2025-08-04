@@ -547,6 +547,9 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => document.body.removeChild(notification), 300);
         }, 3000);
     }
+    
+    // Reading Progress & Table of Contents
+    initReadingProgress();
 });
 
 // Construction Banner Functions
@@ -899,3 +902,184 @@ function initBlogFilters() {
 document.addEventListener('DOMContentLoaded', function() {
     initBlogFilters();
 });
+
+// Reading Progress & Table of Contents Functionality
+function initReadingProgress() {
+    const progressBar = document.getElementById('reading-progress-bar');
+    const readingTimeElement = document.getElementById('reading-time');
+    const postContent = document.getElementById('post-content');
+    const tocContainer = document.getElementById('table-of-contents');
+    const tocList = document.getElementById('toc-list');
+    const tocToggle = document.getElementById('toc-toggle');
+    
+    // Only initialize on post pages
+    if (!progressBar || !postContent) return;
+    
+    // Calculate and display reading time
+    calculateReadingTime();
+    
+    // Generate table of contents
+    generateTableOfContents();
+    
+    // Update progress on scroll
+    window.addEventListener('scroll', updateReadingProgress);
+    window.addEventListener('resize', updateReadingProgress);
+    
+    // TOC toggle functionality
+    if (tocToggle && tocList) {
+        tocToggle.addEventListener('click', toggleTableOfContents);
+    }
+    
+    function calculateReadingTime() {
+        if (!readingTimeElement || !postContent) return;
+        
+        const text = postContent.textContent || postContent.innerText;
+        const wordCount = text.trim().split(/\s+/).length;
+        const wordsPerMinute = 200; // Average reading speed
+        const minutes = Math.ceil(wordCount / wordsPerMinute);
+        
+        const currentLang = document.documentElement.lang || 'es';
+        let timeText;
+        
+        if (minutes < 1) {
+            timeText = currentLang === 'es' ? 
+                'Menos de 1 min de lectura' : 
+                'Less than 1 min read';
+        } else {
+            timeText = currentLang === 'es' ? 
+                `${minutes} min de lectura` : 
+                `${minutes} min read`;
+        }
+        
+        // Update the reading time display
+        const timeSpan = readingTimeElement.querySelector('span');
+        if (timeSpan) {
+            timeSpan.textContent = timeText;
+        }
+    }
+    
+    function generateTableOfContents() {
+        if (!tocContainer || !tocList || !postContent) return;
+        
+        const headers = postContent.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        
+        if (headers.length < 2) {
+            // Hide TOC if there are fewer than 2 headers
+            tocContainer.style.display = 'none';
+            return;
+        }
+        
+        // Show TOC
+        tocContainer.style.display = 'block';
+        
+        // Clear existing TOC
+        tocList.innerHTML = '';
+        
+        headers.forEach((header, index) => {
+            // Generate unique ID for header if it doesn't have one
+            if (!header.id) {
+                header.id = `heading-${index}`;
+            }
+            
+            // Create TOC item
+            const tocItem = document.createElement('li');
+            const tocLink = document.createElement('a');
+            
+            tocLink.href = `#${header.id}`;
+            tocLink.textContent = header.textContent;
+            tocLink.className = `toc-${header.tagName.toLowerCase()}`;
+            
+            // Add click handler for smooth scrolling
+            tocLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.getElementById(header.id);
+                if (target) {
+                    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active state
+                    updateActiveTocItem(tocLink);
+                }
+            });
+            
+            tocItem.appendChild(tocLink);
+            tocList.appendChild(tocItem);
+        });
+        
+        // Set initial active state
+        updateActiveTocItem();
+    }
+    
+    function updateReadingProgress() {
+        if (!progressBar || !postContent) return;
+        
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        
+        progressBar.style.width = Math.min(100, Math.max(0, scrollPercent)) + '%';
+        
+        // Update active TOC item based on scroll position
+        updateActiveTocItemOnScroll();
+    }
+    
+    function updateActiveTocItemOnScroll() {
+        if (!tocList) return;
+        
+        const headers = postContent.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        const tocLinks = tocList.querySelectorAll('a');
+        
+        let activeHeader = null;
+        const scrollTop = window.pageYOffset + 100; // Offset for better detection
+        
+        // Find the current active header
+        headers.forEach(header => {
+            const headerTop = header.getBoundingClientRect().top + window.pageYOffset;
+            if (headerTop <= scrollTop) {
+                activeHeader = header;
+            }
+        });
+        
+        // Update active TOC item
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (activeHeader && link.getAttribute('href') === `#${activeHeader.id}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    function updateActiveTocItem(activeLink = null) {
+        if (!tocList) return;
+        
+        const tocLinks = tocList.querySelectorAll('a');
+        tocLinks.forEach(link => link.classList.remove('active'));
+        
+        if (activeLink) {
+            activeLink.classList.add('active');
+        } else {
+            // Set first item as active by default
+            const firstLink = tocLinks[0];
+            if (firstLink) {
+                firstLink.classList.add('active');
+            }
+        }
+    }
+    
+    function toggleTableOfContents() {
+        if (!tocList || !tocToggle) return;
+        
+        const isCollapsed = tocList.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+            tocList.classList.remove('collapsed');
+            tocToggle.classList.remove('collapsed');
+        } else {
+            tocList.classList.add('collapsed');
+            tocToggle.classList.add('collapsed');
+        }
+    }
+}

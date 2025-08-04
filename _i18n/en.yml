@@ -137,3 +137,8 @@ months:
   october: "October"
   november: "November"
   december: "December"
+
+reading:
+    progress: "Reading progress"
+    time_estimate: "min read"
+    time_less_than: "Less than 1 min read"

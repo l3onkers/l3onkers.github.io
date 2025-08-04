@@ -137,3 +137,8 @@ months:
   october: "octubre"
   november: "noviembre"
   december: "diciembre"
+
+reading:
+    progress: "Progreso de lectura"
+    time_estimate: "min de lectura"
+    time_less_than: "Menos de 1 min de lectura"
