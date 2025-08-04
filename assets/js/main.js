@@ -133,24 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add reading time estimation for blog posts
-    const postContent = document.querySelector('.post-content');
-    if (postContent) {
-        const text = postContent.textContent;
-        const wordsPerMinute = 200;
-        const words = text.trim().split(/\s+/).length;
-        const readingTime = Math.ceil(words / wordsPerMinute);
-        
-        const readingTimeElement = document.createElement('span');
-        readingTimeElement.className = 'reading-time';
-        readingTimeElement.innerHTML = `<i class="fas fa-clock"></i> ${readingTime} min de lectura`;
-        
-        const postMeta = document.querySelector('.post-meta');
-        if (postMeta) {
-            postMeta.appendChild(readingTimeElement);
-        }
-    }
-    
     // Parallax effect on scroll
     window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
@@ -942,10 +924,6 @@ function initReadingProgress() {
     
     function calculateReadingTime() {
         if (!readingTimeElement || !postContent) return;
-        
-        // Temporarily disable to test for duplication
-        console.log('calculateReadingTime called');
-        return;
         
         const text = postContent.textContent || postContent.innerText;
         const wordCount = text.trim().split(/\s+/).length;
