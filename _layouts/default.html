@@ -8,6 +8,10 @@
     <title>{% if page.title %}{{ page.title | escape }} - {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
     <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicons/favicon.ico' | relative_url }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ '/assets/images/favicons/favicon.ico' | relative_url }}">
+    
     <!-- Performance Optimizations -->
     <link rel="preload" href="{{ '/assets/css/style.css' | relative_url }}" as="style">
     <link rel="preload" href="{{ '/assets/js/main.js' | relative_url }}" as="script">
