@@ -19,38 +19,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Complete pipeline: Test → Build → Deploy
-  ci-cd-pipeline:
-    name: 🔄 Complete Pipeline
+  # Job 1: Quick validation tests
+  quick-validation:
+    name: ⚡ Quick Validation
     runs-on: ubuntu-latest
     steps:
-      # 1. SETUP
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
-
-      - name: 💎 Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-          bundler-cache: true
 
       - name: 🌐 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      # 2. QUICK VALIDATION TESTS
-      - name: ⚡ Quick Validation Tests
+      - name: ⚡ Quick Tests
         run: |
           echo "⚡ Running quick validation tests..."
-          
-          # Test bundle dependencies
-          echo "📦 Testing bundle dependencies..."
-          bundle list
-          
-          # Test Jekyll configuration
-          echo "🔧 Testing Jekyll configuration..."
-          bundle exec jekyll doctor
           
           # Test YAML files syntax
           echo "📋 Testing YAML files..."
@@ -59,32 +43,99 @@ jobs:
           ruby -e "require 'yaml'; YAML.load_file('_i18n/en.yml')"
           
           # Test JavaScript syntax
-          echo "🟨 Testing JavaScript..."
+          echo "� Testing JavaScript..."
           if command -v node >/dev/null 2>&1; then
             node -c assets/js/main.js
           fi
           
           echo "✅ Quick validation tests passed!"
 
-      # 3. JEKYLL BUILD TESTS
-      - name: 🔨 Jekyll Build Tests
+  # Job 2: Jekyll setup and dependencies
+  setup-dependencies:
+    name: 📦 Setup Dependencies
+    runs-on: ubuntu-latest
+    needs: quick-validation
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 💎 Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: false
+
+      - name: 📦 Install Dependencies
         run: |
-          echo "🔨 Testing Jekyll builds..."
+          echo "📦 Installing bundle dependencies..."
+          gem install bundler
+          bundle config set --local deployment 'false'
+          bundle config set --local path 'vendor/bundle'
+          bundle config set --local without 'test development'
+          bundle install --jobs 4 --retry 3
+
+      - name: 🔧 Validate Jekyll Setup
+        run: |
+          echo "📦 Testing bundle dependencies..."
+          bundle list
           
-          # Development build test
+          echo "🔧 Testing Jekyll configuration..."
+          bundle exec jekyll doctor
+
+      - name: 💾 Cache Dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+  # Job 3: Build tests
+  build-tests:
+    name: 🔨 Build Tests
+    runs-on: ubuntu-latest
+    needs: setup-dependencies
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 💎 Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: false
+
+      - name: 💾 Restore Dependencies Cache
+        uses: actions/cache@v3
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: 📦 Install Dependencies
+        run: |
+          gem install bundler
+          bundle config set --local deployment 'false'
+          bundle config set --local path 'vendor/bundle'
+          bundle config set --local without 'test development'
+          bundle install --jobs 4 --retry 3
+
+      - name: 🛠️ Development Build Test
+        run: |
           echo "🛠️ Testing development build..."
           JEKYLL_ENV=development bundle exec jekyll build --verbose
           echo "✅ Development build successful"
-          
-          # Clean for production build
-          rm -rf _site
-          
-          # Production build test  
+
+      - name: 🏭 Production Build Test
+        run: |
           echo "🏭 Testing production build..."
+          rm -rf _site
           JEKYLL_ENV=production bundle exec jekyll build --verbose
           echo "✅ Production build successful"
-          
-          # Validate build results
+
+      - name: 🔍 Validate Build Results
+        run: |
           echo "🔍 Validating build results..."
           if [ -d "_site" ]; then
             site_size=$(du -sh _site | cut -f1)
@@ -117,8 +168,23 @@ jobs:
             exit 1
           fi
 
-      # 4. CONTENT VALIDATION
-      - name: 📝 Content Validation
+      - name: 📦 Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-test-artifacts
+          path: _site/
+          retention-days: 1
+
+  # Job 4: Content validation
+  content-validation:
+    name: 📝 Content Validation
+    runs-on: ubuntu-latest
+    needs: quick-validation
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🌐 Check Posts Translations
         run: |
           echo "📝 Running content validation..."
           
@@ -148,40 +214,98 @@ jobs:
           
           echo "✅ Content validation completed"
 
-      # 5. SETUP PAGES (only for pushes to main, not PRs)
+  # Job 5: Production build (only for main branch)
+  production-build:
+    name: 🏭 Production Build
+    runs-on: ubuntu-latest
+    needs: [build-tests, content-validation]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 💎 Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: false
+
+      - name: 💾 Restore Dependencies Cache
+        uses: actions/cache@v3
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: 📦 Install Dependencies
+        run: |
+          gem install bundler
+          bundle config set --local deployment 'false'
+          bundle config set --local path 'vendor/bundle'
+          bundle config set --local without 'test development'
+          bundle install --jobs 4 --retry 3
+
       - name: 🔧 Setup GitHub Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         id: pages
         uses: actions/configure-pages@v5
 
-      # 6. PRODUCTION BUILD (only for pushes to main)
-      - name: 🏭 Production Build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: 🏭 Build for Production
         run: |
           echo "🏭 Building for production deployment..."
-          rm -rf _site
           bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
 
-      # 7. UPLOAD ARTIFACT (only for pushes to main)
-      - name: 📦 Upload Build Artifact
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: 📦 Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
 
-      # 8. DEPLOY TO GITHUB PAGES (only for pushes to main)
+  # Job 6: Deploy (only for main branch)
+  deploy:
+    name: 🚀 Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: production-build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: 🚀 Deploy to GitHub Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         id: deployment
         uses: actions/deploy-pages@v4
 
-      # 9. POST-DEPLOYMENT VALIDATION (only after deployment)
-      - name: 🌐 Post-deployment Validation
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  # Job 7: Post-deployment validation (only after deploy)
+  post-deploy-validation:
+    name: 🌐 Post-deploy Validation
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 💎 Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: false
+
+      - name: 📦 Install Dependencies
         run: |
-          echo "🌐 Validating deployed site..."
+          gem install bundler
+          bundle config set --local deployment 'false'
+          bundle config set --local path 'vendor/bundle'
+          bundle config set --local without 'test development'
+          bundle install --jobs 4 --retry 3
+
+      - name: ⏱️ Wait for Deployment
+        run: |
           echo "⏱️ Waiting for deployment to be available..."
           sleep 30
+
+      - name: 🌐 Test Live Site
+        run: |
+          echo "🌐 Validating deployed site..."
           
           # Test deployed site URLs
           echo "🔗 Testing deployed URLs..."
@@ -209,28 +333,20 @@ jobs:
             done
           fi
 
-      # 10. SUCCESS SUMMARY
-      - name: 🎉 Pipeline Success Summary
-        if: success()
+      - name: 🎉 Success Summary
         run: |
-          echo "## 🎉 Pipeline Completed Successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "## 🎉 Deployment Completed Successfully!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### ✅ Completed Steps:" >> $GITHUB_STEP_SUMMARY
-          echo "- Quick validation tests" >> $GITHUB_STEP_SUMMARY
-          echo "- Jekyll build tests (dev & prod)" >> $GITHUB_STEP_SUMMARY
-          echo "- Content validation" >> $GITHUB_STEP_SUMMARY
-          
-          if [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "- Production build" >> $GITHUB_STEP_SUMMARY
-            echo "- Deployment to GitHub Pages" >> $GITHUB_STEP_SUMMARY
-            echo "- Post-deployment validation" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "🌐 **Live Site**: https://l3onkers.github.io" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- PR validation (no deployment)" >> $GITHUB_STEP_SUMMARY
-          fi
-          
+          echo "### ✅ Pipeline Jobs Completed:" >> $GITHUB_STEP_SUMMARY
+          echo "- ⚡ Quick Validation" >> $GITHUB_STEP_SUMMARY
+          echo "- 📦 Setup Dependencies" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔨 Build Tests" >> $GITHUB_STEP_SUMMARY
+          echo "- 📝 Content Validation" >> $GITHUB_STEP_SUMMARY
+          echo "- 🏭 Production Build" >> $GITHUB_STEP_SUMMARY
+          echo "- 🚀 Deploy to GitHub Pages" >> $GITHUB_STEP_SUMMARY
+          echo "- 🌐 Post-deploy Validation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🌐 **Live Site**: https://l3onkers.github.io" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "**Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Event**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
