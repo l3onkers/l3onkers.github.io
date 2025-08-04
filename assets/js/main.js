@@ -301,7 +301,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentLang = getCurrentLanguageFromPath();
         if (currentLang === lang) return;
         
-        // Language URL mapping
+        // Special handling for blog posts
+        if (currentPath.includes('/blog/')) {
+            // For blog posts, we need to check if the corresponding post exists in the target language
+            // For now, just redirect to the blog index page
+            if (lang === 'en') {
+                window.location.href = baseUrl + '/en/blog/';
+            } else {
+                window.location.href = baseUrl + '/blog/';
+            }
+            return;
+        }
+        
+        // Language URL mapping for other pages
         if (lang === 'en') {
             // Redirect to English version
             if (!currentPath.startsWith('/en/')) {
