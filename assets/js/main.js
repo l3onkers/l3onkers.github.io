@@ -329,11 +329,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Special handling for blog posts
         if (currentPath.includes('/blog/')) {
-            // For blog posts, redirect to the blog index page
-            if (lang === 'en') {
-                window.location.href = baseUrl + '/en/blog/';
+            const postMapping = findCorrespondingPost(currentPath, lang);
+            if (postMapping) {
+                window.location.href = baseUrl + postMapping;
             } else {
-                window.location.href = baseUrl + '/blog/';
+                // Show notification that the post doesn't exist in the target language
+                showPostNotAvailableNotification(lang);
+                // Fallback to blog index
+                if (lang === 'en') {
+                    window.location.href = baseUrl + '/en/blog/';
+                } else {
+                    window.location.href = baseUrl + '/blog/';
+                }
             }
             return;
         }
@@ -1099,4 +1106,86 @@ function initReadingProgress() {
             tocToggle.classList.add('expanded');
         }
     }
+}
+
+// Find corresponding post in different language
+function findCorrespondingPost(currentPath, targetLang) {
+    // Post mapping between languages based on dates and content
+    const postMappings = {
+        // 2025-07-29 posts
+        '/blog/2025/07/29/modernizando-mi-sitio-web-personal/': '/en/blog/2025/07/29/modernizing-my-personal-website/',
+        '/en/blog/2025/07/29/modernizing-my-personal-website/': '/blog/2025/07/29/modernizando-mi-sitio-web-personal/',
+        
+        // 2024-01-20 posts
+        '/blog/2024/01/20/configurando-entorno-desarrollo-moderno/': '/en/blog/2024/01/20/setting-up-modern-development-environment/',
+        '/en/blog/2024/01/20/setting-up-modern-development-environment/': '/blog/2024/01/20/configurando-entorno-desarrollo-moderno/',
+        
+        // 2024-01-15 posts
+        '/blog/2024/01/15/bienvenido-a-mi-blog/': '/en/blog/2024/01/15/welcome-to-my-blog/',
+        '/en/blog/2024/01/15/welcome-to-my-blog/': '/blog/2024/01/15/bienvenido-a-mi-blog/'
+    };
+    
+    // Check direct mapping first
+    if (postMappings[currentPath]) {
+        return postMappings[currentPath];
+    }
+    
+    // Try to extract date and create alternative paths
+    const pathMatch = currentPath.match(/\/blog\/(\d{4})\/(\d{2})\/(\d{2})\/([^\/]+)\/?$/);
+    if (pathMatch) {
+        const [, year, month, day, slug] = pathMatch;
+        
+        // Common patterns between languages for the same content
+        const slugMappings = {
+            'modernizando-mi-sitio-web-personal': 'modernizing-my-personal-website',
+            'modernizing-my-personal-website': 'modernizando-mi-sitio-web-personal',
+            'configurando-entorno-desarrollo-moderno': 'setting-up-modern-development-environment',
+            'setting-up-modern-development-environment': 'configurando-entorno-desarrollo-moderno',
+            'bienvenido-a-mi-blog': 'welcome-to-my-blog',
+            'welcome-to-my-blog': 'bienvenido-a-mi-blog'
+        };
+        
+        const targetSlug = slugMappings[slug];
+        if (targetSlug) {
+            if (targetLang === 'en') {
+                return `/en/blog/${year}/${month}/${day}/${targetSlug}/`;
+            } else {
+                return `/blog/${year}/${month}/${day}/${targetSlug}/`;
+            }
+        }
+    }
+    
+    return null; // No corresponding post found
+}
+
+// Show notification when post is not available in target language
+function showPostNotAvailableNotification(lang) {
+    const messages = {
+        es: 'Este artículo no está disponible en español. Redirigiendo al blog...',
+        en: 'This article is not available in English. Redirecting to blog...'
+    };
+    
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = 'language-notification warning';
+    notification.innerHTML = `
+        <i class="fas fa-exclamation-triangle"></i>
+        ${messages[lang] || messages['es']}
+    `;
+    
+    // Add notification to page
+    document.body.appendChild(notification);
+    
+    // Show notification
+    setTimeout(() => notification.classList.add('show'), 100);
+    
+    // Hide and remove notification after longer time since it's important
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            if (notification.parentNode) {
+                document.body.removeChild(notification);
+            }
+        }, 300);
+    }, 4000);
 }
