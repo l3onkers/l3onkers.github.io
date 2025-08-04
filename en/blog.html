@@ -18,9 +18,9 @@ lang: en
     <article class="post-preview card-clickable"
              role="button"
              tabindex="0"
-             data-href="{{ post.url | relative_url }}"
+             data-href="{{ post.url | absolute_url }}"
              aria-label="Read article: {{ post.title }}">
-        <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h2>
         <div class="post-meta">
             <time datetime="{{ post.date | date_to_xmlschema }}">
                 <i class="fas fa-calendar-alt"></i>
@@ -54,7 +54,7 @@ lang: en
             {% endif %}
         </div>
         {% endif %}
-        <a href="{{ post.url | relative_url }}" class="read-more" data-translate="blog.read_full">Read full article →</a>
+        <a href="{{ post.url | absolute_url }}" class="read-more" data-translate="blog.read_full">Read full article →</a>
     </article>
     {% endfor %}
 </div>

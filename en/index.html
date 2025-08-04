@@ -59,9 +59,9 @@ lang: en
         <article class="post-preview card-clickable fade-in-up animate-in anim-delay-{{ forloop.index0 }}"
                  role="button"
                  tabindex="0"
-                 data-href="{{ post.url | relative_url }}"
+                 data-href="{{ post.url | absolute_url }}"
                  aria-label="Read article: {{ post.title }}">
-            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <h3><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h3>
             <div class="post-meta">
                 <time datetime="{{ post.date | date_to_xmlschema }}">
                     <i class="fas fa-calendar-alt"></i>
@@ -69,7 +69,7 @@ lang: en
                 </time>
             </div>
             <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
-            <a href="{{ post.url | relative_url }}" class="read-more" data-translate="buttons.read_more">Read more →</a>
+            <a href="{{ post.url | absolute_url }}" class="read-more" data-translate="buttons.read_more">Read more →</a>
         </article>
         {% endfor %}
     </div>
