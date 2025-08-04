@@ -27,14 +27,14 @@ lang: en
 </section>
 
 <section class="home-sections">
-    <div class="grid grid-2" style="margin-top: 3rem;">
-        <div class="card fade-in-up animate-in" style="animation-delay: 0s;">
+    <div class="grid grid-2 mt-3">
+        <div class="card fade-in-up animate-in anim-delay-0">
             <h3><i class="fas fa-code"></i> <span data-translate="homepage.sections.development.title">Development</span></h3>
             <p data-translate="homepage.sections.development.description">Specialized in modern web technologies, creating scalable applications and exceptional user experiences.</p>
             <a href="{{ '/en/projects' | relative_url }}" class="read-more" data-translate="buttons.see_projects">View projects →</a>
         </div>
         
-        <div class="card fade-in-up animate-in" style="animation-delay: 0.1s;">
+        <div class="card fade-in-up animate-in anim-delay-1">
             <h3><i class="fas fa-pen"></i> <span data-translate="homepage.sections.blog_section.title">Blog</span></h3>
             <p data-translate="homepage.sections.blog_section.description">I share knowledge about development, technology and best practices through technical articles.</p>
             <a href="{{ '/en/blog' | relative_url }}" class="read-more" data-translate="buttons.read_more">Read articles →</a>
@@ -44,8 +44,8 @@ lang: en
 
 {% assign english_posts = site.posts | where: "lang", "en" %}
 {% if english_posts.size > 0 %}
-<section style="margin-top: 4rem;">
-    <h2 style="text-align: center; margin-bottom: 2rem;" data-translate="home.sections.latest_posts">Latest Posts</h2>
+<section class="section-spaced">
+    <h2 class="section-title" data-translate="home.sections.latest_posts">Latest Posts</h2>
     <div class="grid grid-2">
         {% for post in english_posts limit:4 %}
         <article class="post-preview">
@@ -63,7 +63,7 @@ lang: en
     </div>
     
     {% if english_posts.size > 4 %}
-    <div style="text-align: center; margin-top: 2rem;">
+    <div class="btn-container">
         <a href="{{ '/en/blog' | relative_url }}" class="btn btn-primary" data-translate="home.sections.all_articles">View all articles</a>
     </div>
     {% endif %}
