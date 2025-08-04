@@ -1767,149 +1767,143 @@ html {
 }
 
 /* Hide banner when dismissed */
-.construction-banner.hidden {
-  display: none;
-}
 
-/* Language Selector */
-.language-selector {
-  position: relative;
-  display: inline-block;
-}
-
-.language-toggle {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  color: var(--text-color);
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  transition: var(--transition);
-}
-
-.language-toggle:hover {
-  background: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-}
-
-.language-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
+/* Post Preview Cards - Same style as project cards */
+.post-preview {
   background: var(--bg-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
   border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  animation: float 6s ease-in-out infinite;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post-preview:hover {
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-  min-width: 120px;
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
 }
 
-.language-dropdown.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.post-preview:nth-child(2n) {
+  animation-delay: -2s;
 }
 
-.language-option {
+.post-preview:nth-child(3n) {
+  animation-delay: -4s;
+}
+
+.post-preview h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.post-preview h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.post-meta time,
+.post-meta .post-author,
+.post-meta .post-categories {
   display: flex;
   align-items: center;
+  gap: 0.25rem;
+}
+
+.post-meta i {
+  color: var(--primary-color);
+}
+
+.post-excerpt {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex-grow: 1;
+  margin: 0;
+}
+
+.post-preview .read-more {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* Animation delays for post preview cards */
+.post-preview.anim-delay-0 {
+  animation-delay: 0s;
+}
+
+.post-preview.anim-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.post-preview.anim-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.post-preview.anim-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.post-preview:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.post-preview:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.post-preview:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.post-preview:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+/* Post tags styling */
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  text-decoration: none;
-  color: var(--text-color);
-  transition: var(--transition);
-  border-bottom: 1px solid var(--border-color);
+  margin: 0.5rem 0 0 0;
 }
 
-.language-option:last-child {
-  border-bottom: none;
-}
-
-.language-option:hover {
+.tag {
   background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
 }
 
-.language-option.active {
+.tag:hover {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.category {
   background: var(--primary-color);
   color: white;
-}
-
-.language-option.active:hover {
-  background: var(--primary-hover);
-}
-
-/* Card links - Make entire cards clickable */
-.card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  transition: var(--transition);
-}
-
-.card-link:hover {
-  text-decoration: none;
-  color: inherit;
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-}
-
-.card-link:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-.card-link .read-more {
-  color: var(--primary-color);
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
   font-weight: 500;
-  transition: var(--transition);
 }
-
-.card-link:hover .read-more {
-  color: var(--primary-hover);
-}
-
-/* Card clickable divs - Same behavior as card-link but for div elements */
-.card-clickable {
-  cursor: pointer;
-  user-select: none;
-  transition: var(--transition);
-}
-
-.card-clickable:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-}
-
-.card-clickable:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-.card-clickable .read-more {
-  color: var(--primary-color);
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.card-clickable:hover .read-more {
-  color: var(--primary-hover);
-}
-
-.card-clickable h3 {
-  color: inherit;
-}
-
-.card-clickable p {
-  color: var(--text-secondary);
-}
-
-/* Hide banner when dismissed */

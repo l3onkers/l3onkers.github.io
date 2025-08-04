@@ -55,7 +55,11 @@ layout: default
     <h2 class="section-title" data-translate="home.sections.latest_posts">Últimas Publicaciones</h2>
     <div class="grid grid-2">
         {% for post in spanish_posts limit:4 %}
-        <article class="post-preview">
+        <article class="post-preview card-clickable fade-in-up animate-in anim-delay-{{ forloop.index0 }}"
+                 role="button"
+                 tabindex="0"
+                 data-href="{{ post.url | relative_url }}"
+                 aria-label="Leer artículo: {{ post.title }}">
             <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
             <div class="post-meta">
                 <time datetime="{{ post.date | date_to_xmlschema }}">
