@@ -96,6 +96,11 @@ footer:
   links: "Enlaces"
   follow: "Sígueme"
   rights: "Todos los derechos reservados"
+  social:
+    github: "GitHub"
+    linkedin: "LinkedIn"
+    hackthebox: "HackTheBox"
+    email: "Email"
 
 # Mensajes del sistema
 system:

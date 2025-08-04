@@ -1830,3 +1830,44 @@ html {
 .language-option.active:hover {
   background: var(--primary-hover);
 }
+
+/* Card links - Make entire cards clickable */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: var(--transition);
+}
+
+.card-link:hover {
+  text-decoration: none;
+  color: inherit;
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-link:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.card-link .read-more {
+  color: var(--primary-color);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.card-link:hover .read-more {
+  color: var(--primary-hover);
+}
+
+/* Ensure proper styling for card elements when used as links */
+.card-link h3 {
+  color: inherit;
+}
+
+.card-link p {
+  color: var(--text-secondary);
+}
+
+/* Hide banner when dismissed */
