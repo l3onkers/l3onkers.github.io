@@ -1,12 +1,10 @@
 source "https://rubygems.org"
 
+# GitHub Pages gem includes Jekyll and most common plugins
 gem "github-pages", group: :jekyll_plugins
-gem "jekyll-feed", "~> 0.12"
-gem "jekyll-sitemap"
-gem "jekyll-seo-tag"
 
-# Testing gems
-group :test do
+# Testing gems (only install locally, not on GitHub Pages)
+group :test, :development do
   gem "rspec", "~> 3.12"
   gem "capybara", "~> 3.39"
   gem "selenium-webdriver", "~> 4.15"
