@@ -142,3 +142,13 @@ reading:
     progress: "Reading progress"
     time_estimate: "min read"
     time_less_than: "Less than 1 min read"
+
+gallery:
+    loading: "Loading image..."
+    error: "Error loading image"
+    close: "Close gallery"
+    previous: "Previous image"
+    next: "Next image"
+    zoom_in: "Zoom in"
+    zoom_out: "Zoom out"
+    counter: "of"

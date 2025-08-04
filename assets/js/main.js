@@ -557,6 +557,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Reading Progress & Table of Contents
     initReadingProgress();
+    
+    // Initialize Lightbox Gallery
+    initLightbox();
 });
 
 // Construction Banner Functions
@@ -1105,6 +1108,336 @@ function initReadingProgress() {
             tocList.classList.add('expanded');
             tocToggle.classList.add('expanded');
         }
+    }
+}
+
+// Lightbox Gallery Functionality
+function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCurrent = document.getElementById('lightbox-current');
+    const lightboxTotal = document.getElementById('lightbox-total');
+    const lightboxLoading = document.getElementById('lightbox-loading');
+    const lightboxError = document.getElementById('lightbox-error');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxOverlay = document.getElementById('lightbox-overlay');
+    const lightboxZoomIn = document.getElementById('lightbox-zoom-in');
+    const lightboxZoomOut = document.getElementById('lightbox-zoom-out');
+    const lightboxImageContainer = lightbox.querySelector('.lightbox-image-container');
+    
+    let currentImages = [];
+    let currentIndex = 0;
+    let zoomLevel = 1;
+    let isDragging = false;
+    let dragStart = { x: 0, y: 0 };
+    let imagePosition = { x: 0, y: 0 };
+    
+    // Initialize image gallery
+    initImageGallery();
+    
+    function initImageGallery() {
+        // Find all images in content that should be in the gallery
+        const contentImages = document.querySelectorAll('.post-content img, .content img, .project-gallery img');
+        
+        contentImages.forEach((img, index) => {
+            // Skip if image is already processed or doesn't have src
+            if (img.dataset.lightboxInit || !img.src) return;
+            
+            img.dataset.lightboxInit = 'true';
+            img.dataset.lightboxIndex = index;
+            
+            // Add click event listener
+            img.addEventListener('click', function() {
+                openLightbox(img);
+            });
+            
+            // Add keyboard event for accessibility
+            img.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openLightbox(img);
+                }
+            });
+            
+            // Make image focusable
+            img.setAttribute('tabindex', '0');
+            img.setAttribute('role', 'button');
+            img.setAttribute('aria-label', `Open image: ${img.alt || 'Image'}`);
+            
+            // Implement lazy loading
+            implementLazyLoading(img);
+        });
+    }
+    
+    function implementLazyLoading(img) {
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const image = entry.target;
+                        if (image.dataset.src) {
+                            image.src = image.dataset.src;
+                            image.removeAttribute('data-src');
+                            image.dataset.loaded = 'true';
+                            observer.unobserve(image);
+                        }
+                    }
+                });
+            });
+            
+            if (img.dataset.src) {
+                imageObserver.observe(img);
+            }
+        }
+    }
+    
+    function openLightbox(clickedImg) {
+        // Collect all images in the same container
+        const container = clickedImg.closest('.post-content, .content, .project-gallery') || document;
+        currentImages = Array.from(container.querySelectorAll('img')).filter(img => 
+            img.src && !img.closest('.lightbox') && img.dataset.lightboxInit
+        );
+        
+        currentIndex = currentImages.indexOf(clickedImg);
+        if (currentIndex === -1) currentIndex = 0;
+        
+        // Show lightbox
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        
+        // Load current image
+        loadImage(currentIndex);
+        
+        // Update navigation
+        updateNavigation();
+        
+        // Focus management
+        lightboxClose.focus();
+    }
+    
+    function loadImage(index) {
+        if (!currentImages[index]) return;
+        
+        const img = currentImages[index];
+        
+        // Show loading state
+        lightboxLoading.style.display = 'flex';
+        lightboxError.style.display = 'none';
+        lightboxImage.style.display = 'none';
+        
+        // Reset zoom and position
+        resetZoomAndPosition();
+        
+        // Create new image to preload
+        const newImg = new Image();
+        
+        newImg.onload = function() {
+            lightboxImage.src = this.src;
+            lightboxImage.alt = img.alt || '';
+            lightboxCaption.textContent = img.alt || img.title || '';
+            
+            // Hide loading, show image
+            lightboxLoading.style.display = 'none';
+            lightboxImage.style.display = 'block';
+            
+            // Update counter
+            lightboxCurrent.textContent = index + 1;
+            lightboxTotal.textContent = currentImages.length;
+        };
+        
+        newImg.onerror = function() {
+            lightboxLoading.style.display = 'none';
+            lightboxError.style.display = 'flex';
+        };
+        
+        newImg.src = img.src;
+    }
+    
+    function updateNavigation() {
+        // Update navigation buttons
+        lightboxPrev.disabled = currentIndex === 0;
+        lightboxNext.disabled = currentIndex === currentImages.length - 1;
+        
+        // Hide navigation if only one image
+        if (currentImages.length <= 1) {
+            lightboxPrev.style.display = 'none';
+            lightboxNext.style.display = 'none';
+        } else {
+            lightboxPrev.style.display = 'flex';
+            lightboxNext.style.display = 'flex';
+        }
+    }
+    
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        
+        // Reset zoom and position
+        resetZoomAndPosition();
+        
+        // Return focus to the clicked image
+        if (currentImages[currentIndex]) {
+            currentImages[currentIndex].focus();
+        }
+    }
+    
+    function nextImage() {
+        if (currentIndex < currentImages.length - 1) {
+            currentIndex++;
+            loadImage(currentIndex);
+            updateNavigation();
+        }
+    }
+    
+    function prevImage() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            loadImage(currentIndex);
+            updateNavigation();
+        }
+    }
+    
+    function zoomIn() {
+        zoomLevel = Math.min(zoomLevel * 1.5, 5);
+        applyZoom();
+    }
+    
+    function zoomOut() {
+        zoomLevel = Math.max(zoomLevel / 1.5, 0.5);
+        applyZoom();
+    }
+    
+    function applyZoom() {
+        lightboxImage.style.transform = `scale(${zoomLevel}) translate(${imagePosition.x}px, ${imagePosition.y}px)`;
+    }
+    
+    function resetZoomAndPosition() {
+        zoomLevel = 1;
+        imagePosition = { x: 0, y: 0 };
+        applyZoom();
+    }
+    
+    // Event listeners
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+    }
+    
+    if (lightboxOverlay) {
+        lightboxOverlay.addEventListener('click', closeLightbox);
+    }
+    
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', prevImage);
+    }
+    
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', nextImage);
+    }
+    
+    if (lightboxZoomIn) {
+        lightboxZoomIn.addEventListener('click', zoomIn);
+    }
+    
+    if (lightboxZoomOut) {
+        lightboxZoomOut.addEventListener('click', zoomOut);
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (!lightbox.classList.contains('active')) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                prevImage();
+                break;
+            case 'ArrowRight':
+                nextImage();
+                break;
+            case '+':
+            case '=':
+                zoomIn();
+                break;
+            case '-':
+                zoomOut();
+                break;
+        }
+    });
+    
+    // Mouse drag for zoomed images
+    if (lightboxImageContainer) {
+        lightboxImageContainer.addEventListener('mousedown', startDrag);
+        lightboxImageContainer.addEventListener('mousemove', drag);
+        lightboxImageContainer.addEventListener('mouseup', endDrag);
+        lightboxImageContainer.addEventListener('mouseleave', endDrag);
+    }
+    
+    function startDrag(e) {
+        if (zoomLevel <= 1) return;
+        isDragging = true;
+        lightboxImageContainer.classList.add('dragging');
+        dragStart = { x: e.clientX - imagePosition.x, y: e.clientY - imagePosition.y };
+    }
+    
+    function drag(e) {
+        if (!isDragging || zoomLevel <= 1) return;
+        e.preventDefault();
+        imagePosition = {
+            x: e.clientX - dragStart.x,
+            y: e.clientY - dragStart.y
+        };
+        applyZoom();
+    }
+    
+    function endDrag() {
+        isDragging = false;
+        lightboxImageContainer.classList.remove('dragging');
+    }
+    
+    // Touch support for mobile
+    let touchStartDistance = 0;
+    let touchStartZoom = 1;
+    
+    if (lightboxImageContainer) {
+        lightboxImageContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
+        lightboxImageContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
+        lightboxImageContainer.addEventListener('touchend', handleTouchEnd);
+    }
+    
+    function handleTouchStart(e) {
+        if (e.touches.length === 2) {
+            // Pinch to zoom
+            touchStartDistance = getTouchDistance(e.touches[0], e.touches[1]);
+            touchStartZoom = zoomLevel;
+        }
+    }
+    
+    function handleTouchMove(e) {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            const currentDistance = getTouchDistance(e.touches[0], e.touches[1]);
+            const scale = currentDistance / touchStartDistance;
+            zoomLevel = Math.max(0.5, Math.min(5, touchStartZoom * scale));
+            applyZoom();
+        }
+    }
+    
+    function handleTouchEnd(e) {
+        touchStartDistance = 0;
+        touchStartZoom = 1;
+    }
+    
+    function getTouchDistance(touch1, touch2) {
+        const dx = touch1.clientX - touch2.clientX;
+        const dy = touch1.clientY - touch2.clientY;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 }
 

@@ -252,6 +252,51 @@
         </div>
     </footer>
 
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="lightbox-overlay" id="lightbox-overlay"></div>
+        <div class="lightbox-content">
+            <div class="lightbox-header">
+                <div class="lightbox-counter">
+                    <span id="lightbox-current">1</span>
+                    <span data-translate="gallery.counter">de</span>
+                    <span id="lightbox-total">1</span>
+                </div>
+                <div class="lightbox-controls">
+                    <button class="lightbox-btn" id="lightbox-zoom-out" aria-label="Zoom out" data-translate-aria="gallery.zoom_out">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button class="lightbox-btn" id="lightbox-zoom-in" aria-label="Zoom in" data-translate-aria="gallery.zoom_in">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="lightbox-btn" id="lightbox-close" aria-label="Close gallery" data-translate-aria="gallery.close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="lightbox-body">
+                <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image" data-translate-aria="gallery.previous">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="lightbox-image-container">
+                    <img class="lightbox-image" id="lightbox-image" alt="" />
+                    <div class="lightbox-loading" id="lightbox-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span data-translate="gallery.loading">Cargando imagen...</span>
+                    </div>
+                    <div class="lightbox-error" id="lightbox-error" style="display: none;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span data-translate="gallery.error">Error al cargar la imagen</span>
+                    </div>
+                </div>
+                <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next image" data-translate-aria="gallery.next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
 </html>
