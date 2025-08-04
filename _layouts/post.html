@@ -27,7 +27,13 @@ layout: default
             {% endif %}
             <span class="reading-time" id="reading-time">
                 <i class="fas fa-clock"></i>
-                <span data-translate="blog.reading.time_estimate">min de lectura</span>
+                <span id="reading-time-text">
+                    {% if page.lang == 'en' %}
+                        Calculating...
+                    {% else %}
+                        Calculando...
+                    {% endif %}
+                </span>
             </span>
             {% if page.categories %}
             <span class="post-categories">

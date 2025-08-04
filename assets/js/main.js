@@ -961,10 +961,16 @@ function initReadingProgress() {
                 `${minutes} min read`;
         }
         
-        // Update the reading time display
-        const timeSpan = readingTimeElement.querySelector('span');
-        if (timeSpan) {
-            timeSpan.textContent = timeText;
+        // Update the reading time display - look for the specific text element
+        const timeTextElement = document.getElementById('reading-time-text');
+        if (timeTextElement) {
+            timeTextElement.textContent = timeText;
+        } else {
+            // Fallback: update the span inside reading-time
+            const timeSpan = readingTimeElement.querySelector('span');
+            if (timeSpan) {
+                timeSpan.textContent = timeText;
+            }
         }
     }
     
