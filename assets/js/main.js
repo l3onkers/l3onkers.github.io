@@ -994,7 +994,7 @@ function initReadingProgress() {
                 e.preventDefault();
                 const target = document.getElementById(header.id);
                 if (target) {
-                    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 120;
                     window.scrollTo({
                         top: offsetTop,
                         behavior: 'smooth'
@@ -1017,10 +1017,27 @@ function initReadingProgress() {
         if (!progressBar || !postContent) return;
         
         const scrollTop = window.pageYOffset;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = (scrollTop / docHeight) * 100;
+        const postTop = postContent.getBoundingClientRect().top + window.pageYOffset;
+        const postHeight = postContent.offsetHeight;
+        const windowHeight = window.innerHeight;
+        
+        // Calculate progress based on post content, not entire page
+        const postScrollTop = Math.max(0, scrollTop - postTop + windowHeight * 0.2);
+        const postScrollHeight = postHeight - windowHeight * 0.8;
+        
+        let scrollPercent = 0;
+        if (postScrollHeight > 0) {
+            scrollPercent = (postScrollTop / postScrollHeight) * 100;
+        }
         
         progressBar.style.width = Math.min(100, Math.max(0, scrollPercent)) + '%';
+        
+        // Show/hide progress bar based on scroll position
+        if (scrollTop > 100) {
+            progressBar.parentElement.style.opacity = '1';
+        } else {
+            progressBar.parentElement.style.opacity = '0';
+        }
         
         // Update active TOC item based on scroll position
         updateActiveTocItemOnScroll();
@@ -1033,7 +1050,7 @@ function initReadingProgress() {
         const tocLinks = tocList.querySelectorAll('a');
         
         let activeHeader = null;
-        const scrollTop = window.pageYOffset + 100; // Offset for better detection
+        const scrollTop = window.pageYOffset + 120; // Increased offset for better detection
         
         // Find the current active header
         headers.forEach(header => {
@@ -1072,14 +1089,14 @@ function initReadingProgress() {
     function toggleTableOfContents() {
         if (!tocList || !tocToggle) return;
         
-        const isCollapsed = tocList.classList.contains('collapsed');
+        const isExpanded = tocList.classList.contains('expanded');
         
-        if (isCollapsed) {
-            tocList.classList.remove('collapsed');
-            tocToggle.classList.remove('collapsed');
+        if (isExpanded) {
+            tocList.classList.remove('expanded');
+            tocToggle.classList.remove('expanded');
         } else {
-            tocList.classList.add('collapsed');
-            tocToggle.classList.add('collapsed');
+            tocList.classList.add('expanded');
+            tocToggle.classList.add('expanded');
         }
     }
 }
