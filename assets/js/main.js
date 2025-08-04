@@ -624,3 +624,53 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Clickable Cards Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Make cards with data-href clickable
+    const clickableCards = document.querySelectorAll('.card-clickable[data-href]');
+    
+    clickableCards.forEach(card => {
+        const href = card.getAttribute('data-href');
+        
+        // Handle click events
+        card.addEventListener('click', function(e) {
+            // Don't navigate if clicking on a nested link
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+                return;
+            }
+            
+            if (href) {
+                window.location.href = href;
+            }
+        });
+        
+        // Handle keyboard navigation
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                if (href) {
+                    window.location.href = href;
+                }
+            }
+        });
+        
+        // Add visual feedback on hover and focus
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+        
+        card.addEventListener('focus', function() {
+            this.style.outline = '2px solid var(--primary-color)';
+            this.style.outlineOffset = '2px';
+        });
+        
+        card.addEventListener('blur', function() {
+            this.style.outline = 'none';
+        });
+    });
+});
