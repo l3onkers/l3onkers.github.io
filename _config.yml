@@ -45,10 +45,25 @@ exclude:
 collections:
   posts:
     output: true
-    permalink: /blog/:year/:month/:day/:title/
 
 # Defaults
 defaults:
+  - scope:
+      path: "_posts/es"
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Álvaro Escobar"
+      lang: "es"
+      permalink: /blog/:year/:month/:day/:title/
+  - scope:
+      path: "_posts/en"
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Álvaro Escobar"
+      lang: "en"
+      permalink: /en/blog/:year/:month/:day/:title/
   - scope:
       path: ""
       type: "posts"
