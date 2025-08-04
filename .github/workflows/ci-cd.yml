@@ -141,34 +141,20 @@ jobs:
             site_size=$(du -sh _site | cut -f1)
             echo "📊 Site size: $site_size"
             
-            echo "📁 Generated structure:"
-            find _site -type f -name "*.html" | head -20
-            
-            # Check if main files exist (flexible validation)
+            # Check if main files exist
             required_files=(
               "_site/index.html"
               "_site/en/index.html" 
               "_site/assets/css/style.css"
               "_site/assets/js/main.js"
-            )
-            
-            # Optional files (won't fail if missing)
-            optional_files=(
-              "_site/cv/index.html"
               "_site/cv.html"
-              "_site/proyectos/index.html"
               "_site/proyectos.html"
-              "_site/blog/index.html"
               "_site/blog.html"
-              "_site/en/resume/index.html"
               "_site/en/resume.html"
-              "_site/en/projects/index.html"
               "_site/en/projects.html"
-              "_site/en/blog/index.html"
               "_site/en/blog.html"
             )
             
-            # Check required files
             for file in "${required_files[@]}"; do
               if [ -f "$file" ]; then
                 echo "✅ $file exists"
@@ -178,14 +164,14 @@ jobs:
               fi
             done
             
-            # Check optional files (won't fail)
-            for file in "${optional_files[@]}"; do
-              if [ -f "$file" ]; then
-                echo "✅ $file exists"
-              else
-                echo "⚠️ $file not found (checking alternative paths)"
-              fi
-            done
+            # Validate that blog posts are generated
+            es_posts=$(find _site/blog -name "index.html" 2>/dev/null | wc -l)
+            en_posts=$(find _site/en/blog -name "index.html" 2>/dev/null | wc -l)
+            echo "📝 Generated posts: $es_posts (ES) + $en_posts (EN) = $((es_posts + en_posts)) total"
+            
+            if [ $((es_posts + en_posts)) -lt 6 ]; then
+              echo "⚠️ Warning: Expected at least 6 posts (3 ES + 3 EN), found $((es_posts + en_posts))"
+            fi
             
             echo "✅ Build validation completed successfully"
           else
@@ -243,7 +229,7 @@ jobs:
   production-build:
     name: 🏭 Production Build
     runs-on: ubuntu-latest
-    needs: [build-tests, content-validation]
+    needs: [build-tests, enhanced-content-validation, html-accessibility-validation]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: 📥 Checkout Repository
@@ -343,9 +329,14 @@ jobs:
             urls=(
               "https://l3onkers.github.io/"
               "https://l3onkers.github.io/en/"
-              "https://l3onkers.github.io/cv"
-              "https://l3onkers.github.io/blog"
+              "https://l3onkers.github.io/cv.html"
+              "https://l3onkers.github.io/blog.html"
+              "https://l3onkers.github.io/proyectos.html"
+              "https://l3onkers.github.io/en/resume.html"
+              "https://l3onkers.github.io/en/projects.html"
+              "https://l3onkers.github.io/en/blog.html"
               "https://l3onkers.github.io/assets/css/style.css"
+              "https://l3onkers.github.io/assets/js/main.js"
             )
             
             for url in "${urls[@]}"; do
@@ -358,20 +349,247 @@ jobs:
             done
           fi
 
-      - name: 🎉 Success Summary
+      - name: 🎉 Deployment Success
         run: |
-          echo "## 🎉 Deployment Completed Successfully!" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### ✅ Pipeline Jobs Completed:" >> $GITHUB_STEP_SUMMARY
-          echo "- ⚡ Quick Validation" >> $GITHUB_STEP_SUMMARY
-          echo "- 📦 Setup Dependencies" >> $GITHUB_STEP_SUMMARY
-          echo "- 🔨 Build Tests" >> $GITHUB_STEP_SUMMARY
-          echo "- 📝 Content Validation" >> $GITHUB_STEP_SUMMARY
-          echo "- 🏭 Production Build" >> $GITHUB_STEP_SUMMARY
-          echo "- 🚀 Deploy to GitHub Pages" >> $GITHUB_STEP_SUMMARY
-          echo "- 🌐 Post-deploy Validation" >> $GITHUB_STEP_SUMMARY
+          echo "## � Deployment Successful!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "🌐 **Live Site**: https://l3onkers.github.io" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+
+  # Job 8: HTML & Accessibility validation
+  html-accessibility-validation:
+    name: 🔍 HTML & Accessibility Tests
+    runs-on: ubuntu-latest
+    needs: build-tests
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-test-artifacts
+          path: _site/
+
+      - name: 🌐 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Install HTML Testing Tools
+        run: |
+          npm install -g html-validate
+          npm install -g pa11y
+
+      - name: 🔍 Validate HTML
+        run: |
+          echo "🔍 Validating HTML syntax..."
+          find _site -name "*.html" -exec html-validate {} \;
+
+      - name: ♿ Test Accessibility
+        run: |
+          echo "♿ Testing accessibility..."
+          # Serve site locally for testing
+          python3 -m http.server 8000 --directory _site &
+          SERVER_PID=$!
+          sleep 5
+          
+          # Accessibility tests on main pages
+          pa11y http://localhost:8000/ || true
+          pa11y http://localhost:8000/blog.html || true
+          pa11y http://localhost:8000/cv.html || true
+          pa11y http://localhost:8000/en/ || true
+          
+          # Kill server
+          kill $SERVER_PID
+
+  # Job 9: Enhanced content validation
+  enhanced-content-validation:
+    name: 📝 Enhanced Content Validation
+    runs-on: ubuntu-latest
+    needs: quick-validation
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 💎 Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: false
+
+      - name: 📦 Install YAML Tools
+        run: |
+          gem install yaml-lint
+          gem install htmlbeautifier
+
+      - name: 📋 Enhanced YAML Validation
+        run: |
+          echo "📋 Validating YAML files with enhanced checks..."
+          yaml-lint _config.yml
+          yaml-lint _i18n/es.yml
+          yaml-lint _i18n/en.yml
+          
+          # Validate frontmatter of posts
+          for file in _posts/**/*.md; do
+            if [ -f "$file" ]; then
+              echo "Validating frontmatter: $file"
+              head -20 "$file" | yaml-lint || echo "⚠️ Warning in $file"
+            fi
+          done
+
+      - name: 🌐 Enhanced Translation Check
+        run: |
+          echo "🌐 Enhanced translation verification..."
+          
+          extract_date() {
+            basename "$1" | grep -o '^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}'
+          }
+          
+          missing_translations=0
+          for post in _posts/es/*.md; do
+            if [ -f "$post" ]; then
+              post_date=$(extract_date "$post")
+              filename=$(basename "$post")
+              
+              en_files=(_posts/en/${post_date}-*.md)
+              
+              if [ -f "${en_files[0]}" ]; then
+                en_filename=$(basename "${en_files[0]}")
+                echo "✅ Translation found: $filename → $en_filename"
+              else
+                echo "❌ Missing translation for date $post_date: $filename"
+                missing_translations=1
+              fi
+            fi
+          done
+          
+          # Check reverse direction
+          for post in _posts/en/*.md; do
+            if [ -f "$post" ]; then
+              post_date=$(extract_date "$post")
+              filename=$(basename "$post")
+              
+              es_files=(_posts/es/${post_date}-*.md)
+              
+              if [ ! -f "${es_files[0]}" ]; then
+                echo "❌ Missing Spanish translation for date $post_date: $filename"
+                missing_translations=1
+              fi
+            fi
+          done
+          
+          if [ $missing_translations -eq 1 ]; then
+            echo ""
+            echo "💡 Tip: Each post must have its translation with the same date (YYYY-MM-DD)"
+            echo "   Example: 2024-01-15-welcome.md ↔ 2024-01-15-bienvenido.md"
+            exit 1
+          fi
+
+      - name: 📁 Check Required Files
+        run: |
+          echo "📁 Checking required files..."
+          required_files=(
+            "_config.yml"
+            "index.html"
+            "en/index.html"
+            "_layouts/default.html"
+            "_layouts/post.html"
+            "assets/css/style.css"
+            "assets/js/main.js"
+            "robots.txt"
+          )
+          
+          for file in "${required_files[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✅ $file"
+            else
+              echo "❌ Missing: $file"
+              exit 1
+            fi
+          done
+
+  # Job 10: Performance testing
+  performance-testing:
+    name: 🚀 Performance Tests
+    runs-on: ubuntu-latest
+    needs: build-tests
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-test-artifacts
+          path: _site/
+
+      - name: 🌐 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Install Lighthouse
+        run: npm install -g lighthouse
+
+      - name: 🚀 Run Performance Tests
+        run: |
+          echo "🚀 Running performance tests..."
+          # Serve site locally
+          python3 -m http.server 8000 --directory _site &
+          SERVER_PID=$!
+          sleep 5
+          
+          # Run Lighthouse
+          lighthouse http://localhost:8000/ \
+            --output html \
+            --output-path ./lighthouse-report.html \
+            --chrome-flags="--headless --no-sandbox" \
+            --quiet || true
+          
+          # Kill server
+          kill $SERVER_PID
+
+      - name: 📊 Upload Lighthouse Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: lighthouse-report.html
+          retention-days: 7
+
+  # Job 11: Test Summary (always runs to show results)
+  test-summary:
+    name: 📊 Test Summary
+    runs-on: ubuntu-latest
+    needs: [quick-validation, setup-dependencies, build-tests, content-validation, enhanced-content-validation, html-accessibility-validation, performance-testing]
+    if: always()
+    steps:
+      - name: 📊 Generate Test Results Summary
+        run: |
+          echo "## 🧪 Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Job | Status | Description |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|--------|-------------|" >> $GITHUB_STEP_SUMMARY
+          echo "| ⚡ Quick Validation | ${{ needs.quick-validation.result == 'success' && '✅ Passed' || needs.quick-validation.result == 'failure' && '❌ Failed' || '⏭️ Skipped' }} | YAML, JS syntax validation |" >> $GITHUB_STEP_SUMMARY
+          echo "| 📦 Setup Dependencies | ${{ needs.setup-dependencies.result == 'success' && '✅ Passed' || needs.setup-dependencies.result == 'failure' && '❌ Failed' || '⏭️ Skipped' }} | Ruby, Bundle installation |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔨 Build Tests | ${{ needs.build-tests.result == 'success' && '✅ Passed' || needs.build-tests.result == 'failure' && '❌ Failed' || '⏭️ Skipped' }} | Jekyll dev/prod builds |" >> $GITHUB_STEP_SUMMARY
+          echo "| 📝 Content Validation | ${{ needs.content-validation.result == 'success' && '✅ Passed' || needs.content-validation.result == 'failure' && '❌ Failed' || '⏭️ Skipped' }} | Post translations |" >> $GITHUB_STEP_SUMMARY
+          echo "| 📝 Enhanced Content | ${{ needs.enhanced-content-validation.result == 'success' && '✅ Passed' || needs.enhanced-content-validation.result == 'failure' && '❌ Failed' || '⏭️ Skipped' }} | YAML lint, required files |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔍 HTML & Accessibility | ${{ needs.html-accessibility-validation.result == 'success' && '✅ Passed' || needs.html-accessibility-validation.result == 'failure' && '❌ Failed' || '⏭️ Skipped' }} | HTML validation, pa11y |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🚀 Performance Tests | ${{ needs.performance-testing.result == 'success' && '✅ Passed' || needs.performance-testing.result == 'failure' && '❌ Failed' || '⏭️ Skipped' }} | Lighthouse performance |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Overall status
+          if [[ "${{ needs.quick-validation.result }}" == "success" && 
+                "${{ needs.setup-dependencies.result }}" == "success" && 
+                "${{ needs.build-tests.result }}" == "success" ]]; then
+            echo "## 🎉 Core Tests: All Passed!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ⚠️ Core Tests: Some Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Event**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
           echo "**Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY

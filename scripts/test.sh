@@ -41,16 +41,16 @@ test_url() {
 # Test basic pages
 echo "Testing main pages..."
 test_url "/"
-test_url "/cv"
-test_url "/proyectos"
-test_url "/blog"
+test_url "/cv.html"
+test_url "/proyectos.html"
+test_url "/blog.html"
 
 echo ""
 echo "Testing English pages..."
 test_url "/en/"
-test_url "/en/resume"
-test_url "/en/projects"
-test_url "/en/blog"
+test_url "/en/resume.html"
+test_url "/en/projects.html"
+test_url "/en/blog.html"
 
 echo ""
 echo "Testing assets..."

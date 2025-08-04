@@ -11,15 +11,15 @@ BASE_URL = 'https://l3onkers.github.io'
 TEST_URLS = [
   # Spanish pages
   '/',
-  '/cv',
-  '/proyectos', 
-  '/blog',
+  '/cv.html',
+  '/proyectos.html', 
+  '/blog.html',
   
   # English pages
   '/en/',
-  '/en/resume',
-  '/en/projects',
-  '/en/blog',
+  '/en/resume.html',
+  '/en/projects.html',
+  '/en/blog.html',
   
   # Assets
   '/assets/css/style.css',
