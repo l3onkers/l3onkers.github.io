@@ -1998,3 +1998,120 @@ html {
   font-size: 0.75rem;
   font-weight: 500;
 }
+
+/* Blog Filters */
+.blog-filters {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.filters-header h3 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.filters-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.filter-select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(138, 102, 204, 0.2);
+}
+
+.results-counter {
+    text-align: center;
+    padding: 0.5rem;
+    background: var(--subtle-bg);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+    transition: color 0.3s ease;
+}
+
+.btn-link:hover {
+    color: var(--accent-hover);
+}
+
+/* Post filtering animations */
+.post-preview {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.post-preview.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    margin: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.no-results {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive filters */
+@media (max-width: 768px) {
+    .filters-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+    
+    .filters-container {
+        grid-template-columns: 1fr;
+    }
+}

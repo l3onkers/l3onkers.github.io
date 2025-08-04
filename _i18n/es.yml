@@ -78,18 +78,33 @@ projects:
     title: "¿Interesado en colaborar?"
     description: "Siempre estoy abierto a nuevos proyectos y colaboraciones interesantes."
 
-# Blog
+# Página de blog
 blog:
   title: "Blog"
   description: "Comparto mis experiencias, aprendizajes y reflexiones sobre desarrollo web, tecnología y mejores prácticas."
-  read_full: "Leer artículo completo"
-  no_posts: "Próximamente..."
-  
-  meta:
-    by: "por"
-    on: "el"
-    in: "en"
-    tags: "etiquetas"
+  filters:
+    title: "Filtros"
+    all: "Todos"
+    category: "Categoría"
+    tag: "Etiqueta"
+    year: "Año"
+    clear: "Limpiar filtros"
+    results: "resultado(s) encontrado(s)"
+    no_results: "No se encontraron artículos con los filtros seleccionados."
+  categories:
+    personal: "Personal"
+    desarrollo: "Desarrollo" 
+    herramientas: "Herramientas"
+    jekyll: "Jekyll"
+  tags:
+    bienvenida: "Bienvenida"
+    github-pages: "GitHub Pages"
+    desarrollo-web: "Desarrollo Web"
+    configuracion: "Configuración"
+    productividad: "Productividad"
+    herramientas: "Herramientas"
+    modernizacion: "Modernización"
+    optimizacion: "Optimización"
 
 # Footer
 footer:

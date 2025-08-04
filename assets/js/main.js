@@ -719,3 +719,183 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Blog Filters Functionality
+function initBlogFilters() {
+    // Check if we're on a blog page
+    const postList = document.getElementById('post-list');
+    if (!postList) return;
+    
+    const categoryFilter = document.getElementById('category-filter');
+    const yearFilter = document.getElementById('year-filter');
+    const clearFiltersBtn = document.getElementById('clear-filters');
+    const clearFiltersLink = document.getElementById('clear-filters-link');
+    const resultsCount = document.getElementById('results-count');
+    const noResults = document.getElementById('no-results');
+    
+    const posts = Array.from(postList.querySelectorAll('.post-preview'));
+    
+    // Initialize results counter
+    updateResultsCounter();
+    
+    // Filter event listeners
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', applyFilters);
+    }
+    
+    if (yearFilter) {
+        yearFilter.addEventListener('change', applyFilters);
+    }
+    
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', clearAllFilters);
+    }
+    
+    if (clearFiltersLink) {
+        clearFiltersLink.addEventListener('click', clearAllFilters);
+    }
+    
+    // Load filters from URL on page load
+    loadFiltersFromURL();
+    
+    function applyFilters() {
+        const selectedCategory = categoryFilter ? categoryFilter.value : '';
+        const selectedYear = yearFilter ? yearFilter.value : '';
+        
+        let visibleCount = 0;
+        
+        posts.forEach(post => {
+            const postCategories = post.dataset.categories || '';
+            const postYear = post.dataset.year || '';
+            
+            let matchesCategory = true;
+            let matchesYear = true;
+            
+            // Category filter (supports multiple values separated by comma)
+            if (selectedCategory) {
+                const categoryValues = selectedCategory.split(',');
+                matchesCategory = categoryValues.some(cat => 
+                    postCategories.toLowerCase().includes(cat.toLowerCase())
+                );
+            }
+            
+            // Year filter
+            if (selectedYear) {
+                matchesYear = postYear === selectedYear;
+            }
+            
+            // Show/hide post with animation
+            if (matchesCategory && matchesYear) {
+                showPost(post);
+                visibleCount++;
+            } else {
+                hidePost(post);
+            }
+        });
+        
+        // Update results counter and no results message
+        updateResultsCounter(visibleCount);
+        toggleNoResultsMessage(visibleCount === 0);
+        
+        // Update URL with current filters
+        updateURL();
+    }
+    
+    function showPost(post) {
+        post.classList.remove('hidden');
+        post.style.display = '';
+    }
+    
+    function hidePost(post) {
+        post.classList.add('hidden');
+        // After animation, hide completely
+        setTimeout(() => {
+            if (post.classList.contains('hidden')) {
+                post.style.display = 'none';
+            }
+        }, 300);
+    }
+    
+    function updateResultsCounter(count = null) {
+        if (!resultsCount) return;
+        
+        if (count === null) {
+            count = posts.filter(post => !post.classList.contains('hidden')).length;
+        }
+        
+        const currentLang = document.documentElement.lang || 'es';
+        const resultsText = currentLang === 'es' ? 
+            `${count} resultado(s) encontrado(s)` : 
+            `${count} result(s) found`;
+            
+        resultsCount.textContent = resultsText;
+    }
+    
+    function toggleNoResultsMessage(show) {
+        if (!noResults) return;
+        
+        if (show) {
+            noResults.style.display = 'block';
+            postList.style.display = 'none';
+        } else {
+            noResults.style.display = 'none';
+            postList.style.display = '';
+        }
+    }
+    
+    function clearAllFilters() {
+        if (categoryFilter) categoryFilter.value = '';
+        if (yearFilter) yearFilter.value = '';
+        
+        // Show all posts
+        posts.forEach(showPost);
+        updateResultsCounter();
+        toggleNoResultsMessage(false);
+        
+        // Clear URL
+        updateURL();
+    }
+    
+    function updateURL() {
+        const params = new URLSearchParams();
+        
+        if (categoryFilter && categoryFilter.value) {
+            params.set('category', categoryFilter.value);
+        }
+        
+        if (yearFilter && yearFilter.value) {
+            params.set('year', yearFilter.value);
+        }
+        
+        const newURL = params.toString() ? 
+            `${window.location.pathname}?${params.toString()}` : 
+            window.location.pathname;
+            
+        window.history.replaceState({}, '', newURL);
+    }
+    
+    function loadFiltersFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        
+        const categoryParam = params.get('category');
+        const yearParam = params.get('year');
+        
+        if (categoryParam && categoryFilter) {
+            categoryFilter.value = categoryParam;
+        }
+        
+        if (yearParam && yearFilter) {
+            yearFilter.value = yearParam;
+        }
+        
+        // Apply filters if any were loaded from URL
+        if (categoryParam || yearParam) {
+            applyFilters();
+        }
+    }
+}
+
+// Initialize blog filters on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    initBlogFilters();
+});

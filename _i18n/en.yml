@@ -81,15 +81,30 @@ projects:
 # Blog
 blog:
   title: "Blog"
-  description: "I share my experiences, learnings and reflections on web development, technology and best practices."
-  read_full: "Read full article"
-  no_posts: "Coming soon..."
-  
-  meta:
-    by: "by"
-    on: "on"
-    in: "in"
-    tags: "tags"
+  description: "I share my experiences, learnings and reflections about web development, technology and best practices."
+  filters:
+    title: "Filters"
+    all: "All"
+    category: "Category"
+    tag: "Tag"
+    year: "Year"
+    clear: "Clear filters"
+    results: "result(s) found"
+    no_results: "No articles found with the selected filters."
+  categories:
+    personal: "Personal"
+    development: "Development"
+    tools: "Tools"
+    jekyll: "Jekyll"
+  tags:
+    welcome: "Welcome"
+    github-pages: "GitHub Pages"
+    web-development: "Web Development"
+    setup: "Setup"
+    productivity: "Productivity"
+    tools: "Tools"
+    modernization: "Modernization"
+    optimization: "Optimization"
 
 # Footer
 footer:
