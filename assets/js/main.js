@@ -657,11 +657,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add visual feedback on hover and focus
         card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
+            // Let CSS handle the hover effect, no need to override
         });
         
         card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+            // Let CSS handle the hover effect, no need to override
         });
         
         card.addEventListener('focus', function() {
