@@ -1767,6 +1767,85 @@ html {
 }
 
 /* Hide banner when dismissed */
+.construction-banner.hidden {
+  display: none;
+}
+
+/* Language Selector */
+.language-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.language-toggle {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.language-toggle:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.language-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-lg);
+  min-width: 120px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.language-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: var(--transition);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.language-option:last-child {
+  border-bottom: none;
+}
+
+.language-option:hover {
+  background: var(--bg-secondary);
+}
+
+.language-option.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+.language-option.active:hover {
+  background: var(--primary-hover);
+}
 
 /* Post Preview Cards - Same style as project cards */
 .post-preview {
