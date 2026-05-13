@@ -120,15 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
     
-    // Load banner state
-    const bannerHidden = localStorage.getItem('construction-banner-hidden');
-    if (bannerHidden === 'true') {
-        const banner = document.getElementById('construction-banner');
-        if (banner) {
-            banner.classList.add('hidden');
-        }
-    }
-    
     // Enhanced theme toggle with animation
     themeToggle.addEventListener('click', function() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -352,9 +343,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Close dropdown
             languageDropdown.classList.remove('show');
             languageToggle.classList.remove('active');
-            
-            // Show language change notification
-            showLanguageNotification(selectedLang);
         });
     });
     
@@ -376,9 +364,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 option.classList.add('active');
             }
         });
-        
-        // Apply translations
-        applyTranslations(lang);
         
         // Redirect to appropriate language version if available
         redirectToLanguageVersion(lang);
@@ -476,203 +461,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return 'es';
     }
     
-    // Apply translations function
-    function applyTranslations(lang) {
-        // Advanced translations using nested keys
-        const translations = {
-            es: {
-                'nav.home': 'Inicio',
-                'nav.cv': 'CV',
-                'nav.projects': 'Proyectos',
-                'nav.blog': 'Blog',
-                'nav.contact': 'Contacto',
-                'home.hero.greeting': '¡Hola! Soy',
-                'home.hero.tagline': 'Desarrollador Full Stack especializado en tecnologías web modernas. Apasionado por crear soluciones innovadoras y compartir conocimiento con la comunidad.',
-                'home.sections.development.title': 'Desarrollo',
-                'home.sections.development.description': 'Especializado en tecnologías web modernas, creando aplicaciones escalables y experiencias de usuario excepcionales.',
-                'home.sections.blog.title': 'Blog',
-                'home.sections.blog.description': 'Comparto conocimientos sobre desarrollo, tecnología y mejores prácticas a través de artículos técnicos.',
-                'home.sections.latest_posts': 'Últimas Publicaciones',
-                'home.sections.all_articles': 'Ver todos los artículos',
-                'buttons.read_more': 'Leer más →',
-                'buttons.see_projects': 'Ver proyectos →',
-                'buttons.see_cv': 'Ver mi CV',
-                'buttons.read_blog': 'Leer mi Blog',
-                'buttons.contact_email': 'Contactar por Email',
-                'buttons.download_pdf': 'Descargar PDF',
-                'buttons.demo': 'Demo',
-                'buttons.code': 'Código',
-                'buttons.connect_linkedin': 'Conectar en LinkedIn',
-                'buttons.see_github': 'Ver en GitHub',
-                'cv.title': 'Currículum Vitae',
-                'cv.personal_info': 'Información Personal',
-                'cv.download_cv': 'Descargar CV',
-                'cv.download_description': 'Descarga una versión en PDF de mi currículum para tener una copia offline.',
-                'cv.sections.experience': 'Experiencia Profesional',
-                'cv.sections.education': 'Formación Académica',
-                'cv.sections.skills': 'Habilidades Técnicas',
-                'cv.sections.certifications': 'Certificaciones',
-                'cv.sections.projects': 'Proyectos Destacados',
-                'cv.sections.languages': 'Idiomas',
-                'cv.fields.name': 'Nombre',
-                'cv.fields.location': 'Ubicación',
-                'cv.fields.email': 'Email',
-                'cv.fields.bio': 'Bio',
-                'cv.fields.company': 'Empresa',
-                'cv.fields.period': 'Período',
-                'cv.fields.present': 'Presente',
-                'cv.fields.technologies': 'Tecnologías',
-                'cv.fields.date': 'Fecha',
-                'cv.fields.id': 'ID',
-                'cv.fields.native': 'Nativo',
-                'cv.fields.advanced': 'Avanzado',
-                'cv.fields.intermediate': 'Intermedio',
-                'projects.title': 'Mis Proyectos',
-                'projects.description': 'Una selección de proyectos personales y profesionales que demuestran mis habilidades técnicas y creatividad.',
-                'projects.featured': 'Destacado',
-                'projects.collaboration.title': '¿Interesado en colaborar?',
-                'projects.collaboration.description': 'Siempre estoy abierto a nuevos proyectos y colaboraciones interesantes.',
-                'blog.title': 'Blog',
-                'blog.description': 'Comparto mis experiencias, aprendizajes y reflexiones sobre desarrollo web, tecnología y mejores prácticas.',
-                'blog.read_full': 'Leer artículo completo →',
-                'blog.no_posts': 'Próximamente...',
-                'footer.links': 'Enlaces',
-                'footer.follow': 'Sígueme',
-                'footer.rights': 'Todos los derechos reservados',
-                'system.under_construction': '¡Sitio en construcción! 🚧',
-                'system.construction_message': 'Estoy trabajando para ofrecerte la mejor experiencia. Algunas funciones pueden estar limitadas.',
-                'system.language_changed': 'Idioma cambiado a Español'
-            },
-            en: {
-                'nav.home': 'Home',
-                'nav.cv': 'Resume',
-                'nav.projects': 'Projects',
-                'nav.blog': 'Blog',
-                'nav.contact': 'Contact',
-                'home.hero.greeting': 'Hello! I\'m',
-                'home.hero.tagline': 'Full Stack Developer specialized in modern web technologies. Passionate about creating innovative solutions and sharing knowledge with the community.',
-                'home.sections.development.title': 'Development',
-                'home.sections.development.description': 'Specialized in modern web technologies, creating scalable applications and exceptional user experiences.',
-                'home.sections.blog.title': 'Blog',
-                'home.sections.blog.description': 'I share knowledge about development, technology and best practices through technical articles.',
-                'home.sections.latest_posts': 'Latest Posts',
-                'home.sections.all_articles': 'View all articles',
-                'buttons.read_more': 'Read more →',
-                'buttons.see_projects': 'View projects →',
-                'buttons.see_cv': 'View my Resume',
-                'buttons.read_blog': 'Read my Blog',
-                'buttons.contact_email': 'Contact via Email',
-                'buttons.download_pdf': 'Download PDF',
-                'buttons.demo': 'Demo',
-                'buttons.code': 'Code',
-                'buttons.connect_linkedin': 'Connect on LinkedIn',
-                'buttons.see_github': 'View on GitHub',
-                'cv.title': 'Curriculum Vitae',
-                'cv.personal_info': 'Personal Information',
-                'cv.download_cv': 'Download Resume',
-                'cv.download_description': 'Download a PDF version of my resume to have an offline copy.',
-                'cv.sections.experience': 'Professional Experience',
-                'cv.sections.education': 'Education',
-                'cv.sections.skills': 'Technical Skills',
-                'cv.sections.certifications': 'Certifications',
-                'cv.sections.projects': 'Featured Projects',
-                'cv.sections.languages': 'Languages',
-                'cv.fields.name': 'Name',
-                'cv.fields.location': 'Location',
-                'cv.fields.email': 'Email',
-                'cv.fields.bio': 'Bio',
-                'cv.fields.company': 'Company',
-                'cv.fields.period': 'Period',
-                'cv.fields.present': 'Present',
-                'cv.fields.technologies': 'Technologies',
-                'cv.fields.date': 'Date',
-                'cv.fields.id': 'ID',
-                'cv.fields.native': 'Native',
-                'cv.fields.advanced': 'Advanced',
-                'cv.fields.intermediate': 'Intermediate',
-                'projects.title': 'My Projects',
-                'projects.description': 'A selection of personal and professional projects that demonstrate my technical skills and creativity.',
-                'projects.featured': 'Featured',
-                'projects.collaboration.title': 'Interested in collaborating?',
-                'projects.collaboration.description': 'I\'m always open to new projects and interesting collaborations.',
-                'blog.title': 'Blog',
-                'blog.description': 'I share my experiences, learnings and reflections on web development, technology and best practices.',
-                'blog.read_full': 'Read full article →',
-                'blog.no_posts': 'Coming soon...',
-                'footer.links': 'Links',
-                'footer.follow': 'Follow me',
-                'footer.rights': 'All rights reserved',
-                'system.under_construction': 'Site under construction! 🚧',
-                'system.construction_message': 'I\'m working to provide you with the best experience. Some features may be limited.',
-                'system.language_changed': 'Language changed to English'
-            }
-        };
-        
-        const currentTranslations = translations[lang] || translations['es'];
-        
-        // Apply translations to elements with data-translate attributes
-        document.querySelectorAll('[data-translate]').forEach(element => {
-            const key = element.getAttribute('data-translate');
-            if (currentTranslations[key]) {
-                element.textContent = currentTranslations[key];
-            }
-        });
-        
-        // Update page language attribute
-        document.documentElement.setAttribute('lang', lang);
-    }
-    
-    // Show language change notification
-    function showLanguageNotification(lang) {
-        const notifications = {
-            es: 'Idioma cambiado a Español',
-            en: 'Language changed to English'
-        };
-        
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = 'language-notification';
-        notification.textContent = notifications[lang] || notifications['es'];
-        
-        // Add notification to page
-        document.body.appendChild(notification);
-        
-        // Show notification
-        setTimeout(() => notification.classList.add('show'), 100);
-        
-        // Hide and remove notification
-        setTimeout(() => {
-            notification.classList.remove('show');
-            setTimeout(() => document.body.removeChild(notification), 300);
-        }, 3000);
-    }
-    
     // Reading Progress & Table of Contents
     initReadingProgress();
     
     // Initialize Lightbox Gallery
     initLightbox();
 });
-
-// Construction Banner Functions
-function closeBanner() {
-    const banner = document.getElementById('construction-banner');
-    if (banner) {
-        banner.style.transition = 'all 0.5s ease';
-        banner.classList.add('hidden');
-        localStorage.setItem('construction-banner-hidden', 'true');
-    }
-}
-
-// Optional: Auto-hide banner after 30 seconds
-setTimeout(() => {
-    const banner = document.getElementById('construction-banner');
-    const bannerHidden = localStorage.getItem('construction-banner-hidden');
-    if (banner && bannerHidden !== 'true') {
-        // Add a subtle pulse to remind user they can close it
-        banner.style.animation = 'pulse 1s ease-in-out 3';
-    }
-}, 30000);
 
 // Add CSS for copy button
 const style = document.createElement('style');

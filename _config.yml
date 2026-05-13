@@ -18,6 +18,8 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-minifier  # Añadir para minificación
+  - jekyll-analytics # Añadir para tracking
 
 # SEO Tag configuration - Security hardening
 seo_tag:
@@ -26,7 +28,6 @@ seo_tag:
 # Sass configuration for better CSS compilation
 sass:
   style: compressed
-  sass_dir: _sass
 
 # Force regeneration
 incremental: false
@@ -91,3 +92,16 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/l3onkers"
+
+# Compresión de assets
+sass:
+  style: compressed
+
+# Cache busting
+incremental: false
+
+# Optimización de imágenes
+picture:
+  source: "assets/images"
+  output: "assets/processed"
+  suppress_warnings: true
