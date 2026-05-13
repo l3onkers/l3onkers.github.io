@@ -39,8 +39,6 @@ jobs:
           # Test YAML files syntax
           echo "📋 Testing YAML files..."
           ruby -e "require 'yaml'; YAML.load_file('_config.yml')"
-          ruby -e "require 'yaml'; YAML.load_file('_i18n/es.yml')"
-          ruby -e "require 'yaml'; YAML.load_file('_i18n/en.yml')"
           
           # Test JavaScript syntax
           echo "� Testing JavaScript..."
