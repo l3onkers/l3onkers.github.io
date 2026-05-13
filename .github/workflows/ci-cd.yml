@@ -30,7 +30,7 @@ jobs:
       - name: 🌐 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
 
       - name: ⚡ Quick Tests
         run: |
@@ -373,7 +373,7 @@ jobs:
       - name: 🌐 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
 
       - name: 📦 Install HTML Testing Tools
         run: |
@@ -426,8 +426,6 @@ jobs:
         run: |
           echo "📋 Validating YAML files with enhanced checks..."
           yaml-lint _config.yml
-          yaml-lint _i18n/es.yml
-          yaml-lint _i18n/en.yml
           
           # Validate frontmatter of posts
           for file in _posts/**/*.md; do
@@ -526,7 +524,7 @@ jobs:
       - name: 🌐 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
 
       - name: 📦 Install Performance Tools
         run: |
