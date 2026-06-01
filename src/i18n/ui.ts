@@ -7,6 +7,7 @@ export const defaultLang = 'es';
 
 export const ui = {
   es: {
+    'site.title': 'Portfolio de Álvaro Escobar - DevOps & Solutions Architect',
     'nav.experience': 'Experiencia',
     'nav.projects': 'Proyectos',
     'nav.about': 'Sobre mí',
@@ -19,6 +20,7 @@ export const ui = {
     'footer.rights': 'Casi todos los derechos reservados.',
   },
   en: {
+    'site.title': 'Álvaro Escobar Portfolio - DevOps & Solutions Architect',
     'nav.experience': 'Experience',
     'nav.projects': 'Projects',
     'nav.about': 'About me',
