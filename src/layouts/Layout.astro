@@ -22,6 +22,20 @@ const { title, description, lang } = Astro.props;
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+		<!-- OpenGraph Meta Tags -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:image" content={new URL('/favicon.png', Astro.site)} />
+
+		<!-- Twitter Meta Tags -->
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL('/favicon.png', Astro.site)} />
+
 		<ClientRouter />
 	</head>
 	<body class="relative text-black dark:text-white min-h-screen selection:bg-violet-500 selection:text-white pb-16">
