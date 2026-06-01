@@ -1,0 +1,41 @@
+---
+import { type ui } from '../i18n/ui';
+
+interface Props {
+  lang: keyof typeof ui;
+}
+
+const { lang } = Astro.props;
+
+const personalImageAlt = "Álvaro Escobar";
+---
+
+<article class="flex flex-col items-center justify-center gap-8 text-gray-700 dark:text-gray-300 md:flex-row">
+  <div class="[&>p]:mb-4 [&>p>strong]:text-violet-500 dark:[&>p>strong]:text-violet-400 [&>p>strong]:font-normal [&>p>strong]:font-mono text-pretty order-2 md:order-1">
+    {
+      lang === 'es' ? (
+        <p>
+          Me llamo Álvaro pero en internet me conocen como l3onkers. Empecé en el mundo del desarrollo automatizando pequeños scripts para servidores y, hoy en día, diseño <strong>arquitecturas escalables Serverless para millones de usuarios</strong>.
+        </p>
+        <p>
+          A lo largo de mi carrera, he colaborado en la migración de infraestructuras críticas hacia la nube y he liderado la adopción de <strong>metodologías GitOps y contenedores en Kubernetes</strong>. Mi objetivo siempre ha sido asegurar la alta disponibilidad.
+        </p>
+        <p>
+          Actualmente, me encuentro profundizando en patrones avanzados de despliegue continuo y <strong>creando herramientas open-source</strong> para facilitar la observabilidad en ecosistemas distribuidos.
+        </p>
+      ) : (
+        <p>
+          My name is Álvaro, but on the internet I'm known as l3onkers. I started in the development world by automating small scripts for servers and, today, I design <strong>scalable Serverless architectures for millions of users</strong>.
+        </p>
+        <p>
+          Throughout my career, I have collaborated in the migration of critical infrastructures to the cloud and led the adoption of <strong>GitOps methodologies and containers in Kubernetes</strong>. My goal has always been to ensure high availability.
+        </p>
+        <p>
+          Currently, I'm deepening my knowledge in advanced continuous deployment patterns and <strong>creating open-source tools</strong> to facilitate observability in distributed ecosystems.
+        </p>
+      )
+    }
+  </div>
+
+  <img width="200" height="200" src="https://avatars.githubusercontent.com/u/49257662?v=4" alt={personalImageAlt} class="order-1 object-cover w-64 h-full p-1 md:order-2 rotate-3 lg:p-2 lg:w-64 aspect-square rounded-2xl bg-black/20 dark:bg-yellow-500/5 ring-1 ring-black/70 dark:ring-white/20" style="object-position: 50% 50%">
+</article>

@@ -4,21 +4,20 @@ import SectionContainer from '../components/SectionContainer.astro';
 import Hero from '../components/Hero.astro';
 import Experience from '../components/Experience.astro';
 import Projects from '../components/Projects.astro';
+import AboutMe from '../components/AboutMe.astro';
 import BriefcaseIcon from '../icons/Briefcase.astro';
 import CodeIcon from '../icons/Code.astro';
+import UserIcon from '../icons/User.astro';
+import MailIcon from '../icons/Mail.astro';
 import { useTranslations } from '../i18n/ui';
 
 const lang = 'es';
 const t = useTranslations(lang);
 ---
 
-<Layout 
-  lang={lang}
-  title="Portfolio de Álvaro Escobar - Desarrollador y Programador Web"
-  description="Contrata a Álvaro Escobar para crear tu aplicación web o móvil. Desarrollador Full Stack Especializado."
->
-  <div class="space-y-24 mt-24">
-    <SectionContainer id="inicio" class="py-16 md:py-36">
+<Layout title={t('hero.title')} description={t('hero.description')} lang={lang}>
+  <div class="space-y-24">
+    <SectionContainer id="hero" class="pt-16 pb-32">
       <Hero lang={lang} />
     </SectionContainer>
     
@@ -36,6 +35,28 @@ const t = useTranslations(lang);
         {t('projects.title')}
       </h2>
       <Projects lang={lang} />
+    </SectionContainer>
+
+    <SectionContainer id="sobre-mi">
+      <h2 class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-gray-800 dark:text-white/80">
+        <UserIcon class="size-7" />
+        {t('nav.about')}
+      </h2>
+      <AboutMe lang={lang} />
+    </SectionContainer>
+
+    <SectionContainer id="contacto">
+      <h2 class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-gray-800 dark:text-white/80">
+        <MailIcon class="size-7" />
+        {t('nav.contact')}
+      </h2>
+      <div class="flex flex-col gap-4 text-gray-700 dark:text-gray-300 anim-fade-in anim-delay-1">
+        <p>¿Tienes un proyecto en mente o necesitas ayuda con tu infraestructura? ¡Hablemos!</p>
+        <a href="mailto:contacto@alvaro-escobar.dev" class="inline-flex items-center justify-center gap-2 px-6 py-3 mt-4 text-white transition bg-violet-600 rounded-full hover:bg-violet-700 w-fit">
+          <MailIcon class="size-5" />
+          Envíame un correo
+        </a>
+      </div>
     </SectionContainer>
   </div>
 </Layout>
