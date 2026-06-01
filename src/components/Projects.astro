@@ -65,8 +65,9 @@ const PROJECTS = [
     PROJECTS.map(({ image, title, description, tags, link, github }, i) => (
       <article class="anim-fade-in flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0" style={`animation-delay: ${i * 150}ms`}>
         <div class="w-full md:w-1/2">
-          <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-200 dark:lg:border-gray-800 lg:hover:border-gray-300 dark:lg:hover:border-gray-700 lg:hover:bg-gray-100/50 dark:lg:hover:bg-gray-800/50">
-            <img alt={title} class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105" src={image} />
+          <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition-all duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-[0_20px_60px_-10px_rgba(139,92,246,0.2)] lg:border lg:border-gray-200 dark:lg:border-gray-800 lg:hover:border-violet-400/30 dark:lg:hover:bg-gray-800/50">
+            <img alt={title} class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105" src={image} loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" aria-hidden="true"></div>
           </div>
         </div>
 
