@@ -11,5 +11,9 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: false
     }
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover'
   }
 });
