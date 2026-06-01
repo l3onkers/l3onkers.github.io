@@ -15,12 +15,15 @@ const t = useTranslations(lang);
 ---
 
 <div class="max-w-xl anim-fade-in anim-delay-1">
-  <div class="flex gap-4 mb-4">
-    <img
-      class="rounded-full shadow-lg size-16 bg-black"
-      src="/favicon.png"
-      alt={t('hero.title')}
-    />
+  <div class="flex gap-4 mb-6 items-center">
+    <div class="relative flex-shrink-0">
+      <div class="absolute inset-0 rounded-full bg-violet-500/30 dark:bg-violet-500/20 blur-xl scale-125" aria-hidden="true"></div>
+      <img
+        class="relative rounded-full shadow-2xl size-16 bg-black ring-2 ring-violet-500/60 ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-950"
+        src="/favicon.png"
+        alt="Avatar"
+      />
+    </div>
     <a
       href="https://linkedin.com/in/alvaro-escobar"
       target="_blank"
@@ -30,12 +33,8 @@ const t = useTranslations(lang);
       <Badge>{t('hero.badge')}</Badge>
     </a>
   </div>
-  <h1 class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white">
-    {t('hero.title')}
-  </h1>
-  <p class="mt-6 text-xl text-gray-700 dark:text-gray-300 [&>strong]:text-violet-500 dark:[&>strong]:text-violet-400 [&>strong]:font-semibold">
-    {t('hero.description')}
-  </p>
+  <h1 class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white" set:html={t('hero.title')} />
+  <p class="mt-6 text-xl text-gray-700 dark:text-gray-300 [&>strong]:text-violet-500 dark:[&>strong]:text-violet-400 [&>strong]:font-semibold" set:html={t('hero.description')} />
   <nav class="flex flex-wrap gap-4 mt-8">
     <SocialPill href="mailto:contacto@alvaro-escobar.dev">
       <MailIcon class="size-4 md:size-6" />

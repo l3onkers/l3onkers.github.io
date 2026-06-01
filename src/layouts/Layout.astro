@@ -76,6 +76,15 @@ const { title, description, lang } = Astro.props;
 	.anim-delay-3 { animation-delay: 400ms; }
 	.anim-delay-4 { animation-delay: 540ms; }
 
+	/* Gradient text utility for the hero name */
+	.gradient-name {
+		background: linear-gradient(135deg, #c084fc 10%, #7c3aed 90%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		color: transparent;
+	}
+
 	/* Scroll-triggered reveal for named sections (below the fold) */
 	@supports (animation-timeline: view()) {
 		[data-section] {
