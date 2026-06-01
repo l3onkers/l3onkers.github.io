@@ -10,40 +10,28 @@ interface Props {
 const { lang } = Astro.props;
 
 const TAGS = {
-  REACT: {
-    name: "React",
-    class: "bg-black text-white",
+  AWS: {
+    name: "AWS",
+    class: "bg-[#232F3E] text-white",
   },
-  NODE: {
-    name: "Node.js",
-    class: "bg-[#026e00] text-white",
+  TERRAFORM: {
+    name: "Terraform",
+    class: "bg-[#844FBA] text-white",
   },
-  VUE: {
-    name: "Vue.js",
-    class: "bg-[#41b883] text-white",
-  },
-  NEXT: {
-    name: "Next.js",
-    class: "bg-black text-white",
+  KUBERNETES: {
+    name: "Kubernetes",
+    class: "bg-[#326CE5] text-white",
   }
 }
 
 const PROJECTS = [
   {
-    title: lang === 'es' ? "Plataforma E-commerce Completa" : "Full E-commerce Platform",
-    description: lang === 'es' ? "Sistema de comercio electrónico full-stack con gestión de productos, carrito de compras, procesamiento de pagos y panel de administración." : "Full-stack e-commerce system with product management, shopping cart, payment processing and admin dashboard.",
+    title: lang === 'es' ? "Migración a Arquitectura Cloud Native" : "Cloud Native Architecture Migration",
+    description: lang === 'es' ? "Diseño e implementación de una migración completa de monolito a microservicios usando EKS, Terraform y GitOps con ArgoCD." : "Design and implementation of a complete monolith to microservices migration using EKS, Terraform and GitOps with ArgoCD.",
     link: "#",
     github: "#",
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1000",
-    tags: [TAGS.REACT, TAGS.NODE],
-  },
-  {
-    title: lang === 'es' ? "Gestor de Tareas Colaborativo" : "Collaborative Task Manager",
-    description: lang === 'es' ? "Aplicación de gestión de proyectos con funcionalidades de colaboración en tiempo real, notificaciones push y sincronización offline." : "Project management application with real-time collaboration features, push notifications and offline sync.",
-    link: "#",
-    github: "#",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=1000",
-    tags: [TAGS.VUE, TAGS.NODE],
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
+    tags: [TAGS.AWS, TAGS.KUBERNETES, TAGS.TERRAFORM],
   }
 ]
 ---
@@ -53,36 +41,36 @@ const PROJECTS = [
     PROJECTS.map(({ image, title, description, tags, link, github }) => (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
-          <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+          <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-200 dark:lg:border-gray-800 lg:hover:border-gray-300 dark:lg:hover:border-gray-700 lg:hover:bg-gray-100/50 dark:lg:hover:bg-gray-800/50">
             <img alt={title} class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105" src={image} />
           </div>
         </div>
 
         <div class="w-full md:w-1/2 md:max-w-lg">
-          <h3 class="text-2xl font-bold text-gray-100">
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
             {title}
           </h3>
           <div class="flex flex-wrap mt-2">
             <ul class="flex flex-row mb-2 gap-x-2">
               {tags.map((tag) => (
                 <li>
-                  <span class={`flex gap-x-2 rounded-full text-xs py-1 px-2 border border-white/10 ${tag.class}`}>
+                  <span class={`flex gap-x-2 rounded-full text-xs py-1 px-2 border border-black/10 dark:border-white/10 ${tag.class}`}>
                     {tag.name}
                   </span>
                 </li>
               ))}
             </ul>
 
-            <div class="mt-2 text-gray-400">{description}</div>
+            <div class="mt-2 text-gray-700 dark:text-gray-400">{description}</div>
             <footer class="flex items-end justify-start mt-4 gap-x-4">
               {github && (
-                <a href={github} class="bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 border border-gray-600 rounded-full inline-flex items-center gap-x-2 transition">
+                <a href={github} class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-900 dark:text-white py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-full inline-flex items-center gap-x-2 transition">
                   <GitHubIcon class="size-4" />
                   Code
                 </a>
               )}
               {link && (
-                <a href={link} class="bg-primary hover:bg-primary-hover text-white py-2 px-4 border border-primary rounded-full inline-flex items-center gap-x-2 transition">
+                <a href={link} class="bg-violet-600 hover:bg-violet-700 text-white py-2 px-4 border border-violet-600 rounded-full inline-flex items-center gap-x-2 transition">
                   <CodeIcon class="size-4" />
                   Preview
                 </a>

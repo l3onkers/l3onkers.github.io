@@ -13,9 +13,9 @@ export const ui = {
     'nav.contact': 'Contacto',
     'hero.badge': 'Disponible para trabajar',
     'hero.title': 'Hola, soy Álvaro',
-    'hero.description': '+5 años de experiencia. Desarrollador Full Stack especializado en tecnologías web modernas. Apasionado por crear soluciones innovadoras y compartir conocimiento con la comunidad. De Madrid, España.',
+    'hero.description': '+5 años de experiencia. Cloud & DevOps Engineer especializado en infraestructuras escalables y arquitecturas Serverless. Apasionado por la automatización y la cultura GitOps. De Madrid, España.',
     'experience.title': 'Experiencia Laboral',
-    'projects.title': 'Proyectos Destacados',
+    'projects.title': 'Arquitecturas Destacadas',
     'footer.rights': 'Casi todos los derechos reservados.',
   },
   en: {
@@ -25,9 +25,9 @@ export const ui = {
     'nav.contact': 'Contact',
     'hero.badge': 'Available for hire',
     'hero.title': 'Hi, I am Álvaro',
-    'hero.description': '+5 years of experience. Full Stack Developer specialized in modern web technologies. Passionate about creating innovative solutions and sharing knowledge with the community. From Madrid, Spain.',
+    'hero.description': '+5 years of experience. Cloud & DevOps Engineer specialized in scalable infrastructures and Serverless architectures. Passionate about automation and GitOps culture. From Madrid, Spain.',
     'experience.title': 'Work Experience',
-    'projects.title': 'Featured Projects',
+    'projects.title': 'Featured Architectures',
     'footer.rights': 'Almost all rights reserved.',
   }
 } as const;

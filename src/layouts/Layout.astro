@@ -1,7 +1,8 @@
 ---
-import '@fontsource-variable/inter';
+import '@fontsource-variable/onest';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -13,7 +14,7 @@ const { title, description, lang } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
@@ -21,13 +22,13 @@ const { title, description, lang } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ViewTransitions />
 	</head>
-	<body class="bg-gray-900 text-white min-h-screen pb-10 selection:bg-primary selection:text-white">
-		<div class="fixed left-0 top-0 -z-10 h-full w-full">
-			<div class="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#2563eb_100%)]"></div>
-		</div>
+	<body class="relative text-black dark:text-white min-h-screen selection:bg-violet-500 selection:text-white pb-10">
+		<div class="fixed inset-0 z-[-2] bg-gray-50 dark:bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.15),rgba(255,255,255,0.9))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.15),rgba(0,0,0,0))]"></div>
+		
 		<Header lang={lang as any} />
-		<main class="max-w-4xl mx-auto px-4">
+		<main class="max-w-4xl mx-auto px-4 mt-24">
 			<slot />
 		</main>
 		<Footer lang={lang as any} />
@@ -36,11 +37,11 @@ const { title, description, lang } = Astro.props;
 
 <style is:global>
 	:root {
-		color-scheme: dark;
+		color-scheme: light dark;
 	}
 	
 	html {
-		font-family: 'Inter Variable', system-ui, sans-serif;
+		font-family: 'Onest Variable', system-ui, sans-serif;
 		scroll-behavior: smooth;
 	}
 
