@@ -18,20 +18,44 @@ const TAGS = {
     name: "Terraform",
     class: "bg-[#844FBA] text-white",
   },
-  KUBERNETES: {
-    name: "Kubernetes",
-    class: "bg-[#326CE5] text-white",
+  GITLAB: {
+    name: "GitLab CI/CD",
+    class: "bg-[#FC6D26] text-white",
+  },
+  AZURE: {
+    name: "Azure DevOps",
+    class: "bg-[#0078D4] text-white",
+  },
+  PYTHON: {
+    name: "Python / Bash",
+    class: "bg-[#3776AB] text-white",
   }
 }
 
 const PROJECTS = [
   {
-    title: lang === 'es' ? "Migración a Arquitectura Cloud Native" : "Cloud Native Architecture Migration",
-    description: lang === 'es' ? "Diseño e implementación de una migración completa de monolito a microservicios usando EKS, Terraform y GitOps con ArgoCD." : "Design and implementation of a complete monolith to microservices migration using EKS, Terraform and GitOps with ArgoCD.",
-    link: "#",
-    github: "#",
+    title: lang === 'es' ? "Enterprise GitOps & Pipelines CI/CD" : "Enterprise GitOps & CI/CD Pipelines",
+    description: lang === 'es' ? "Diseño e implementación de pipelines CI/CD en entornos híbridos (On-Premise y Cloud). Automatización integral del ciclo de vida del software, garantizando despliegues consistentes, seguros y trazables." : "Design and implementation of CI/CD pipelines in hybrid environments (On-Premise and Cloud). Comprehensive automation of the software lifecycle, ensuring consistent, secure, and traceable deployments.",
+    link: "",
+    github: "",
+    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=1000",
+    tags: [TAGS.GITLAB, TAGS.AWS, TAGS.PYTHON],
+  },
+  {
+    title: lang === 'es' ? "Cloud Infrastructure & SecOps" : "Cloud Infrastructure & SecOps",
+    description: lang === 'es' ? "Administración avanzada y securización de arquitecturas en AWS (EC2, ECS, Lambda, S3, CloudFront). Análisis de riesgos y desarrollo de scripts para automatización de procesos recurrentes y remediación." : "Advanced administration and securitization of AWS architectures (EC2, ECS, Lambda, S3, CloudFront). Risk analysis and script development for recurrent process automation and remediation.",
+    link: "",
+    github: "",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
-    tags: [TAGS.AWS, TAGS.KUBERNETES, TAGS.TERRAFORM],
+    tags: [TAGS.AWS, TAGS.TERRAFORM, TAGS.PYTHON],
+  },
+  {
+    title: lang === 'es' ? "Microservicios & Flujos de Datos IoT" : "Microservices & IoT Data Flows",
+    description: lang === 'es' ? "Gestión y configuración de flujos de datos IoT en arquitecturas de alta concurrencia. Administración de bases de datos SQL/NoSQL y optimización del rendimiento bajo metodologías CI/CD con Azure." : "Management and configuration of IoT data flows in high-concurrency architectures. SQL/NoSQL database administration and performance optimization using CI/CD methodologies with Azure.",
+    link: "",
+    github: "",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1000",
+    tags: [TAGS.AZURE, TAGS.PYTHON],
   }
 ]
 ---
