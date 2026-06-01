@@ -1,0 +1,36 @@
+---
+import { useTranslations, type ui } from '../i18n/ui';
+
+interface Props {
+  lang: keyof typeof ui;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const navItems = [
+  { title: t('nav.experience'), url: '#experiencia' },
+  { title: t('nav.projects'), url: '#proyectos' },
+  { title: t('nav.about'), url: '#sobre-mi' },
+  { title: t('nav.contact'), url: 'mailto:contacto@alvaro-escobar.dev' },
+];
+
+const homeUrl = lang === 'es' ? '/' : `/${lang}`;
+const altLang = lang === 'es' ? 'en' : 'es';
+const altUrl = lang === 'es' ? '/en' : '/';
+---
+
+<header class="flex justify-center items-center py-5 w-full xl:w-[1120px] mx-auto z-50 sticky top-0">
+  <nav class="flex px-3 text-sm font-medium rounded-full text-gray-200 justify-center items-center bg-gray-800/90 shadow-lg ring-1 ring-white/10 backdrop-blur-md">
+    {
+      navItems.map((item) => (
+        <a class="relative block px-3 py-2 transition hover:text-primary" href={item.url}>
+          {item.title}
+        </a>
+      ))
+    }
+    <a href={altUrl} class="ml-4 px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs transition uppercase font-bold">
+      {altLang}
+    </a>
+  </nav>
+</header>

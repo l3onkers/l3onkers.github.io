@@ -1,0 +1,53 @@
+---
+import Badge from './Badge.astro';
+import SocialPill from './SocialPill.astro';
+import LinkedInIcon from '../icons/LinkedIn.astro';
+import GitHubIcon from '../icons/GitHub.astro';
+import MailIcon from '../icons/Mail.astro';
+import { useTranslations, type ui } from '../i18n/ui';
+
+interface Props {
+  lang: keyof typeof ui;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="max-w-xl">
+  <div class="flex gap-4 mb-4">
+    <img
+      class="rounded-full shadow-lg size-16"
+      src="https://avatars.githubusercontent.com/u/104102607?v=4"
+      alt="Álvaro Escobar"
+    />
+    <a
+      href="https://linkedin.com/in/alvaro-escobar"
+      target="_blank"
+      rel="noopener"
+      class="flex items-center transition md:justify-center md:hover:scale-105"
+    >
+      <Badge>{t('hero.badge')}</Badge>
+    </a>
+  </div>
+  <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+    {t('hero.title')}
+  </h1>
+  <p class="mt-6 text-xl text-gray-300 [&>strong]:text-primary [&>strong]:font-semibold">
+    {t('hero.description')}
+  </p>
+  <nav class="flex flex-wrap gap-4 mt-8">
+    <SocialPill href="mailto:contacto@alvaro-escobar.dev">
+      <MailIcon class="size-4 md:size-6" />
+      Contáctame
+    </SocialPill>
+    <SocialPill href="https://linkedin.com/in/alvaro-escobar">
+      <LinkedInIcon class="size-4 md:size-6" />
+      LinkedIn
+    </SocialPill>
+    <SocialPill href="https://github.com/l3onkers">
+      <GitHubIcon class="size-4 md:size-6" />
+      GitHub
+    </SocialPill>
+  </nav>
+</div>

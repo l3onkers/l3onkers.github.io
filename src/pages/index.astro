@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionContainer from '../components/SectionContainer.astro';
+import Hero from '../components/Hero.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import BriefcaseIcon from '../icons/Briefcase.astro';
+import CodeIcon from '../icons/Code.astro';
+import { useTranslations } from '../i18n/ui';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  lang={lang}
+  title="Portfolio de Álvaro Escobar - Desarrollador y Programador Web"
+  description="Contrata a Álvaro Escobar para crear tu aplicación web o móvil. Desarrollador Full Stack Especializado."
+>
+  <div class="space-y-24 mt-24">
+    <SectionContainer id="inicio" class="py-16 md:py-36">
+      <Hero lang={lang} />
+    </SectionContainer>
+    
+    <SectionContainer id="experiencia">
+      <h2 class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-white/80">
+        <BriefcaseIcon class="size-7" />
+        {t('experience.title')}
+      </h2>
+      <Experience lang={lang} />
+    </SectionContainer>
+    
+    <SectionContainer id="proyectos">
+      <h2 class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-white/80">
+        <CodeIcon class="size-7" />
+        {t('projects.title')}
+      </h2>
+      <Projects lang={lang} />
+    </SectionContainer>
+  </div>
+</Layout>

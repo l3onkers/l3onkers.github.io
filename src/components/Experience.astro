@@ -1,0 +1,42 @@
+---
+import ExperienceItem from "./ExperienceItem.astro"
+import { type ui } from '../i18n/ui';
+
+interface Props {
+  lang: keyof typeof ui;
+}
+
+const { lang } = Astro.props;
+
+// Data would normally come from i18n or Content Collections, but keeping it simple for the portfolio.
+const EXPERIENCE = [
+  {
+    date: lang === 'es' ? 'Enero 2022 - Presente' : 'January 2022 - Present',
+    title: lang === 'es' ? 'Desarrollador Full Stack Senior' : 'Senior Full Stack Developer',
+    company: 'Empresa Tecnológica S.L.',
+    description: lang === 'es' ? 'Desarrollo de aplicaciones web escalables usando React, Node.js y PostgreSQL. Implementación de arquitecturas de microservicios con Docker y Kubernetes. Liderazgo técnico de un equipo de 5 desarrolladores y mejora del rendimiento de aplicaciones en un 40%.' : 'Development of scalable web applications using React, Node.js and PostgreSQL. Implementation of microservices architectures with Docker and Kubernetes. Technical leadership of a 5-developer team and 40% performance improvement on existing apps.',
+  },
+  {
+    date: lang === 'es' ? 'Marzo 2020 - Diciembre 2021' : 'March 2020 - December 2021',
+    title: lang === 'es' ? 'Desarrollador Frontend' : 'Frontend Developer',
+    company: 'StartupInnovadora',
+    description: lang === 'es' ? 'Desarrollo de interfaces de usuario modernas con Vue.js y TypeScript. Implementación de diseños responsive y accesibles. Integración con APIs RESTful y GraphQL.' : 'Development of modern user interfaces with Vue.js and TypeScript. Implementation of responsive and accessible designs. Integration with RESTful APIs and GraphQL.',
+  },
+  {
+    date: lang === 'es' ? 'Junio 2018 - Febrero 2020' : 'June 2018 - February 2020',
+    title: lang === 'es' ? 'Desarrollador Junior' : 'Junior Developer',
+    company: 'AgenciaDigital',
+    description: lang === 'es' ? 'Desarrollo de sitios web corporativos con WordPress y PHP. Maquetación de diseños con HTML5, CSS3 y JavaScript. Mantenimiento y actualización de sitios web existentes.' : 'Development of corporate websites with WordPress and PHP. Layout design with HTML5, CSS3 and JavaScript. Maintenance and update of existing websites.',
+  }
+]
+---
+
+<ol class="relative mt-16">
+  {
+    EXPERIENCE.map((experiencie) => (
+      <li class="">
+        <ExperienceItem {...experiencie} />
+      </li>
+    ))
+  }
+</ol>
