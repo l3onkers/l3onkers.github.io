@@ -2,7 +2,7 @@
 import '@fontsource-variable/onest';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -22,7 +22,7 @@ const { title, description, lang } = Astro.props;
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<ViewTransitions />
+		<ClientRouter />
 	</head>
 	<body class="relative text-black dark:text-white min-h-screen selection:bg-violet-500 selection:text-white pb-10">
 		<div class="fixed inset-0 z-[-2] bg-gray-50 dark:bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.15),rgba(255,255,255,0.9))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.15),rgba(0,0,0,0))]"></div>
