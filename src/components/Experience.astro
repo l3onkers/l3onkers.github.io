@@ -11,28 +11,34 @@ const { lang } = Astro.props;
 // Data would normally come from i18n or Content Collections, but keeping it simple for the portfolio.
 const EXPERIENCE = [
   {
-    date: lang === 'es' ? 'Febrero 2025 - Presente' : 'February 2025 - Present',
-    title: 'Senior DevOps Expert & SRE | Gitlab PSE | Solutions Architect',
-    company: 'knowmad mood',
-    description: lang === 'es' ? 'Gestión avanzada de GitLab, administración on-premises y automatización integral CI/CD. Diseño e implementación de pipelines en entornos híbridos y definición de estándares arquitectónicos DevOps.' : 'Advanced GitLab management, on-premises administration, and comprehensive CI/CD automation. Design and implementation of pipelines in hybrid environments and definition of DevOps architectural standards.',
+    date: lang === 'es' ? 'FEB 2025 - Actualidad' : 'FEB 2025 - Present',
+    title: lang === 'es' ? 'Especialista Senior DevOps - SRE & Arquitecto de Soluciones' : 'Senior DevOps - SRE Specialist & Solutions Architect',
+    company: 'Knowmadmood',
+    description: lang === 'es' ? 'Automatización total del ciclo de vida del software en entornos híbridos utilizando Terraform y GitLab CI/CD. Integración de modelos de IA avanzados (Claude 3, Copilot, HuggingFace) en los flujos de trabajo diarios para el Code Scaffolding. Administración de instancias de GitLab on-premises a gran escala, y configuración de flujos de trabajo de observabilidad (Prometheus, Datadog).' : 'Total automation of the software lifecycle in hybrid environments using Terraform and GitLab CI/CD. Integration of advanced AI models (Claude 3, Copilot, HuggingFace) into daily workflows for Code Scaffolding. Large-scale on-premises GitLab instance administration, and configuration of observability workflows (Prometheus, Datadog).',
   },
   {
-    date: lang === 'es' ? 'Febrero 2023 - Enero 2025' : 'February 2023 - January 2025',
-    title: 'DevOps Team Lead & Solutions Architect',
-    company: 'CoverManager',
-    description: lang === 'es' ? 'Liderazgo técnico del equipo DevOps. Responsable del análisis, diseño y planificación de arquitecturas Cloud, automatización de infraestructuras y procesos de integración continua.' : 'Technical leadership of the DevOps team. Responsible for the analysis, design, and planning of Cloud architectures, infrastructure automation, and continuous integration processes.',
+    date: lang === 'es' ? 'FEB 2023 - FEB 2025' : 'FEB 2023 - FEB 2025',
+    title: lang === 'es' ? 'Líder de Equipo DevOps & Arquitecto de Soluciones' : 'DevOps Team Lead & Solutions Architect',
+    company: 'Covermanager',
+    description: lang === 'es' ? 'Liderazgo de un equipo DevOps de 2 ingenieros, diseñando una arquitectura AWS altamente escalable. Mitigación exitosa de un ataque DDoS masivo asegurando la continuidad del negocio y reduciendo costes de AWS. Administración de clústeres de PostgreSQL y MongoDB de alta concurrencia, y automatización de soluciones CI/CD Serverless.' : 'Leadership of a 2-engineer DevOps team, designing a highly scalable AWS architecture. Successful mitigation of a massive DDoS attack ensuring business continuity and reducing AWS costs. Administration of high-concurrency PostgreSQL and MongoDB clusters, and automation of Serverless CI/CD solutions.',
   },
   {
-    date: lang === 'es' ? 'Octubre 2021 - Diciembre 2022' : 'October 2021 - December 2022',
-    title: 'DevOps Engineer & Solutions Architect',
+    date: lang === 'es' ? 'OCT 2021 - FEB 2023' : 'OCT 2021 - FEB 2023',
+    title: lang === 'es' ? 'Especialista DevOps & Arquitecto de Soluciones' : 'DevOps Specialist & Solutions Architect',
     company: 'Wellness TechGroup',
-    description: lang === 'es' ? 'Análisis, diseño y despliegue de infraestructuras On Premise y SaaS. Automatización de flujos de datos IoT, administración de BBDD y pipelines CI/CD con AWS y Azure DevOps.' : 'Analysis, design, and deployment of On Premise and SaaS infrastructures. Automation of IoT data flows, database administration, and CI/CD pipelines using AWS and Azure DevOps.',
+    description: lang === 'es' ? 'Diseño y planificación de soluciones CI/CD utilizando Jenkins y Azure-DevOps. Ejecución de análisis de riesgo e impacto con herramientas de escaneo de seguridad en flujos de datos IoT. Implementación y escalado de infraestructuras On-Premise y SaaS, y gestión del Change Management.' : 'Design and planning of CI/CD solutions using Jenkins and Azure-DevOps. Execution of risk and impact analysis with security scanning tools in IoT data flows. Implementation and scaling of On-Premise and SaaS infrastructures, and Change Management administration.',
   },
   {
-    date: lang === 'es' ? 'Abril 2019 - Marzo 2021' : 'April 2019 - March 2021',
-    title: 'DevOps Specialist & Sysadmin',
+    date: lang === 'es' ? 'ABR 2021 - SEP 2021' : 'APR 2021 - SEP 2021',
+    title: lang === 'es' ? 'Especialista DevOps & Arquitecto de Soluciones' : 'DevOps Specialist & Solutions Architect',
+    company: 'ViewNext / Kyndryl',
+    description: lang === 'es' ? 'Gestión de un equipo técnico de 5 ingenieros para el despliegue en producción de aplicaciones críticas aplicando la metodología ITIL. Gestión del ciclo de vida completo del software y administración de la CMDB en Oracle, SQL Server y sistemas legacy.' : 'Management of a 5-engineer technical team for production deployment of critical applications applying ITIL methodology. Full software lifecycle management and CMDB administration on Oracle, SQL Server, and legacy systems.',
+  },
+  {
+    date: lang === 'es' ? 'ABR 2019 - MAR 2021' : 'APR 2019 - MAR 2021',
+    title: lang === 'es' ? 'Especialista DevOps & Administrador de Sistemas Linux' : 'DevOps Specialist & Linux Systems Administrator',
     company: 'Agilia Center',
-    description: lang === 'es' ? 'Administración integral de entornos AWS (EC2, S3, ECS, Lambda). Desarrollo de herramientas en Bash y Python para la automatización de procesos recurrentes y securización de infraestructuras críticas.' : 'Comprehensive administration of AWS environments (EC2, S3, ECS, Lambda). Tool development in Bash and Python for recurrent process automation and critical infrastructure securitization.',
+    description: lang === 'es' ? 'Administración de infraestructuras AWS Cloud a gran escala y bases de datos. Resolución y gestión de incidentes críticos garantizando 99.9% de uptime. Mitigación de riesgos mediante el análisis de impacto.' : 'Large-scale AWS Cloud infrastructure and database administration. Resolution and management of critical incidents ensuring 99.9% uptime. Risk mitigation through impact analysis.',
   }
 ]
 ---

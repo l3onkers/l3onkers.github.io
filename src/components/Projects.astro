@@ -29,33 +29,37 @@ const TAGS = {
   PYTHON: {
     name: "Python / Bash",
     class: "bg-[#3776AB] text-white",
+  },
+  AI: {
+    name: "AI / LLMs",
+    class: "bg-[#000000] text-white",
+  },
+  ASTRO: {
+    name: "Astro",
+    class: "bg-[#FF5D01] text-white",
+  },
+  TAILWIND: {
+    name: "Tailwind CSS",
+    class: "bg-[#06B6D4] text-white",
   }
 }
 
 const PROJECTS = [
   {
-    title: lang === 'es' ? "Enterprise GitOps & Pipelines CI/CD" : "Enterprise GitOps & CI/CD Pipelines",
-    description: lang === 'es' ? "Diseño e implementación de pipelines CI/CD en entornos híbridos (On-Premise y Cloud). Automatización integral del ciclo de vida del software, garantizando despliegues consistentes, seguros y trazables." : "Design and implementation of CI/CD pipelines in hybrid environments (On-Premise and Cloud). Comprehensive automation of the software lifecycle, ensuring consistent, secure, and traceable deployments.",
+    title: "G.A.I.A Framework",
+    description: lang === 'es' ? "AI-Driven Platform Engineering & DevOps Swarm: Un enjambre de agentes autónomos inspirado en Horizon Zero Dawn. Diseñado para convertir GitHub Copilot y LLMs (Claude 3, modelos locales de HuggingFace) en un motor determinista para la Orquestación de LLM. Cubre todo el ciclo de vida del software: desde la forja de infraestructura autónoma (Terraform) hasta la observabilidad avanzada." : "AI-Driven Platform Engineering & DevOps Swarm: An autonomous agent swarm inspired by Horizon Zero Dawn. Designed to turn GitHub Copilot and LLMs (Claude 3, local HuggingFace models) into a deterministic engine for LLM Orchestration. Covers the entire software lifecycle: from autonomous infrastructure forging (Terraform) to advanced observability.",
     link: "",
-    github: "",
-    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=1000",
-    tags: [TAGS.GITLAB, TAGS.AWS, TAGS.PYTHON],
+    github: "https://github.com/13onkers/gaia-autonomous-framework",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
+    tags: [TAGS.AI, TAGS.TERRAFORM, TAGS.PYTHON],
   },
   {
-    title: lang === 'es' ? "Cloud Infrastructure & SecOps" : "Cloud Infrastructure & SecOps",
-    description: lang === 'es' ? "Administración avanzada y securización de arquitecturas en AWS (EC2, ECS, Lambda, S3, CloudFront). Análisis de riesgos y desarrollo de scripts para automatización de procesos recurrentes y remediación." : "Advanced administration and securitization of AWS architectures (EC2, ECS, Lambda, S3, CloudFront). Risk analysis and script development for recurrent process automation and remediation.",
-    link: "",
-    github: "",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
-    tags: [TAGS.AWS, TAGS.TERRAFORM, TAGS.PYTHON],
-  },
-  {
-    title: lang === 'es' ? "Microservicios & Flujos de Datos IoT" : "Microservices & IoT Data Flows",
-    description: lang === 'es' ? "Gestión y configuración de flujos de datos IoT en arquitecturas de alta concurrencia. Administración de bases de datos SQL/NoSQL y optimización del rendimiento bajo metodologías CI/CD con Azure." : "Management and configuration of IoT data flows in high-concurrency architectures. SQL/NoSQL database administration and performance optimization using CI/CD methodologies with Azure.",
-    link: "",
-    github: "",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1000",
-    tags: [TAGS.AZURE, TAGS.PYTHON],
+    title: "Personal Portfolio",
+    description: lang === 'es' ? "Desarrollo de portfolio personal web enfocado en el rendimiento y accesibilidad. Construido con Astro y Tailwind CSS, desplegado utilizando GitHub Pages." : "Development of a personal web portfolio focused on performance and accessibility. Built with Astro and Tailwind CSS, deployed using GitHub Pages.",
+    link: "https://13onkers.github.io/",
+    github: "https://github.com/13onkers/13onkers.github.io",
+    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1000",
+    tags: [TAGS.ASTRO, TAGS.TAILWIND],
   }
 ]
 ---

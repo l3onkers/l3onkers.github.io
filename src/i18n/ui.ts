@@ -7,29 +7,29 @@ export const defaultLang = 'es';
 
 export const ui = {
   es: {
-    'site.title': 'Portfolio de Álvaro Escobar - DevOps & Solutions Architect',
+    'site.title': 'Portfolio de Álvaro Escobar - Senior DevOps / SRE Specialist & Solutions Architect',
     'nav.experience': 'Experiencia',
     'nav.projects': 'Proyectos',
     'nav.about': 'Sobre mí',
     'nav.contact': 'Contacto',
     'hero.badge': 'Disponible para nuevos retos',
     'hero.title': 'Hola, soy <span class="gradient-name">Álvaro</span>',
-    'hero.description': '+7 años de experiencia. <strong>Senior DevOps Expert & Solutions Architect</strong> especializado en plataformas Cloud (AWS), SecOps y alta disponibilidad. Apasionado por la automatización, <strong>GitOps</strong> y el diseño de pipelines CI/CD robustas. Desde Sevilla, España.',
+    'hero.description': '+7 años de experiencia. <strong>Especialista Senior DevOps - SRE & Arquitecto de Soluciones</strong> especializado en plataformas Cloud (AWS), automatización CI/CD, GitOps y alta disponibilidad. Apasionado por la observabilidad, la automatización y la cultura DevOps. Desde Sevilla, España.',
     'experience.title': 'Experiencia Laboral',
-    'projects.title': 'Arquitecturas Destacadas',
+    'projects.title': 'Proyectos',
     'footer.rights': 'Casi todos los derechos reservados.',
   },
   en: {
-    'site.title': 'Álvaro Escobar Portfolio - DevOps & Solutions Architect',
+    'site.title': 'Álvaro Escobar Portfolio - Senior DevOps / SRE Specialist & Solutions Architect',
     'nav.experience': 'Experience',
     'nav.projects': 'Projects',
     'nav.about': 'About me',
     'nav.contact': 'Contact',
     'hero.badge': 'Open to new challenges',
     'hero.title': 'Hi, I am <span class="gradient-name">Álvaro</span>',
-    'hero.description': '+7 years of experience. <strong>Senior DevOps Expert & Solutions Architect</strong> specialized in Cloud platforms (AWS), SecOps, and high availability. Passionate about automation, <strong>GitOps</strong>, and designing robust CI/CD pipelines. Based in Seville, Spain.',
+    'hero.description': '+7 years of experience. <strong>Senior DevOps / SRE Specialist & Solutions Architect</strong> specialized in Cloud platforms (AWS), CI/CD automation, GitOps, and high availability. Passionate about observability, automation, and DevOps culture. Based in Seville, Spain.',
     'experience.title': 'Work Experience',
-    'projects.title': 'Featured Architectures',
+    'projects.title': 'Projects',
     'footer.rights': 'Almost all rights reserved.',
   }
 } as const;
