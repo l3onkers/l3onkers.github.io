@@ -82,21 +82,55 @@ const altUrl = lang === 'es' ? '/en' : '/';
 </script>
 
 <style>
-  .header-nav {
-    animation: nav-appear 1s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 100px;
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .header-nav {
+        animation: nav-appear 1s linear both;
+        animation-timeline: scroll();
+        animation-range: 0 100px;
+      }
+
+      @keyframes nav-appear {
+        0% {
+          background-color: transparent;
+          box-shadow: none;
+          backdrop-filter: blur(0px);
+          -webkit-backdrop-filter: blur(0px);
+          outline-color: transparent;
+        }
+        100% {
+          background-color: rgba(243, 244, 246, 0.85);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+      }
+
+      :global(.dark) .header-nav {
+        animation-name: nav-appear-dark;
+      }
+
+      @keyframes nav-appear-dark {
+        0% {
+          background-color: transparent;
+          box-shadow: none;
+          backdrop-filter: blur(0px);
+          -webkit-backdrop-filter: blur(0px);
+          outline-color: transparent;
+        }
+        100% {
+          background-color: rgba(31, 41, 55, 0.85);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+      }
+    }
   }
 
-  @keyframes nav-appear {
-    0% {
-      background-color: transparent;
-      border-color: transparent;
-      box-shadow: none;
-      backdrop-filter: blur(0);
-    }
-    100% {
-      /* Uses classes via tailwind logic but animates the base CSS properties smoothly */
+  @media (prefers-reduced-motion: reduce) {
+    .header-nav {
+      animation: none !important;
     }
   }
 </style>

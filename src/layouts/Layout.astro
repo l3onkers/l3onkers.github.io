@@ -39,6 +39,7 @@ const { title, description, lang } = Astro.props;
 		<ClientRouter />
 	</head>
 	<body class="relative text-black dark:text-white min-h-screen selection:bg-violet-500 selection:text-white pb-16">
+		<div id="scroll-progress-bar" class="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-violet-600 via-fuchsia-500 to-indigo-500 z-50 origin-left pointer-events-none" aria-hidden="true"></div>
 		<div class="fixed inset-0 z-[-2] bg-gray-50 dark:bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.15),rgba(255,255,255,0.9))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.15),rgba(0,0,0,0))] overflow-hidden pointer-events-none">
 			<!-- Animated Background Blobs -->
 			<div class="absolute top-10 left-1/4 w-[500px] h-[500px] bg-violet-500/20 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-[100px] opacity-70 animate-blob"></div>
@@ -104,21 +105,60 @@ const { title, description, lang } = Astro.props;
 		color: transparent;
 	}
 
+	/* ── Scroll-driven global reading progress bar ─────────────────── */
+	#scroll-progress-bar {
+		transform: scaleX(0);
+		transform-origin: left;
+	}
+
+	@supports (animation-timeline: scroll()) {
+		#scroll-progress-bar {
+			animation: scroll-progress-grow linear both;
+			animation-timeline: scroll();
+		}
+
+		@keyframes scroll-progress-grow {
+			from {
+				transform: scaleX(0);
+			}
+			to {
+				transform: scaleX(1);
+			}
+		}
+	}
+
 	/* Scroll-triggered reveal for named sections (below the fold) */
 	@supports (animation-timeline: view()) {
-		[data-section] {
-			animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-			animation-timeline: view();
-			animation-range: entry 0% entry 18%;
+		@media (prefers-reduced-motion: no-preference) {
+			section[data-section]:not(#hero) {
+				animation: section-fade-in linear both;
+				animation-timeline: view();
+				animation-range: entry 0% cover 25%;
+			}
+
+			@keyframes section-fade-in {
+				0% {
+					opacity: 0.15;
+					transform: translateY(28px);
+				}
+				100% {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
+		#scroll-progress-bar {
+			display: none !important;
+		}
 		.anim-fade-in,
 		[data-section] {
 			animation: none !important;
 			opacity: 1 !important;
 			translate: none !important;
+			transform: none !important;
 		}
 	}
 </style>

@@ -45,10 +45,41 @@ const EXPERIENCE = [
 
 <ol class="relative mt-16">
   {
-    EXPERIENCE.map((experiencie, i) => (
-      <li class="anim-fade-in" style={`animation-delay: ${i * 150}ms`}>
+    EXPERIENCE.map((experiencie) => (
+      <li class="sda-timeline-item">
         <ExperienceItem {...experiencie} />
       </li>
     ))
   }
 </ol>
+
+<style>
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .sda-timeline-item {
+        animation: timeline-item-fade-in linear both;
+        animation-timeline: view();
+        animation-range: entry 5% cover 30%;
+      }
+
+      @keyframes timeline-item-fade-in {
+        0% {
+          opacity: 0.15;
+          transform: translateY(32px) scale(0.98);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sda-timeline-item {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>

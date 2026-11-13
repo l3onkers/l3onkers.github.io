@@ -15,7 +15,7 @@ const { title, company, description, link, date } = Astro.props
     <div class="sticky top-0">
       <span class="absolute -left-[42px] top-[6px] flex size-[14px] items-center justify-center" aria-hidden="true">
         <span class="animate-ping motion-reduce:animate-none absolute inline-flex size-full rounded-full bg-violet-500/40"></span>
-        <span class="relative inline-flex size-[10px] rounded-full bg-violet-500 shadow-[0_0_8px_2px_rgba(139,92,246,0.45)]"></span>
+        <span class="timeline-dot relative inline-flex size-[10px] rounded-full bg-violet-500 shadow-[0_0_8px_2px_rgba(139,92,246,0.45)]"></span>
       </span>
       <h3 class="text-xl font-bold text-violet-600 dark:text-violet-400">{title}</h3>
       <h4 class="font-semibold text-xl text-gray-800 dark:text-white">{company}</h4>
@@ -33,3 +33,34 @@ const { title, company, description, link, date } = Astro.props
     }
   </div>
 </div>
+
+<style>
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .timeline-dot {
+        animation: dot-glow-reveal linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 35%;
+      }
+
+      @keyframes dot-glow-reveal {
+        0% {
+          transform: scale(0.5);
+          box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+          opacity: 0.4;
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 12px 3px rgba(139, 92, 246, 0.6);
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-dot {
+      animation: none !important;
+    }
+  }
+</style>

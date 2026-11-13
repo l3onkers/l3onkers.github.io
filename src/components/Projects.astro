@@ -66,8 +66,8 @@ const PROJECTS = [
 
 <div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ image, title, description, tags, link, github }, i) => (
-      <article class="anim-fade-in flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0" style={`animation-delay: ${i * 150}ms`}>
+    PROJECTS.map(({ image, title, description, tags, link, github }) => (
+      <article class="sda-project-card flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
           <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition-all duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-[0_20px_60px_-10px_rgba(139,92,246,0.2)] lg:border lg:border-gray-200 dark:lg:border-gray-800 lg:hover:border-violet-400/30 dark:lg:hover:bg-gray-800/50">
             <img alt={title} class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105" src={image} loading="lazy" decoding="async" />
@@ -111,3 +111,34 @@ const PROJECTS = [
     ))
   }
 </div>
+
+<style>
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .sda-project-card {
+        animation: card-reveal linear both;
+        animation-timeline: view();
+        animation-range: entry 5% cover 30%;
+      }
+
+      @keyframes card-reveal {
+        0% {
+          opacity: 0.2;
+          transform: translateY(40px) scale(0.96);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sda-project-card {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
