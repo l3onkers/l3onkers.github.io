@@ -1,6 +1,6 @@
 # l3onkers.github.io - Álvaro Escobar Portfolio
 
-![Astro](https://img.shields.io/badge/Astro-6.x-FF5D01?style=flat-square&logo=astro&logoColor=white)
+![Astro](https://img.shields.io/badge/Astro-7.x-FF5D01?style=flat-square&logo=astro&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/Node-24-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 
@@ -10,7 +10,7 @@ Este repositorio contiene el código fuente de mi portfolio personal. Es un esca
 
 El proyecto ha sido migrado de Jekyll/Ruby a un ecosistema web moderno y de altísimo rendimiento:
 
-- **Framework**: [Astro 6](https://astro.build/) (Para generación de sitios estáticos ultrarrápidos).
+- **Framework**: [Astro 7](https://astro.build/) (Para generación de sitios estáticos ultrarrápidos).
 - **Estilos**: [Tailwind CSS](https://tailwindcss.com/) (Animaciones fluidas y diseño adaptativo).
 - **Lógica**: TypeScript y JavaScript.
 - **Multilingüe**: Soporte nativo de i18n (Inglés/Español).
