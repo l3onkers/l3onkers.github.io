@@ -57,7 +57,9 @@ const EXPERIENCE = [
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
       .sda-timeline-item {
-        animation: timeline-item-fade-in linear both;
+        animation-name: timeline-item-fade-in;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
         animation-timeline: view();
         animation-range: entry 5% cover 30%;
       }

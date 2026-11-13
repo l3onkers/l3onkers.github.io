@@ -113,7 +113,9 @@ const { title, description, lang } = Astro.props;
 
 	@supports (animation-timeline: scroll()) {
 		#scroll-progress-bar {
-			animation: scroll-progress-grow linear both;
+			animation-name: scroll-progress-grow;
+			animation-timing-function: linear;
+			animation-fill-mode: both;
 			animation-timeline: scroll();
 		}
 
@@ -131,9 +133,11 @@ const { title, description, lang } = Astro.props;
 	@supports (animation-timeline: view()) {
 		@media (prefers-reduced-motion: no-preference) {
 			section[data-section]:not(#hero) {
-				animation: section-fade-in linear both;
+				animation-name: section-fade-in;
+				animation-timing-function: linear;
+				animation-fill-mode: both;
 				animation-timeline: view();
-				animation-range: entry 0% cover 25%;
+				animation-range: entry 5% cover 25%;
 			}
 
 			@keyframes section-fade-in {

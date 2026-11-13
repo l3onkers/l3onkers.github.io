@@ -85,9 +85,11 @@ const altUrl = lang === 'es' ? '/en' : '/';
   @supports (animation-timeline: scroll()) {
     @media (prefers-reduced-motion: no-preference) {
       .header-nav {
-        animation: nav-appear 1s linear both;
+        animation-name: nav-appear;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
         animation-timeline: scroll();
-        animation-range: 0 100px;
+        animation-range: 0px 100px;
       }
 
       @keyframes nav-appear {

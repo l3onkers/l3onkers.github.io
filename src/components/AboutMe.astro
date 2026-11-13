@@ -44,7 +44,9 @@ const personalImageAlt = "Álvaro Escobar";
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
       .sda-avatar {
-        animation: avatar-settle linear both;
+        animation-name: avatar-settle;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
         animation-timeline: view();
         animation-range: entry 10% cover 35%;
       }
