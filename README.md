@@ -1,7 +1,7 @@
 # l3onkers.github.io - Álvaro Escobar Portfolio
 
 ![Astro](https://img.shields.io/badge/Astro-7.x-FF5D01?style=flat-square&logo=astro&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-4.x-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/Node-24-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 
 Este repositorio contiene el código fuente de mi portfolio personal. Es un escaparate de mi experiencia como **Senior DevOps Expert & Solutions Architect**, mostrando los hitos profesionales, mis skills en arquitecturas Cloud (AWS, Azure) y la filosofía GitOps.
@@ -35,7 +35,7 @@ Si deseas levantar el proyecto en tu máquina local:
    ```
 2. **Instala las dependencias:**
    ```bash
-   npm install --legacy-peer-deps
+   npm install
    ```
 3. **Inicia el servidor de desarrollo:**
    ```bash
